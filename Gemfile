@@ -11,4 +11,4 @@ gem "csv"
 gem "base64"
 gem "bigdecimal"
 gem "observer"
-gem "ffi", "~> 1.15.5"  # keep compatibility with system Ruby 2.6
+gem "ffi", ">= 1.15"  # allow a version compatible with the CI Ruby (3.x)

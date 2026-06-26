@@ -8,3 +8,4 @@ _site/
 node_modules/
 package-lock.json
 academic-website-template-source/
+Gemfile.lock
