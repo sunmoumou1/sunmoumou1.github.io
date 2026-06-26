@@ -1,0 +1,7 @@
+# Optional detailed education shown on the About page and profile sidebar.
+- education:
+    - "Sep 2023 - Present: Doctoral student, Department of Earth System Science, Tsinghua University"
+    - "Sep 2019 - Jun 2023: B.S. Atmospheric Science, School of Atmospheric Sciences, Nanjing University"
+  educationshort:
+    - "Ph.D. student, Tsinghua University"
+    - "B.S. Atmospheric Science, Nanjing University"
