@@ -1,96 +1,112 @@
-name: "Sencan Sun"
-title: "Doctoral Student in Atmospheric Science"
-institution: "Department of Earth System Science, Tsinghua University"
-email: ssc23@mails.tsinghua.edu.cn
-photo: sunsencan.png
+# ===== 基本个人信息（用于网页展示）=====
+name: "Sencan Sun(孙森灿)"                                    
+title: "Doctoral Student in Atmospheric Science"             
+institution: "Department of Earth System Science, Tsinghua University"  
+email: ssc23@mails.tsinghua.edu.cn                   
+photo: sunsencan.png                                      
 
+# ===== 外部链接（留空则一般不显示对应图标）=====
 links:
-  google_scholar: ""
-  github: "https://github.com/sunmoumou1"
-  researchgate: ""
-  orcid: ""
-  twitter: ""
-  linkedin: ""
-  cv: ""
+  google_scholar: "https://scholar.google.com/citations?hl=zh-CN&user=LZ0FTD0AAAAJ"  # 谷歌学术主页
+  github: "https://github.com/sunmoumou1"                    # GitHub 主页
+  researchgate: ""                                           # ResearchGate（空 = 不设置）
+  orcid: "0009-0000-5140-1208"                               # ORCID 学者唯一标识
+  twitter: ""                                                # Twitter/X（空）
+  linkedin: ""                                               # LinkedIn（空）
+  cv: ""                                                     # 简历链接（空）
 
-accent_color: "#1f7a8c"
-dark_mode: true
-description: "Academic webpage of Sencan Sun, a doctoral student at Tsinghua University working on AI methods for weather forecasting, data assimilation, and climate prediction."
-baseurl: ""
-url: "https://sunmoumou1.github.io"
+# ===== 网站外观与元信息 =====
+accent_color: "#1f7a8c"                                      # 主题强调色（青蓝色）
+dark_mode: true                                             # 是否启用深色模式
+description: "Academic webpage of Sencan Sun(孙森灿), a doctoral student at Tsinghua University working on AI for operational forecasting, from data assimilation, to weather, S2S and climate prediction."  # 站点描述（用于 SEO/meta 标签）
+# SEO = Search Engine Optimization（搜索引擎优化）。
+# 指的是通过优化网页内容和结构，让搜索引擎（如 Google、百度）更好地理解你的页面，从而在搜索结果中获得更靠前的排名、更准确的展示。
+baseurl: ""                                         
+url: "https://sunmoumou1.github.io"                          # 站点根 URL（GitHub Pages 地址）
 
+# ===== 网站分析统计 =====
 analytics:
-  google_id: ""
+  google_id: ""                                              # Google Analytics 跟踪 ID（空 = 不启用）
 
+# ===== 导航栏页面列表（决定顶部菜单项及顺序）=====
 nav_pages:
-  - name: about
-  - name: publications
-  - name: research
-  - name: software
-  - name: activities
-  - name: blogs
+  - name: about          # 关于
+  - name: publications   # 论文/发表
+  - name: research       # 研究
+  - name: software       # 软件/代码
+  - name: activities     # 学术活动
+  - name: blogs          # 博客
 
-timezone: Asia/Shanghai
-future: true
-permalink: /:categories/:title/
+# ===== Jekyll 构建相关全局设置 =====
+timezone: Asia/Shanghai                                      # 时区（上海，影响文章时间解析）
+future: true                                               # 是否构建“未来日期”的文章（true = 构建）
+permalink: /:categories/:title/                             # 固定链接格式（按 分类/标题 生成 URL）
 
+# ===== 额外包含进构建输出的文件/目录（默认会被忽略的也强制包含）=====
 include:
-  - .htaccess
-  - _pages
+  - .htaccess          # Apache 配置文件（以点开头默认会被排除，这里强制包含）
+  - _pages             # 自定义页面目录
 
+# ===== Sass/SCSS 编译设置 =====
 sass:
-  quiet_deps: true
-  style: compressed
+  quiet_deps: true     # 抑制来自依赖项的警告
+  style: compressed    # 输出压缩后的 CSS（减小体积）
 
-markdown: kramdown
-highlighter: rouge
-lsi: false
-excerpt_separator: "\n\n"
-incremental: false
+# ===== Markdown 与代码高亮引擎 =====
+markdown: kramdown     # 使用 kramdown 作为 Markdown 处理器
+highlighter: rouge     # 使用 rouge 作为代码高亮器
+lsi: false             # 关闭“相关文章”的潜在语义索引（开启会显著拖慢构建）
+excerpt_separator: "\n\n"  # 文章摘要分隔符（遇到空行则截断为摘要）
+incremental: false     # 关闭增量构建（保证全量构建，结果更可靠）
 
+# ===== kramdown 详细配置 =====
 kramdown:
-  input: GFM
-  hard_wrap: false
-  auto_ids: true
-  footnote_nr: 1
-  entity_output: as_char
-  toc_levels: 1..6
-  smart_quotes: lsquo,rsquo,ldquo,rdquo
-  enable_coderay: false
-  parse_block_html: true
+  input: GFM                                # 输入语法采用 GitHub Flavored Markdown
+  hard_wrap: false                          # 单个换行不强制转为 <br>
+  auto_ids: true                            # 自动为标题生成 id（便于锚点跳转）
+  footnote_nr: 1                            # 脚注起始编号
+  entity_output: as_char                    # HTML 实体以字符形式输出
+  toc_levels: 1..6                          # 目录（TOC）包含 1~6 级标题
+  smart_quotes: lsquo,rsquo,ldquo,rdquo     # 智能引号映射（左右单/双引号）
+  enable_coderay: false                     # 关闭 CodeRay（因为已用 rouge 高亮）
+  parse_block_html: true                    # 解析块级 HTML 中的 Markdown 语法
 
-plugins: ["jekyll/scholar"]
+# ===== Jekyll 插件 =====
+plugins: ["jekyll/scholar"]                 # 启用 jekyll-scholar（管理学术文献/参考书目）
 
+# ===== jekyll-scholar 配置（论文列表与引用样式）=====
 scholar:
-  last_name: Sun
-  first_name: [Sencan]
-  style: citesty
-  locale: en
-  source: /assets/
-  bibliography: ref.bib
-  bibliography_template: bibtemplate
-  sort_by: year, month
-  order: descending
-  replace_strings: true
-  join_strings: true
-  details_dir: bibliography
-  details_layout: bibtex.html
-  details_link: Details
-  query: "@*"
+  last_name: Sun                            # 作者姓（用于在文献列表中高亮自己）
+  first_name: [Sencan]                      # 作者名（列表形式）
+  style: citesty                            # 引用样式（CSL 样式名）
+  locale: en                                # 语言区域（英文）
+  source: /assets/                          # 文献相关资源目录
+  bibliography: ref.bib                      # BibTeX 文献库文件
+  bibliography_template: bibtemplate        # 文献条目渲染模板
+  sort_by: year, month                      # 排序依据（先按年，再按月）
+  order: descending                         # 排序方向（降序，新论文在前）
+  replace_strings: true                     # 替换 BibTeX 中的字符串缩写
+  join_strings: true                        # 拼接被分割的字符串
+  details_dir: bibliography                 # 单篇文献详情页输出目录
+  details_layout: bibtex.html               # 文献详情页使用的布局模板
+  details_link: Details                     # 详情页链接显示文字
+  query: "@*"                               # 默认查询（@* = 选取全部条目）
   bibliography_list_attributes:
-    reversed: "reversed"
+    reversed: "reversed"                    # 给文献 <ol> 列表添加 reversed 属性（倒序编号）
 
-google_verify: "SkiyuGpJOKT74vv5GmXLvYXXDkXy4v8VWPtbelYz3Hs"
+# ===== 站点验证 =====
+google_verify: "SkiyuGpJOKT74vv5GmXLvYXXDkXy4v8VWPtbelYz3Hs"  # Google Search Console 验证字符串
 
+# ===== 构建时排除的文件/目录（不参与生成、不出现在 _site）=====
 exclude:
-  - academic-website-template-source
-  - backup
-  - Gemfile.lock
-  - node_modules
-  - package-lock.json
-  - docs
-  - vendor
-  - .bundle
-  - .sass-cache
-  - .jekyll-cache
-  - _site
+  - academic-website-template-source  # 模板源码目录
+  - backup                            # 备份目录
+  - Gemfile.lock                      # Ruby 依赖锁定文件
+  - node_modules                      # Node 依赖目录
+  - package-lock.json                 # npm 依赖锁定文件
+  - docs                              # 文档目录
+  - vendor                            # 第三方依赖目录（如 bundle 安装的 gem）
+  - .bundle                           # Bundler 配置目录
+  - .sass-cache                       # Sass 缓存目录
+  - .jekyll-cache                     # Jekyll 缓存目录
+  - _site                             # 构建输出目录（避免被重复打包）
