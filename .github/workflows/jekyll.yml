@@ -1,54 +1,141 @@
+# GitHub Actions workflow 的名称。
+# 这个名称会显示在 GitHub 仓库的 Actions 页面中，
+# 用于标识这个自动化流程的用途。
 name: Build and deploy Jekyll site to GitHub Pages
 
+# 定义 workflow 的触发条件。
 on:
+  # 当代码被 push 到指定分支时触发。
   push:
     branches:
+      # 只有 push 到 main 分支时才会触发该部署流程。
       - main
+
+  # 允许用户在 GitHub Actions 页面中手动触发该 workflow。
   workflow_dispatch:
 
+# 定义该 workflow 运行时所需的 GitHub 权限。
 permissions:
+  # 允许读取仓库内容。
+  # 构建 Jekyll 站点时需要 checkout 仓库代码。
   contents: read
+
+  # 允许向 GitHub Pages 写入部署内容。
+  # deploy-pages 需要这个权限来发布站点。
   pages: write
+
+  # 允许 workflow 使用 OpenID Connect 生成身份令牌。
+  # GitHub Pages 官方部署 action 需要该权限进行安全认证。
   id-token: write
 
+# 并发控制。
+# 用于避免多个 Pages 部署任务同时运行，造成部署冲突。
+#
 # Allow only one concurrent deployment, skipping runs queued between the run
 # in-progress and latest queued.
 concurrency:
+  # 将所有 Pages 部署任务归到同一个并发组 pages。
+  # 同一个 group 内同一时间只允许一个 workflow run 进行部署相关任务。
   group: pages
+
+  # 如果已经有一个部署正在运行，
+  # 新触发的 workflow 不会取消正在运行的任务。
+  # 也就是说，当前部署会继续完成。
   cancel-in-progress: false
 
+# 定义 workflow 中的任务。
 jobs:
+  # 第一个任务：构建 Jekyll 静态网站。
   build:
+    # 指定该 job 运行在 GitHub 托管的最新版 Ubuntu runner 上。
     runs-on: ubuntu-latest
+
+    # 定义 build job 中按顺序执行的步骤。
     steps:
+      # 第一步：拉取仓库代码到 runner。
       - name: Checkout
+        # 使用官方 checkout action。
+        # v4 是当前常用的稳定版本。
         uses: actions/checkout@v4
 
+      # 第二步：配置 Ruby 环境。
+      # Jekyll 是 Ruby 生态中的静态网站生成器，
+      # 因此需要先安装 Ruby 和 Bundler 环境。
       - name: Setup Ruby
+        # 使用 ruby/setup-ruby 官方 action。
         uses: ruby/setup-ruby@v1
         with:
+          # 指定 Ruby 版本为 3.3。
+          # 这会让 CI 使用现代 Ruby 版本安装依赖并执行 Jekyll。
           ruby-version: "3.3"
+
+          # 启用 Bundler 依赖缓存。
+          # 该选项会自动执行 bundle install，
+          # 并缓存 Gemfile.lock 对应的 gems，
+          # 从而加快后续 workflow 的构建速度。
           bundler-cache: true
 
+      # 第三步：配置 GitHub Pages 构建环境。
       - name: Setup Pages
+        # 给该 step 设置 id，后面可以通过 steps.pages.outputs 读取它的输出。
         id: pages
+
+        # 使用 GitHub 官方 Pages 配置 action。
+        # 它会检测 Pages 相关信息，例如 base_path。
         uses: actions/configure-pages@v5
 
+      # 第四步：使用 Jekyll 构建静态网站。
       - name: Build with Jekyll
+        # 使用 Bundler 环境执行 jekyll build。
+        #
+        # --baseurl "${{ steps.pages.outputs.base_path }}"
+        # 表示将 GitHub Pages 自动推断出的 base_path 传给 Jekyll。
+        # 这对于项目页非常重要，例如：
+        # https://username.github.io/repository-name/
+        # 其中 /repository-name 通常就是 baseurl。
         run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
         env:
+          # 设置 Jekyll 环境为 production。
+          # 一些插件、模板逻辑或配置可能会根据该环境变量切换到生产模式。
           JEKYLL_ENV: production
 
+      # 第五步：上传构建产物。
       - name: Upload artifact
+        # 使用 GitHub Pages 官方 artifact 上传 action。
+        # 默认会上传 Jekyll 构建后的 _site 目录，
+        # 供后续 deploy job 部署到 GitHub Pages。
         uses: actions/upload-pages-artifact@v3
 
+  # 第二个任务：部署到 GitHub Pages。
   deploy:
+    # 声明部署环境。
+    # GitHub 会在仓库的 Environments / Deployments 中记录该部署。
     environment:
+      # 环境名称为 github-pages。
+      # 这是 GitHub Pages 部署常用的环境名。
       name: github-pages
+
+      # 部署完成后显示的页面 URL。
+      # 该值来自后面 Deploy to GitHub Pages step 的输出。
       url: ${{ steps.deployment.outputs.page_url }}
+
+    # deploy job 也运行在 GitHub 托管的最新版 Ubuntu runner 上。
     runs-on: ubuntu-latest
+
+    # 指定 deploy job 依赖 build job。
+    # 只有 build job 成功完成后，deploy job 才会开始执行。
     needs: build
+
+    # 定义 deploy job 中的执行步骤。
     steps:
+      # 使用 GitHub 官方部署 action 将 artifact 发布到 GitHub Pages。
       - name: Deploy to GitHub Pages
+        # 设置 step id。
+        # 上面的 environment.url 会通过 steps.deployment.outputs.page_url
+        # 读取该步骤产生的 GitHub Pages URL。
         id: deployment
+
+        # 使用 GitHub Pages 官方部署 action。
+        # 它会读取前面 upload-pages-artifact 上传的构建产物，
+        # 并将其发布到 GitHub Pages。
         uses: actions/deploy-pages@v4
