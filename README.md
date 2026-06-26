@@ -110,24 +110,6 @@
 
 > 通用流程：**改文件 → `git add .` → `git commit -m "说明"` → `git push`**，然后等 GitHub Actions 自动部署。
 
-### 4.1 修改个人信息 / 链接 / 主题色
-打开 `_config.yml`，修改对应字段，例如：
-```yaml
-name: "Sencan Sun"                    # 姓名
-title: "Doctoral Student…"            # 头衔
-institution: "…Tsinghua University"   # 单位
-email: ssc23@mails.tsinghua.edu.cn    # 邮箱
-links:
-  github: "https://github.com/sunmoumou1"
-  google_scholar: ""                  # 填上链接后，对应图标会自动显示
-accent_color: "#1f7a8c"               # 网站主题色
-```
-> 链接留空（`""`）时，对应图标会自动隐藏；填上网址就会出现。
-
-### 4.2 换头像 / 换图片
-1. 把图片放进 `images/`。
-2. 头像：在 `_config.yml` 把 `photo:` 改成新文件名（如 `photo: me.png`）。
-3. 文章/页面里的图片：用 `![说明](图片相对路径)` 或 `<img src="…">` 引用。
 
 ### 4.3 更新「最近动态 / News」
 编辑 `_data/news.yml`，在最上方加一条（越新越靠前）：
