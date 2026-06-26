@@ -99,7 +99,7 @@ pi-links:
 {% comment %}
 邮箱链接。
 
-{% if site.email %}:
+if site.email 条件:
   只有当 site.email 存在时才渲染邮箱图标。
   这样可以避免 email 为空时生成无效链接。
 
