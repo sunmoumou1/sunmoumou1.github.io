@@ -228,20 +228,20 @@ Experience 区域。
   参与 AI 天气预报工程流程，并实现基于 HRNet 的雷达图像去噪系统。
 {% endcomment %}
 <div style="margin-bottom: 1.6rem;">
-  <div style="display: flex; justify-content: space-between; gap: 1rem; align-items: baseline; flex-wrap: wrap;">
-    <p style="margin-bottom: 0.2rem;">
-      <strong>Meteorological AI Algorithm Engineering Intern</strong><br>
-      <span style="color: var(--accent-color); font-weight: 600;">ColorfulClouds Tech.</span>
-    </p>
-    <p style="margin-bottom: 0.2rem; text-align: right; color: var(--accent-color); font-weight: 600;">
-      2023.06 - 2023.09<br>
-      <span style="color: var(--text-secondary); font-style: italic; font-weight: 500;">Beijing</span>
-    </p>
-  </div>
-  <ul>
-    <li>Designed and implemented a radar image denoising system based on the HRNet deep learning architecture.</li>
-    <li>Learned the full workflow of AI-powered weather forecasting, including data transmission and management, model architecture design, cloud-based training and deployment, testing, and production rollout.</li>
-  </ul>
+<div style="display: flex; justify-content: space-between; gap: 1rem; align-items: baseline; flex-wrap: wrap;">
+<p style="margin-bottom: 0.2rem;">
+<strong>Meteorological AI Algorithm Engineering Intern</strong><br>
+<span style="color: var(--accent-color); font-weight: 600;">ColorfulClouds Tech.</span>
+</p>
+<p style="margin-bottom: 0.2rem; text-align: right; color: var(--accent-color); font-weight: 600;">
+2023.06 - 2023.09<br>
+<span style="color: var(--text-secondary); font-style: italic; font-weight: 500;">Beijing</span>
+</p>
+</div>
+<ul>
+<li>Designed and implemented a radar image denoising system based on the HRNet deep learning architecture.</li>
+<li>Learned the full workflow of AI-powered weather forecasting, including data transmission and management, model architecture design, cloud-based training and deployment, testing, and production rollout.</li>
+</ul>
 </div>
 
 {% comment %}
@@ -260,19 +260,19 @@ Experience 区域。
   参与 AI atmospheric model development 相关技术讨论。
 {% endcomment %}
 <div style="margin-bottom: 1.6rem;">
-  <div style="display: flex; justify-content: space-between; gap: 1rem; align-items: baseline; flex-wrap: wrap;">
-    <p style="margin-bottom: 0.2rem;">
-      <strong>Spatiotemporal Forecasting Algorithm Intern</strong><br>
-      <span style="color: var(--accent-color); font-weight: 600;">Huawei Technologies Co., Ltd.</span>
-    </p>
-    <p style="margin-bottom: 0.2rem; text-align: right; color: var(--accent-color); font-weight: 600;">
-      2024.12 - 2025.05<br>
-      <span style="color: var(--text-secondary); font-style: italic; font-weight: 500;">Beijing</span>
-    </p>
-  </div>
-  <ul>
-    <li>Participated in weekly technical meetings and contributed insights on AI atmospheric model development.</li>
-  </ul>
+<div style="display: flex; justify-content: space-between; gap: 1rem; align-items: baseline; flex-wrap: wrap;">
+<p style="margin-bottom: 0.2rem;">
+<strong>Spatiotemporal Forecasting Algorithm Intern</strong><br>
+<span style="color: var(--accent-color); font-weight: 600;">Huawei Technologies Co., Ltd.</span>
+</p>
+<p style="margin-bottom: 0.2rem; text-align: right; color: var(--accent-color); font-weight: 600;">
+2024.12 - 2025.05<br>
+<span style="color: var(--text-secondary); font-style: italic; font-weight: 500;">Beijing</span>
+</p>
+</div>
+<ul>
+<li>Participated in weekly technical meetings and contributed insights on AI atmospheric model development.</li>
+</ul>
 </div>
 
 {% comment %}
@@ -291,20 +291,20 @@ Experience 区域。
   研究大语言模型在地学问答任务中的性能提升，重点关注 Test-Time Scaling。
 {% endcomment %}
 <div style="margin-bottom: 0;">
-  <div style="display: flex; justify-content: space-between; gap: 1rem; align-items: baseline; flex-wrap: wrap;">
-    <p style="margin-bottom: 0.2rem;">
-      <strong>Large Language Model Research Intern</strong><br>
-      <span style="color: var(--accent-color); font-weight: 600;">Zhijiang Lab</span>
-    </p>
-    <p style="margin-bottom: 0.2rem; text-align: right; color: var(--accent-color); font-weight: 600;">
-      2025.06.22 - 2025.08.03<br>
-      <span style="color: var(--text-secondary); font-style: italic; font-weight: 500;">Hangzhou</span>
-    </p>
-  </div>
-  <ul>
-    <li>Conducted research on enhancing the performance of large language models (LLMs) in geological question answering tasks, with a focus on the application of Test-Time Scaling (TTS) techniques.</li>
-    <li>Designed and implemented algorithms based on three representative TTS approaches: Parallel Scaling, Sequential Scaling, and Internal Scaling.</li>
-  </ul>
+<div style="display: flex; justify-content: space-between; gap: 1rem; align-items: baseline; flex-wrap: wrap;">
+<p style="margin-bottom: 0.2rem;">
+<strong>Large Language Model Research Intern</strong><br>
+<span style="color: var(--accent-color); font-weight: 600;">Zhijiang Lab</span>
+</p>
+<p style="margin-bottom: 0.2rem; text-align: right; color: var(--accent-color); font-weight: 600;">
+2025.06.22 - 2025.08.03<br>
+<span style="color: var(--text-secondary); font-style: italic; font-weight: 500;">Hangzhou</span>
+</p>
+</div>
+<ul>
+<li>Conducted research on enhancing the performance of large language models (LLMs) in geological question answering tasks, with a focus on the application of Test-Time Scaling (TTS) techniques.</li>
+<li>Designed and implemented algorithms based on three representative TTS approaches: Parallel Scaling, Sequential Scaling, and Internal Scaling.</li>
+</ul>
 </div>
 
 </div>
