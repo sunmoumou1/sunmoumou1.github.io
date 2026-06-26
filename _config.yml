@@ -33,7 +33,6 @@ nav_pages:
   - name: about          # 关于
   - name: publications   # 论文/发表
   - name: research       # 研究
-  - name: software       # 软件/代码
   - name: activities     # 学术活动
   - name: blogs          # 博客
 

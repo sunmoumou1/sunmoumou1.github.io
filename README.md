@@ -61,7 +61,7 @@
 
 | 路径 | 作用 |
 |---|---|
-| `_pages/` | 各个**页面**。每个 `.md` 顶部的「front matter」（`---` 之间的部分）决定标题、布局和网址。包含：`home.md`（主页）、`about.md`、`publications.md`、`research.md`、`software.md`、`activities.md`、`blogs.md`（博客列表页）、`allnews.md`（全部动态）、`404.md`（找不到页面时显示）。 |
+| `_pages/` | 各个**页面**。每个 `.md` 顶部的「front matter」（`---` 之间的部分）决定标题、布局和网址。包含：`home.md`（主页）、`about.md`、`publications.md`、`research.md`、`activities.md`、`blogs.md`（博客列表页）、`allnews.md`（全部动态）、`404.md`（找不到页面时显示）。 |
 | `_posts/` | **博客文章 / 短文。** 文件名必须是 `年-月-日-标题.md` 格式（如 `2024-08-15-xxx.md`）。会自动出现在博客列表里。 |
 | `blogs/` | 一些**长篇笔记页面**（如雷达、流体力学笔记）以及它们用到的图片。用的是 `page` 布局。 |
 | `_data/news.yml` | 「最近动态 / News」时间线的数据（主页侧栏和 allnews 页面读取它）。 |
@@ -75,7 +75,7 @@
 |---|---|
 | `_layouts/` | **页面骨架模板。** 决定一类页面长什么样。 |
 | ├ `default.html` | 最基础的骨架：装入 `<head>`、顶部导航、页脚。其它布局都基于它。 |
-| ├ `gridlay.html` | 普通内容页（About / Publications / Research / Software / Activities / Blog 列表 等）。 |
+| ├ `gridlay.html` | 普通内容页（About / Publications / Research / Activities / Blog 列表 等）。 |
 | ├ `homelay.html` | 主页专用（带左侧个人信息侧栏）。 |
 | ├ `page.html` | 长文 / 笔记页面（`blogs/` 里的文章）。 |
 | ├ `post.html` | 博客文章页（`_posts/` 里的文章）。 |
