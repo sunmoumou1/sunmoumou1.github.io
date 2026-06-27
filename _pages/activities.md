@@ -34,8 +34,3 @@ permalink: /activities/
 <img src="{{ '/images/地学系暑期学校证书.png' | relative_url }}" alt="Summer school certificate" loading="lazy">
 </figure>
 </div>
-
-<div class="section-card activity-card">
-<h3>Hobbies</h3>
-<p>This section is intentionally lightweight for now. I will add more non-research notes and personal interests over time.</p>
-</div>
