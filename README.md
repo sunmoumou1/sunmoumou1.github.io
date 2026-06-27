@@ -50,12 +50,10 @@
 | `Gemfile` | 声明 Jekyll 及插件（jekyll-scholar）的 Ruby 依赖。GitHub Actions 构建时会读它。 |
 | `package.json` | 用 [esbuild](https://esbuild.github.io/) 把 `assets/js/site.js` 打包压缩成 `site.min.js`（见 §4.7）。 |
 | `.github/workflows/jekyll.yml` | **自动构建 + 部署脚本。** push 到 `main` 时由 GitHub Actions 执行。 |
-| `Rakefile` | 旧的命令行构建/发布脚本。现在已改用 GitHub Actions，一般用不到，保留作备份。 |
 | `.gitignore` | 告诉 git 哪些文件不提交（如 `_site/`、`vendor/`、缓存等）。 |
 | `favicon.svg` / `favicon.ico` | 浏览器标签页的小图标。 |
 | `robots.txt` / `feed.xml` | 搜索引擎抓取规则 / RSS 订阅源。 |
 | `citesty.csl` | 论文引用的排版样式（被 jekyll-scholar 使用）。 |
-| `grammer.md` | 你自己的 Markdown / 公式语法备忘笔记（个人速查，和网站外观无关）。 |
 
 ### 3.2 网站内容（**这些是你日常要改的**）
 
@@ -106,59 +104,6 @@
 
 ---
 
-## 4. 常见维护操作（手把手）
-
-> 通用流程：**改文件 → `git add .` → `git commit -m "说明"` → `git push`**，然后等 GitHub Actions 自动部署。
-
-
-### 4.3 更新「最近动态 / News」
-编辑 `_data/news.yml`，在最上方加一条（越新越靠前）：
-```yaml
-- date: 1 January, 2026
-  headline: "你的动态内容"
-```
-
-### 4.4 增删论文
-编辑 `assets/ref.bib`，按 BibTeX 格式增删条目。条目类型决定显示在哪个小节：
-- `@unpublished` → Preprints and Manuscripts
-- `@article` → Refereed Journal Articles
-- `@inproceedings` → Conference Proceedings
-
-（这些分组规则写在 `_pages/publications.md` 里。）
-
-### 4.5 写一篇博客 / 短文
-在 `_posts/` 新建文件，文件名格式 `年-月-日-标题.md`，开头写：
-```markdown
----
-layout: post
-title: "文章标题"
-date: 2026-01-01
-categories: blogs
----
-
-正文（Markdown）。公式用 $...$ 行内、$$...$$ 独立行。
-```
-保存后会自动出现在「Blog」列表页。
-
-### 4.6 写一篇长笔记页面
-在 `blogs/` 新建 `.md` 文件，开头写：
-```markdown
----
-title: "笔记标题"
-layout: page
----
-```
-适合不按时间排序的长文 / 讲义。
-
-### 4.7 修改页面交互（暗色切换 / 搜索 / 论文筛选等）
-这些逻辑在 `assets/js/site.js`。**改完必须重新打包**生成网页实际加载的 `site.min.js`：
-```bash
-npm install        # 第一次需要，安装 esbuild
-npm run build      # 把 site.js 打包压缩成 site.min.js
-```
-然后把 `site.js` 和 `site.min.js` 一起提交。
-
----
 
 ## 5. 本地预览（可选，不是必须）
 
@@ -169,23 +114,10 @@ bundle exec jekyll serve        # 本地启动，浏览器打开 http://localhos
 ```
 > ⚠️ 注意：本仓库目录路径含中文（`工作资料`），旧版 Ruby（如系统自带的 2.6）在本地编译时可能因编码报错。线上 GitHub Actions 用的是 Ruby 3.3，构建正常，所以**直接 push 让线上构建是最稳妥的方式**。
 
----
-
-## 6. 关于这次清理（给后续 review 的说明）
-
-为了方便阅读和维护，本次删除了一批**从未被引用的旧模板遗留文件**（删除前已确认它们不在任何页面/布局/资源的引用链里，不影响网站）：
-
-- **未使用的布局**：`_layouts/` 下的 `home.html`、`post-index.html`、`publications.html`、`research.html`、`team.html`、`piclay.html`、`textlay.html`（实际页面用的是 `gridlay` / `homelay` / `page` / `post`）。
-- **未使用的片段**：`_includes/` 下的 `scripts.html`、`author-bio.html`、`navigation.html`、`chrome-frame.html`、`csv_to_table.html`、`disqus.html`（只被上面那些废弃布局引用）。
-- **未使用的样式**：`_sass/bootstrap.scss`（旧的 Bootswatch v4）、`_sass/bootstrap_bak.scss`（备份），都没有被 `main.scss` 引入。
-- **旧版前端资源**：`assets/css/`（旧编译 CSS）、`assets/less/`（旧 LESS 样式，Jekyll 根本不编译它）、`assets/fonts/`（icomoon 图标字体，现已改用 CDN 上的 Font Awesome / Academicons）、`assets/js/main.js`、`assets/js/main.min.js`、`assets/js/vendor/`（jQuery 等）、`assets/javascript/popper/`（功能已包含在 Bootstrap bundle 里）。
-- **旧模板说明文件**：散落在各目录的 `README.md`（原模板作者留下的占位说明）以及空的 `backup/` 目录。
-
-当前网站实际加载的样式来自 `assets/main.scss`（→ `main.css`），脚本来自 `assets/javascript/bootstrap/bootstrap.bundle.min.js` 和 `assets/js/site.min.js`，图标字体来自 CDN。
 
 ---
 
-## 7. 技术栈速览
+## 6. 技术栈速览
 
 - **Jekyll 4** — 静态网站生成器
 - **jekyll-scholar** — 从 BibTeX 自动生成论文列表

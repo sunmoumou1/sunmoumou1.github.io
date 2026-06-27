@@ -2,10 +2,20 @@
 // Publication entry
 // =============================================================
 
+.bibliography {
+  padding-left: 1.5rem;
+
+  > li {
+    max-width: none;
+    padding-left: var(--space-2);
+  }
+}
+
 .pub-entry {
   padding: var(--space-6) 0;
   border-bottom: 1px solid var(--border-color);
   position: relative;
+  width: 100%;
 
   &:last-child {
     border-bottom: none;
@@ -35,10 +45,69 @@
   }
 }
 
+.pub-entry-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 285px);
+  gap: var(--space-8);
+  align-items: start;
+  width: 100%;
+
+  @media (max-width: 860px) {
+    grid-template-columns: 1fr;
+    gap: var(--space-5, 1.25rem);
+  }
+}
+
+.pub-entry-inner-single {
+  grid-template-columns: 1fr;
+}
+
+.pub-main {
+  min-width: 0;
+  padding-right: 4.25rem;
+
+  @media (max-width: 860px) {
+    padding-right: 0;
+  }
+}
+
+.pub-figure {
+  margin: 0;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  background-color: #fff;
+  box-shadow: var(--shadow-md);
+
+  img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    object-position: top center;
+    border-radius: 0;
+  }
+
+  @media (max-width: 860px) {
+    max-width: 360px;
+  }
+}
+
+.text-justify {
+  overflow-wrap: anywhere;
+
+  strong {
+    color: var(--text-primary);
+    font-weight: 800;
+  }
+}
+
 // Year badge — accent pill floated right
 .year-badge {
   display: inline-block;
-  float: right;
+  position: absolute;
+  top: var(--space-6);
+  right: calc(285px + var(--space-8));
   font-family: 'DM Sans', sans-serif;
   font-size: 0.6875rem;
   font-weight: 700;
@@ -48,8 +117,11 @@
   background-color: var(--accent-light);
   color: var(--accent);
   border: 1px solid var(--accent);
-  margin-left: var(--space-3);
-  margin-top: var(--space-1);
+
+  @media (max-width: 860px) {
+    position: static;
+    margin-bottom: var(--space-3);
+  }
 }
 
 // Collapsible bibtex/abstract

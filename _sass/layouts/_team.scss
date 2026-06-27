@@ -110,6 +110,116 @@
   }
 }
 
+.credential-list {
+  display: grid;
+  gap: var(--space-3);
+  margin-top: var(--space-5, 1.25rem);
+}
+
+.credential-item,
+.experience-item {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr);
+  gap: var(--space-4);
+  align-items: start;
+  padding: var(--space-4);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  background:
+    linear-gradient(135deg, rgba(138, 21, 56, 0.04), transparent),
+    var(--bg-card);
+  box-shadow: var(--shadow-sm);
+}
+
+.credential-logo,
+.experience-logo {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  background-color: #fff;
+  padding: 0.35rem;
+}
+
+.credential-title {
+  color: var(--text-primary);
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.credential-meta {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.credential-date,
+.experience-date {
+  color: var(--accent);
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1.55;
+}
+
+.experience-item {
+  margin-bottom: var(--space-4);
+}
+
+.experience-content {
+  min-width: 0;
+
+  ul {
+    margin: var(--space-3) 0 0;
+    padding-left: 1.1rem;
+  }
+
+  li {
+    max-width: none;
+  }
+}
+
+.experience-header {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-4);
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.experience-org {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.experience-date {
+  text-align: right;
+
+  span {
+    color: var(--text-secondary);
+    font-style: italic;
+    font-weight: 500;
+  }
+}
+
+@media (max-width: 640px) {
+  .credential-item,
+  .experience-item {
+    grid-template-columns: 48px minmax(0, 1fr);
+    padding: var(--space-3);
+  }
+
+  .credential-logo,
+  .experience-logo {
+    width: 48px;
+    height: 48px;
+  }
+
+  .experience-date {
+    text-align: left;
+  }
+}
+
 // Alumni table
 .alumni-table {
   width: 100%;

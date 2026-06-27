@@ -28,7 +28,7 @@ pi-card:
   PI / personal info card 的含义。
   这里用于放置头像、姓名、职位、机构、联系方式、教育背景等个人信息。
 {% endcomment %}
-<div class="section-card">
+<div class="section-card" markdown="0">
 <div class="pi-card">
 
 {% comment %}
@@ -138,36 +138,24 @@ ai ai-google-scholar:
 {% if site.links.google_scholar and site.links.google_scholar != "" %}<a href="{{ site.links.google_scholar }}" class="icon-link" title="Google Scholar"><i class="ai ai-google-scholar"></i></a>{% endif %}
 </div>
 
-{% comment %}
-教育背景列表。
-
-site.data.pi:
-  通常对应 _data/pi.yml 或类似数据文件。
-  site.data.pi[0] 表示读取 pi 数据列表中的第一个人物对象。
-
-site.data.pi[0].education:
-  表示该人物对象下的 education 字段。
-  如果 education 字段存在，则渲染下面的 <ul> 列表。
-
-这里使用数据文件驱动页面内容：
-  好处是页面模板和个人数据分离，之后修改教育背景时只需要改 _data/pi.yml。
-{% endcomment %}
-{% if site.data.pi[0].education %}
-<ul style="margin-top: var(--space-4);">
-
-{% comment %}
-遍历 education 列表中的每一条教育经历。
-
-{{ education | replace: "-","&#8211;" }}:
-  将 education 字符串中的普通连字符 "-" 替换为 HTML 实体 &#8211;。
-  &#8211; 是 en dash，即较长的短横线 “–”。
-  这通常用于年份范围，例如 2020–2024，比普通 hyphen 更符合排版习惯。
-{% endcomment %}
-{% for education in site.data.pi[0].education %}
-<li>{{ education | replace: "-","&#8211;" }}</li>
-{% endfor %}
-</ul>
-{% endif %}
+<div class="credential-list" aria-label="Education">
+<div class="credential-item">
+<img src="{{ '/images/清华大学校徽.png' | relative_url }}" class="credential-logo" alt="Tsinghua University logo" loading="lazy">
+<div>
+<div class="credential-title">Doctoral student</div>
+<div class="credential-meta">Department of Earth System Science, Tsinghua University</div>
+<div class="credential-date">Sep 2023 - Present</div>
+</div>
+</div>
+<div class="credential-item">
+<img src="{{ '/images/南京大学校徽.png' | relative_url }}" class="credential-logo" alt="Nanjing University logo" loading="lazy">
+<div>
+<div class="credential-title">B.S. Atmospheric Science</div>
+<div class="credential-meta">School of Atmospheric Sciences, Nanjing University</div>
+<div class="credential-date">Sep 2019 - Jun 2023</div>
+</div>
+</div>
+</div>
 
 </div>
 </div>
@@ -181,7 +169,7 @@ Experience 区域。
   2. Huawei Technologies Co., Ltd. 时空预测算法实习
   3. Zhijiang Lab 大语言模型研究实习
 {% endcomment %}
-<div class="section-card">
+<div class="section-card" markdown="0">
 <h3>Experience</h3>
 
 {% comment %}
@@ -199,21 +187,21 @@ Experience 区域。
 主要内容：
   参与 AI 天气预报工程流程，并实现基于 HRNet 的雷达图像去噪系统。
 {% endcomment %}
-<div style="margin-bottom: 1.6rem;">
-<div style="display: flex; justify-content: space-between; gap: 1rem; align-items: baseline; flex-wrap: wrap;">
-<p style="margin-bottom: 0.2rem;">
+<div class="experience-item">
+<img src="{{ '/images/彩云科技.png' | relative_url }}" class="experience-logo" alt="ColorfulClouds Tech logo" loading="lazy">
+<div class="experience-content">
+<div class="experience-header">
+<div>
 <strong>Meteorological AI Algorithm Engineering Intern</strong><br>
-<span style="color: var(--accent); font-weight: 600;">ColorfulClouds Tech.</span>
-</p>
-<p style="margin-bottom: 0.2rem; text-align: right; color: var(--accent); font-weight: 600;">
-2023.06 - 2023.09<br>
-<span style="color: var(--text-secondary); font-style: italic; font-weight: 500;">Beijing</span>
-</p>
+<span class="experience-org">ColorfulClouds Tech.</span>
+</div>
+<div class="experience-date">2023.06 - 2023.09<br><span>Beijing</span></div>
 </div>
 <ul>
 <li>Designed and implemented a radar image denoising system based on the HRNet deep learning architecture.</li>
 <li>Learned the full workflow of AI-powered weather forecasting, including data transmission and management, model architecture design, cloud-based training and deployment, testing, and production rollout.</li>
 </ul>
+</div>
 </div>
 
 {% comment %}
@@ -231,20 +219,20 @@ Experience 区域。
 主要内容：
   参与 AI atmospheric model development 相关技术讨论。
 {% endcomment %}
-<div style="margin-bottom: 1.6rem;">
-<div style="display: flex; justify-content: space-between; gap: 1rem; align-items: baseline; flex-wrap: wrap;">
-<p style="margin-bottom: 0.2rem;">
+<div class="experience-item">
+<img src="{{ '/images/Huawei.png' | relative_url }}" class="experience-logo" alt="Huawei logo" loading="lazy">
+<div class="experience-content">
+<div class="experience-header">
+<div>
 <strong>Spatiotemporal Forecasting Algorithm Intern</strong><br>
-<span style="color: var(--accent); font-weight: 600;">Huawei Technologies Co., Ltd.</span>
-</p>
-<p style="margin-bottom: 0.2rem; text-align: right; color: var(--accent); font-weight: 600;">
-2024.12 - 2025.05<br>
-<span style="color: var(--text-secondary); font-style: italic; font-weight: 500;">Beijing</span>
-</p>
+<span class="experience-org">Huawei Technologies Co., Ltd.</span>
+</div>
+<div class="experience-date">2024.12 - 2025.05<br><span>Beijing</span></div>
 </div>
 <ul>
 <li>Participated in weekly technical meetings and contributed insights on AI atmospheric model development.</li>
 </ul>
+</div>
 </div>
 
 {% comment %}
@@ -262,21 +250,21 @@ Experience 区域。
 主要内容：
   研究大语言模型在地学问答任务中的性能提升，重点关注 Test-Time Scaling。
 {% endcomment %}
-<div style="margin-bottom: 0;">
-<div style="display: flex; justify-content: space-between; gap: 1rem; align-items: baseline; flex-wrap: wrap;">
-<p style="margin-bottom: 0.2rem;">
+<div class="experience-item">
+<img src="{{ '/images/zhijiang_lab.png' | relative_url }}" class="experience-logo" alt="Zhijiang Lab logo" loading="lazy">
+<div class="experience-content">
+<div class="experience-header">
+<div>
 <strong>Large Language Model Research Intern</strong><br>
-<span style="color: var(--accent); font-weight: 600;">Zhijiang Lab</span>
-</p>
-<p style="margin-bottom: 0.2rem; text-align: right; color: var(--accent); font-weight: 600;">
-2025.06.22 - 2025.08.03<br>
-<span style="color: var(--text-secondary); font-style: italic; font-weight: 500;">Hangzhou</span>
-</p>
+<span class="experience-org">Zhijiang Lab</span>
+</div>
+<div class="experience-date">2025.06.22 - 2025.08.03<br><span>Hangzhou</span></div>
 </div>
 <ul>
 <li>Conducted research on enhancing the performance of large language models (LLMs) in geological question answering tasks, with a focus on the application of Test-Time Scaling (TTS) techniques.</li>
 <li>Designed and implemented algorithms based on three representative TTS approaches: Parallel Scaling, Sequential Scaling, and Internal Scaling.</li>
 </ul>
+</div>
 </div>
 
 </div>
