@@ -174,34 +174,6 @@ site.data.pi[0].education:
 </div>
 
 {% comment %}
-Academic Background 区域。
-
-这个 section 介绍学术背景：
-  1. 研究交叉方向：大气科学与人工智能。
-  2. 当前研究主题：天气预报、资料同化、气候预测。
-  3. 本科训练背景：动力气象、气象学原理、气候动力学、数值模式经验。
-{% endcomment %}
-<div class="section-card">
-<h3>Academic Background</h3>
-
-{% comment %}
-第一段：
-概括当前研究定位。
-强调 atmospheric science 和 artificial intelligence 的交叉。
-{% endcomment %}
-<p>I work at the intersection of atmospheric science and artificial intelligence. My current research focuses on AI for operational forecasting, from data assimilation to weather, S2S and climate prediction.</p>
-
-{% comment %}
-第二段：
-介绍本科阶段的大气科学训练。
-这里的作用是说明作者并不只是做 AI 方法，而是有地球物理和大气科学背景。
-最后一句说明这种背景如何影响作者的研究兴趣。
-{% endcomment %}
-<p>My undergraduate training in atmospheric science covered dynamic meteorology, principles of meteorology, climate dynamics, and experience with atmospheric numerical models.</p>
-</div>
-
-
-{% comment %}
 Experience 区域。
 
 这个 section 介绍三段实习经历：
