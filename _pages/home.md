@@ -5,8 +5,18 @@ sitemap: false
 permalink: /
 ---
 
+<header class="home-hero-block" markdown="0">
+<img src="{{ '/images/avatar.JPG' | relative_url }}" class="home-hero-avatar" alt="{{ site.name }}" loading="lazy">
+<div class="home-hero-text">
 <h2 class="home-hero">{{ site.name }}</h2>
 <p class="home-hero-sub">{{ site.title }}, {{ site.institution }}</p>
+<div class="home-hero-links">
+{% if site.email %}<a href="mailto:{{ site.email }}" class="icon-link" title="Email"><i class="fa-solid fa-envelope"></i></a>{% endif %}
+{% if site.links.google_scholar and site.links.google_scholar != "" %}<a href="{{ site.links.google_scholar }}" class="icon-link" title="Google Scholar"><i class="ai ai-google-scholar"></i></a>{% endif %}
+{% if site.links.github and site.links.github != "" %}<a href="{{ site.links.github }}" class="icon-link" title="GitHub"><i class="fa-brands fa-github"></i></a>{% endif %}
+</div>
+</div>
+</header>
 
 <section class="research-interest-feature" aria-labelledby="forecasting-focus" markdown="0">
 <p class="section-kicker">Research Focus</p>

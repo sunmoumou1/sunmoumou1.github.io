@@ -57,6 +57,44 @@
   max-width: none;
 }
 
+// Home hero header — avatar + identity + links, single-column landing
+.home-hero-block {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  margin-bottom: var(--space-4);
+
+  @media (max-width: 640px) {
+    flex-direction: column;
+    text-align: center;
+    gap: var(--space-5, 1.25rem);
+  }
+}
+
+.home-hero-avatar {
+  flex-shrink: 0;
+  width: 132px;
+  height: 132px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--bg-card);
+  box-shadow: 0 0 0 1px var(--border-color), var(--shadow-md);
+}
+
+.home-hero-text {
+  min-width: 0;
+}
+
+.home-hero-links {
+  display: flex;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+
+  @media (max-width: 640px) {
+    justify-content: center;
+  }
+}
+
 // Research interest feature — image-led operational forecasting focus
 .research-interest-feature {
   margin: var(--space-8) 0;
