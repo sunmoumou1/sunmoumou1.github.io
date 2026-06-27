@@ -37,3 +37,79 @@
     }
   }
 }
+
+// =============================================================
+// Page lead — short editorial intro beneath a page heading
+// =============================================================
+
+.page-lead {
+  margin-top: calc(-1 * var(--space-2));
+  margin-bottom: var(--space-8);
+  max-width: 60ch;
+  color: var(--text-muted);
+  font-size: 1.0625rem;
+  font-style: italic;
+}
+
+// =============================================================
+// Activity cards — refined meta line + framed media
+// =============================================================
+
+.activity-card {
+  h3 {
+    font-size: 1.3rem;
+    line-height: 1.35;
+  }
+
+  > p:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.activity-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.activity-badge {
+  display: inline-block;
+  padding: 0.15rem 0.6rem;
+  border-radius: var(--radius-full);
+  background-color: var(--accent-light);
+  color: var(--accent);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.activity-figure {
+  margin: var(--space-6) 0 0;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background-color: var(--bg-secondary);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition-slow), transform var(--transition-slow);
+
+  img {
+    display: block;
+    width: 100%;
+  }
+
+  &:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+}
+
+// Portrait media (e.g. a certificate) — keep it from dominating the card
+.activity-figure--portrait {
+  max-width: 360px;
+}
