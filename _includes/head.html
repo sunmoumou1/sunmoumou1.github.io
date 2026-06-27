@@ -34,7 +34,16 @@
   <!-- Accent color from config -->
   {% if site.accent_color %}
   <style>
-    :root { --accent: {{ site.accent_color }}; }
+    :root {
+      --accent: {{ site.accent_color }};
+      --accent-hover: #6f102d;
+      --accent-light: rgba(138, 21, 56, 0.1);
+    }
+    [data-bs-theme="dark"] {
+      --accent: #d46a7c;
+      --accent-hover: #ee9cab;
+      --accent-light: rgba(212, 106, 124, 0.16);
+    }
   </style>
   {% endif %}
 

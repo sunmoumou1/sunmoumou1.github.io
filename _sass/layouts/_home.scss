@@ -52,19 +52,71 @@
 .home-hero-sub {
   font-size: 1.0625rem;
   color: var(--text-muted);
-  margin-bottom: var(--space-8);
+  margin-bottom: var(--space-6);
   font-style: italic;
   max-width: none;
 }
 
-// Banner image — editorial frame with caption
-.banner-frame {
+// Research interest feature — image-led operational forecasting focus
+.research-interest-feature {
   margin: var(--space-8) 0;
+  padding: var(--space-8) 0;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.research-interest-copy {
+  max-width: 66ch;
+
+  h3 {
+    margin-top: 0;
+    margin-bottom: var(--space-3);
+    font-size: 1.6rem;
+  }
+
+  p {
+    max-width: none;
+  }
+}
+
+.section-kicker {
+  margin-bottom: var(--space-2);
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.pipeline-steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: 1.25rem 0 var(--space-6);
+
+  span {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    min-height: 2rem;
+    padding: 0.25rem 0.8rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-full);
+    background-color: var(--bg-card);
+    color: var(--text-primary);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    box-shadow: var(--shadow-sm);
+  }
+}
+
+.research-interest-figure {
+  margin: var(--space-6) 0 0;
+  border: 1px solid var(--border-color);
   border-radius: var(--radius-xl);
   overflow: hidden;
+  background-color: #fff;
   box-shadow: var(--shadow-md);
-  border: 1px solid var(--border-color);
-  background-color: var(--bg-card);
 
   img {
     width: 100%;
@@ -77,14 +129,19 @@
     transform: scale(1.02);
   }
 
-  .banner-caption {
+  figcaption {
     padding: var(--space-3) var(--space-4);
-    font-size: 0.75rem;
-    color: var(--text-muted);
-    font-style: italic;
     border-top: 1px solid var(--border-color);
     background-color: var(--bg-secondary);
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    font-style: italic;
+    line-height: 1.6;
   }
+}
+
+[data-bs-theme="dark"] .research-interest-figure {
+  background-color: #fff;
 }
 
 // News timeline

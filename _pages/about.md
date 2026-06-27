@@ -231,9 +231,9 @@ Experience 区域。
 <div style="display: flex; justify-content: space-between; gap: 1rem; align-items: baseline; flex-wrap: wrap;">
 <p style="margin-bottom: 0.2rem;">
 <strong>Meteorological AI Algorithm Engineering Intern</strong><br>
-<span style="color: var(--accent-color); font-weight: 600;">ColorfulClouds Tech.</span>
+<span style="color: var(--accent); font-weight: 600;">ColorfulClouds Tech.</span>
 </p>
-<p style="margin-bottom: 0.2rem; text-align: right; color: var(--accent-color); font-weight: 600;">
+<p style="margin-bottom: 0.2rem; text-align: right; color: var(--accent); font-weight: 600;">
 2023.06 - 2023.09<br>
 <span style="color: var(--text-secondary); font-style: italic; font-weight: 500;">Beijing</span>
 </p>
@@ -263,9 +263,9 @@ Experience 区域。
 <div style="display: flex; justify-content: space-between; gap: 1rem; align-items: baseline; flex-wrap: wrap;">
 <p style="margin-bottom: 0.2rem;">
 <strong>Spatiotemporal Forecasting Algorithm Intern</strong><br>
-<span style="color: var(--accent-color); font-weight: 600;">Huawei Technologies Co., Ltd.</span>
+<span style="color: var(--accent); font-weight: 600;">Huawei Technologies Co., Ltd.</span>
 </p>
-<p style="margin-bottom: 0.2rem; text-align: right; color: var(--accent-color); font-weight: 600;">
+<p style="margin-bottom: 0.2rem; text-align: right; color: var(--accent); font-weight: 600;">
 2024.12 - 2025.05<br>
 <span style="color: var(--text-secondary); font-style: italic; font-weight: 500;">Beijing</span>
 </p>
@@ -294,9 +294,9 @@ Experience 区域。
 <div style="display: flex; justify-content: space-between; gap: 1rem; align-items: baseline; flex-wrap: wrap;">
 <p style="margin-bottom: 0.2rem;">
 <strong>Large Language Model Research Intern</strong><br>
-<span style="color: var(--accent-color); font-weight: 600;">Zhijiang Lab</span>
+<span style="color: var(--accent); font-weight: 600;">Zhijiang Lab</span>
 </p>
-<p style="margin-bottom: 0.2rem; text-align: right; color: var(--accent-color); font-weight: 600;">
+<p style="margin-bottom: 0.2rem; text-align: right; color: var(--accent); font-weight: 600;">
 2025.06.22 - 2025.08.03<br>
 <span style="color: var(--text-secondary); font-style: italic; font-weight: 500;">Hangzhou</span>
 </p>
@@ -308,4 +308,3 @@ Experience 区域。
 </div>
 
 </div>
-

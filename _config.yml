@@ -16,7 +16,7 @@ links:
   cv: ""                                                     # 简历链接（空）
 
 # ===== 网站外观与元信息 =====
-accent_color: "#1f7a8c"                                      # 主题强调色（青蓝色）
+accent_color: "#8a1538"                                      # 主题强调色（酒红色）
 dark_mode: true                                             # 是否启用深色模式
 description: "Academic webpage of Sencan Sun(孙森灿), a doctoral student at Tsinghua University working on AI for operational forecasting, from data assimilation, to weather, S2S and climate prediction."  # 站点描述（用于 SEO/meta 标签）
 # SEO = Search Engine Optimization（搜索引擎优化）。
@@ -32,7 +32,6 @@ analytics:
 nav_pages:
   - name: about          # 关于
   - name: publications   # 论文/发表
-  - name: research       # 研究
   - name: activities     # 学术活动
   - name: blogs          # 博客
 

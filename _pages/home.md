@@ -9,25 +9,37 @@ permalink: /
 <p class="home-hero-sub">{{ site.title }}, {{ site.institution }}</p>
 
 <div class="chip-container" markdown="0">
-<a href="{{ '/research/' | relative_url }}" class="chip">AI for Weather Forecasting</a>
-<a href="{{ '/research/' | relative_url }}" class="chip">Data Assimilation</a>
-<a href="{{ '/research/' | relative_url }}" class="chip">Climate Prediction</a>
-<a href="{{ '/research/' | relative_url }}" class="chip">Diffusion Models</a>
-<a href="{{ '/research/' | relative_url }}" class="chip">Atmospheric Science</a>
+<span class="chip">AI for Operational Forecasting</span>
+<span class="chip">Data Assimilation</span>
+<span class="chip">Weather Prediction</span>
+<span class="chip">S2S Forecasting</span>
+<span class="chip">Climate Projection</span>
 </div>
 
-I am **Sun Sencan (孙森灿)**, a doctoral student at Tsinghua University with a background in atmospheric science. My research explores artificial intelligence methods for weather forecasting, data assimilation, and climate prediction.
+I am **Sun Sencan (孙森灿)**, a doctoral student at Tsinghua University with a background in atmospheric science. My research centers on **AI for operational forecasting**: building AI methods that can enter real forecasting workflows and improve prediction skill across weather and climate timescales.
 
-I am especially interested in probabilistic generative modeling, including diffusion models, and in how these methods can improve weather prediction, climate simulation, and the representation of extreme events.
+<section class="research-interest-feature" aria-labelledby="forecasting-focus" markdown="0">
+<div class="research-interest-copy">
+<p class="section-kicker">Research Focus</p>
+<h3 id="forecasting-focus">AI for operational forecasting</h3>
+<p>I am interested in using AI to gradually replace and improve individual modules in the operational forecasting pipeline: from data assimilation, to medium-range weather prediction, to subseasonal-to-seasonal forecasting, and ultimately to climate projection.</p>
+<p>The goal is not only to build stronger models, but to help operational forecasting skill continue growing rapidly and sustainably over the next decade.</p>
+<div class="pipeline-steps" aria-label="Forecasting pipeline stages">
+<span>Assimilation</span>
+<span>Weather</span>
+<span>S2S</span>
+<span>Climate Projection</span>
+</div>
+</div>
+<figure class="research-interest-figure">
+<img src="{{ '/images/my_research_interest.png' | relative_url }}" alt="Operational forecasting pipeline from assimilation to forecast model, weather products, S2S, and climate simulation" loading="lazy">
+<figcaption>AI methods can be inserted into each stage of the operational pipeline, replacing or augmenting modules where they improve forecast skill and reliability.</figcaption>
+</figure>
+</section>
 
-<div class="callout callout-success" markdown="0">
+<div class="callout callout-info" markdown="0">
 <div class="callout-title"><i class="fa-solid fa-cloud-sun-rain callout-icon"></i> Research Direction</div>
-<p>Building AI methods that are useful for atmospheric prediction, climate simulation, and scientific understanding.</p>
-</div>
-
-<div class="banner-frame" markdown="0">
-<img src="{{ '/images/paper_pic.png' | relative_url }}" alt="Research workflow illustration" loading="lazy">
-<div class="banner-caption">Current work focuses on AI-assisted atmospheric prediction and data-driven scientific modeling.</div>
+<p>Developing AI methods for operationally useful atmospheric prediction across data assimilation, weather prediction, S2S forecasting, and climate projection.</p>
 </div>
 
 ### About Me

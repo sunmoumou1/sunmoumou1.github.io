@@ -4,9 +4,9 @@
 
 :root {
   // Accent
-  --accent: #1f7a8c;
-  --accent-hover: #155f6d;
-  --accent-light: rgba(31, 122, 140, 0.1);
+  --accent: #8a1538;
+  --accent-hover: #6f102d;
+  --accent-light: rgba(138, 21, 56, 0.1);
 
   // Light mode
   --bg-primary: #f7f9fb;
@@ -51,9 +51,9 @@
 
 // Dark mode
 [data-bs-theme="dark"] {
-  --accent: #3dbaa8;
-  --accent-hover: #5dd4c2;
-  --accent-light: rgba(61, 186, 168, 0.1);
+  --accent: #d46a7c;
+  --accent-hover: #ee9cab;
+  --accent-light: rgba(212, 106, 124, 0.16);
 
   --bg-primary: #17191c;
   --bg-secondary: #20252a;
