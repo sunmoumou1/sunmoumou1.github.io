@@ -289,7 +289,9 @@ photo-gallery / photo-card:
 {% endcomment %}
 <div class="section-card" markdown="0">
 <h3>Beyond Research</h3>
-<p>Beyond my research, a little about me: I was born on July 14, 2000, in a small farming village in Luyi County, Zhoukou City, Henan Province, China. Here are a few snapshots along the way — from childhood to more recent travels.</p>
+<p>Beyond my research, a little about me. I was born on July 14, 2000, in a small farming village in Luyi County (鹿邑县), Zhoukou City (周口市), Henan Province (河南省), China. When I was five, my parents brought me to Zhengzhou (郑州), where I grew up and went to school until I left at nineteen to begin university in Nanjing (南京). I am deeply grateful to my parents for the brave, tireless years they spent building a life in the city and giving me a better education — without them, nothing I have today would have been possible.</p>
+<p>My undergraduate years in Nanjing were, quite simply, the happiest of my life. I am grateful to the city itself — its beautiful scenery, gentle climate, and warm, easygoing spirit; to the girls who came into my life there, for Nanjing is where I first fell in love, and whatever became of those relationships, they remain memories I will always treasure; and to the teammates who played football alongside me through those years — with their help, I even won the league's Golden Boot.</p>
+<p>Here are a few snapshots along the way — from childhood to more recent travels.</p>
 <div class="photo-gallery">
 <figure class="photo-card">
 <img src="{{ '/images/child.JPG' | relative_url }}" alt="Sencan Sun as a young child" loading="lazy">
