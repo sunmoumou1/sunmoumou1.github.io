@@ -154,6 +154,22 @@
   line-height: 1.55;
 }
 
+.credential-advisors {
+  margin-top: var(--space-2);
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  line-height: 1.55;
+
+  strong {
+    color: var(--text-muted);
+    font-weight: 700;
+  }
+
+  & + & {
+    margin-top: var(--space-1);
+  }
+}
+
 .credential-date,
 .experience-date {
   color: var(--accent);

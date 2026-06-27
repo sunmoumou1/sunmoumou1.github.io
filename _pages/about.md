@@ -71,23 +71,6 @@ style:
 <h3 class="pi-name">{{ site.name }}</h3>
 
 {% comment %}
-个人身份信息。
-
-{{ site.title }}:
-  从站点配置中读取头衔，例如 Ph.D. Student。
-
-{{ site.institution }}:
-  从站点配置中读取所在机构，例如 Tsinghua University。
-
-font-style: italic:
-  使用斜体显示身份信息。
-
-color: var(--text-secondary):
-  使用次级文本颜色，视觉上弱于姓名标题。
-{% endcomment %}
-<p style="font-style: italic; color: var(--text-secondary);">{{ site.title }}, {{ site.institution }}</p>
-
-{% comment %}
 联系方式链接区域。
 
 pi-links:
@@ -140,11 +123,11 @@ ai ai-google-scholar:
 
 <div class="credential-list" aria-label="Education">
 <div class="credential-item">
-<img src="{{ '/images/清华大学校徽.png' | relative_url }}" class="credential-logo" alt="Tsinghua University logo" loading="lazy">
+<img src="{{ '/images/zzfls.png' | relative_url }}" class="credential-logo" alt="Zhengzhou Foreign Language School logo" loading="lazy">
 <div>
-<div class="credential-title">Doctoral student</div>
-<div class="credential-meta">Department of Earth System Science, Tsinghua University</div>
-<div class="credential-date">Sep 2023 - Present</div>
+<div class="credential-title">High School</div>
+<div class="credential-meta">Zhengzhou Foreign Language School</div>
+<div class="credential-date">Sep 2016 - Jun 2019</div>
 </div>
 </div>
 <div class="credential-item">
@@ -156,11 +139,13 @@ ai ai-google-scholar:
 </div>
 </div>
 <div class="credential-item">
-<img src="{{ '/images/zzfls.png' | relative_url }}" class="credential-logo" alt="Zhengzhou Foreign Language School logo" loading="lazy">
+<img src="{{ '/images/清华大学校徽.png' | relative_url }}" class="credential-logo" alt="Tsinghua University logo" loading="lazy">
 <div>
-<div class="credential-title">High School</div>
-<div class="credential-meta">Zhengzhou Foreign Language School</div>
-<div class="credential-date">Sep 2016 - Jun 2019</div>
+<div class="credential-title">Doctoral student</div>
+<div class="credential-meta">Department of Earth System Science, Tsinghua University</div>
+<div class="credential-date">Sep 2023 - Present</div>
+<div class="credential-advisors"><strong>Advisor:</strong> <a href="https://scholar.google.com/citations?user=WYyB7wYAAAAJ&hl=zh-CN&oi=ao">Yanluan Lin (林岩峦)</a></div>
+<div class="credential-advisors"><strong>Co-advisors:</strong> <a href="https://scholar.google.com/citations?hl=zh-CN&user=DFgFVVYAAAAJ">Baoxiang Pan (潘宝祥)</a>, <a href="https://scholar.google.com/citations?hl=zh-CN&user=0QWGZ1sAAAAJ">Wenhao Dong (董文浩)</a></div>
 </div>
 </div>
 </div>
