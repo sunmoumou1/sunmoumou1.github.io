@@ -68,7 +68,7 @@ style:
   这里使用内联样式控制中文名的字号和颜色。
   color: var(--text-secondary) 使用 CSS 变量，方便和主题颜色保持一致。
 {% endcomment %}
-<h3 class="pi-name">{{ site.name }} <span style="font-size: 1rem; color: var(--text-secondary);">(孙森灿)</span></h3>
+<h3 class="pi-name">{{ site.name }}</h3>
 
 {% comment %}
 个人身份信息。
@@ -153,6 +153,14 @@ ai ai-google-scholar:
 <div class="credential-title">B.S. Atmospheric Science</div>
 <div class="credential-meta">School of Atmospheric Sciences, Nanjing University</div>
 <div class="credential-date">Sep 2019 - Jun 2023</div>
+</div>
+</div>
+<div class="credential-item">
+<img src="{{ '/images/zzfls.png' | relative_url }}" class="credential-logo" alt="Zhengzhou Foreign Language School logo" loading="lazy">
+<div>
+<div class="credential-title">High School</div>
+<div class="credential-meta">Zhengzhou Foreign Language School</div>
+<div class="credential-date">Sep 2016 - Jun 2019</div>
 </div>
 </div>
 </div>
@@ -267,4 +275,33 @@ Experience 区域。
 </div>
 </div>
 
+</div>
+
+{% comment %}
+Beyond Research 区域。
+
+这是一段更个人化的介绍：
+  - 出生信息（2000 年 7 月 14 日，河南周口鹿邑）
+  - 一组生活照（童年、福州、洛杉矶），让读者更了解作者本人。
+
+photo-gallery / photo-card:
+  自定义 CSS，等高图片条带，统一不同长宽比的照片，照片下方带说明文字。
+{% endcomment %}
+<div class="section-card" markdown="0">
+<h3>Beyond Research</h3>
+<p>Beyond my research, a little about me: I was born on July 14, 2000, in a small farming village in Luyi County, Zhoukou City, Henan Province, China. Here are a few snapshots along the way — from childhood to more recent travels.</p>
+<div class="photo-gallery">
+<figure class="photo-card">
+<img src="{{ '/images/child.JPG' | relative_url }}" alt="Sencan Sun as a young child" loading="lazy">
+<figcaption>Childhood</figcaption>
+</figure>
+<figure class="photo-card">
+<img src="{{ '/images/fuzhou.JPG' | relative_url }}" alt="Sencan Sun in Fuzhou" loading="lazy">
+<figcaption>Fuzhou</figcaption>
+</figure>
+<figure class="photo-card">
+<img src="{{ '/images/losangles.jpg' | relative_url }}" alt="Sencan Sun in Los Angeles, with the Hollywood sign in the background" loading="lazy">
+<figcaption>Los Angeles</figcaption>
+</figure>
+</div>
 </div>
