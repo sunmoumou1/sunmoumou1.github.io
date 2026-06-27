@@ -6,29 +6,55 @@
 .chip-container {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-2);
-  margin: var(--space-4) 0 var(--space-6);
+  gap: 0.7rem;
+  margin: var(--space-6) 0 var(--space-8);
+  padding: var(--space-4);
+  border: 1px solid rgba(138, 21, 56, 0.18);
+  border-radius: var(--radius-xl);
+  background:
+    linear-gradient(135deg, rgba(138, 21, 56, 0.08), rgba(255, 255, 255, 0.55)),
+    var(--bg-card);
+  box-shadow: var(--shadow-md);
 }
 
 .chip {
-  display: inline-block;
-  padding: 0.25rem 0.875rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 2.35rem;
+  padding: 0.38rem 0.95rem;
   font-family: 'DM Sans', sans-serif;
-  font-size: 0.75rem;
-  font-weight: 600;
+  font-size: 0.78rem;
+  font-weight: 750;
   letter-spacing: 0;
   border-radius: var(--radius-full);
-  background-color: var(--accent-light);
+  background:
+    linear-gradient(var(--bg-card), var(--bg-card)) padding-box,
+    linear-gradient(135deg, var(--accent), rgba(187, 148, 87, 0.9)) border-box;
   color: var(--accent);
-  border: 1px solid var(--accent);
-  transition: all var(--transition-fast);
+  border: 1px solid transparent;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), color var(--transition-fast), background var(--transition-fast);
   text-decoration: none;
   background-image: none !important;
-  padding-bottom: 0.25rem;
+  padding-bottom: 0.38rem;
+  box-shadow: 0 8px 18px rgba(138, 21, 56, 0.08);
+
+  i {
+    color: var(--accent);
+    font-size: 0.9rem;
+  }
 
   &:hover {
-    background-color: var(--accent);
+    transform: translateY(-2px);
+    background:
+      linear-gradient(135deg, var(--accent), #5c0d24) padding-box,
+      linear-gradient(135deg, rgba(255, 255, 255, 0.7), rgba(187, 148, 87, 0.9)) border-box;
     color: #fff;
+    box-shadow: 0 12px 28px rgba(138, 21, 56, 0.18);
+
+    i {
+      color: #f7dca6;
+    }
   }
 
   // Muted variant for non-linked chips
@@ -42,6 +68,20 @@
       color: var(--text-primary);
     }
   }
+}
+
+[data-bs-theme="dark"] .chip-container {
+  border-color: rgba(212, 106, 124, 0.28);
+  background:
+    linear-gradient(135deg, rgba(212, 106, 124, 0.12), rgba(255, 255, 255, 0.03)),
+    var(--bg-card);
+}
+
+[data-bs-theme="dark"] .chip {
+  background:
+    linear-gradient(var(--bg-card), var(--bg-card)) padding-box,
+    linear-gradient(135deg, var(--accent), rgba(221, 190, 126, 0.85)) border-box;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.22);
 }
 
 // Highlight callout — eye-catching announcement box

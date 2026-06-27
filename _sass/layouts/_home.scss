@@ -52,7 +52,7 @@
 .home-hero-sub {
   font-size: 1.0625rem;
   color: var(--text-muted);
-  margin-bottom: var(--space-6);
+  margin-bottom: 0;
   font-style: italic;
   max-width: none;
 }
@@ -63,16 +63,17 @@
   padding: var(--space-8) 0;
   border-top: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
-}
-
-.research-interest-copy {
-  max-width: 66ch;
 
   h3 {
     margin-top: 0;
-    margin-bottom: var(--space-3);
-    font-size: 1.6rem;
+    margin-bottom: var(--space-5, 1.25rem);
+    font-size: 1.65rem;
   }
+}
+
+.research-interest-copy {
+  margin-top: var(--space-6);
+  max-width: 66ch;
 
   p {
     max-width: none;
@@ -111,7 +112,7 @@
 }
 
 .research-interest-figure {
-  margin: var(--space-6) 0 0;
+  margin: 0;
   border: 1px solid var(--border-color);
   border-radius: var(--radius-xl);
   overflow: hidden;
