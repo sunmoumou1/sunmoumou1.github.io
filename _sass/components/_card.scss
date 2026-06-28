@@ -58,6 +58,130 @@
 }
 
 // =============================================================
+// Activity globe — interactive location map for the activities page
+// =============================================================
+
+.activity-globe-panel {
+  position: relative;
+  min-height: clamp(440px, 58vw, 650px);
+  margin: 0 0 var(--space-10);
+  border: 1px solid rgba(138, 21, 56, 0.14);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    linear-gradient(135deg, rgba(248, 251, 250, 0.98) 0%, rgba(231, 241, 238, 0.94) 46%, rgba(248, 241, 244, 0.96) 100%);
+  box-shadow: var(--shadow-lg);
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image:
+      linear-gradient(rgba(35, 39, 43, 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(35, 39, 43, 0.045) 1px, transparent 1px);
+    background-size: 42px 42px;
+    mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.68), rgba(0, 0, 0, 0.18));
+  }
+}
+
+.activity-globe-stage {
+  position: absolute;
+  inset: 0;
+  min-height: inherit;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+
+  &.is-dragging {
+    cursor: grabbing;
+  }
+}
+
+.activity-globe-canvas,
+.activity-globe-arrows,
+.activity-globe-labels {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.activity-globe-canvas {
+  display: block;
+}
+
+.activity-globe-arrows {
+  overflow: visible;
+  pointer-events: none;
+}
+
+.activity-globe-labels {
+  pointer-events: none;
+}
+
+.activity-globe-callout {
+  position: absolute;
+  max-width: 15rem;
+  padding: 0.58rem 0.72rem;
+  border: 1px solid rgba(138, 21, 56, 0.18);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.78);
+  color: var(--text-primary);
+  box-shadow: 0 12px 28px rgba(35, 39, 43, 0.12);
+  backdrop-filter: blur(14px);
+  font-size: clamp(0.7rem, 1.2vw, 0.86rem);
+  font-weight: 700;
+  line-height: 1.25;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.98);
+  transition:
+    opacity var(--transition-base),
+    transform var(--transition-base),
+    left var(--transition-slow),
+    top var(--transition-slow);
+  will-change: left, top, opacity, transform;
+
+  &.is-visible {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+[data-bs-theme="dark"] {
+  .activity-globe-panel {
+    border-color: rgba(212, 106, 124, 0.22);
+    background:
+      linear-gradient(135deg, rgba(20, 24, 24, 0.98) 0%, rgba(27, 42, 37, 0.96) 48%, rgba(43, 31, 38, 0.97) 100%);
+
+    &::before {
+      background-image:
+        linear-gradient(rgba(237, 242, 244, 0.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(237, 242, 244, 0.055) 1px, transparent 1px);
+    }
+  }
+
+  .activity-globe-callout {
+    border-color: rgba(212, 106, 124, 0.34);
+    background: rgba(25, 29, 31, 0.78);
+    box-shadow: 0 16px 34px rgba(0, 0, 0, 0.34);
+  }
+}
+
+@media (max-width: 640px) {
+  .activity-globe-panel {
+    min-height: 520px;
+    margin-bottom: var(--space-8);
+  }
+
+  .activity-globe-callout {
+    max-width: 9.75rem;
+    padding: 0.48rem 0.56rem;
+  }
+}
+
+// =============================================================
 // Activity cards — refined meta line + framed media
 // =============================================================
 
