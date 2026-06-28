@@ -10,40 +10,50 @@ permalink: /activities/
 <p class="page-lead">Conferences, symposia, and teaching I have taken part in.</p>
 
 <section class="activity-globe-panel" aria-label="Activity locations">
-<div class="activity-globe-stage" id="activityGlobe">
+<div class="activity-globe-stage" id="activityAtlas" data-world="{{ '/assets/data/countries-110m.json' | relative_url }}">
 <canvas class="activity-globe-canvas" aria-label="Interactive globe showing activity locations"></canvas>
 <svg class="activity-globe-arrows" aria-hidden="true" focusable="false"></svg>
 <div class="activity-globe-labels" aria-hidden="true"></div>
+<p class="activity-globe-hint" aria-hidden="true"><i class="fa-solid fa-arrows-up-down-left-right"></i> Drag to spin the globe</p>
 </div>
 <script type="application/json" id="activityGlobeData">
 [
   {
     "title": "AGU Annual Meeting 2025",
     "city": "New Orleans",
+    "date": "December 2025",
     "lat": 29.9511,
     "lon": -90.0715
   },
   {
     "title": "Korean-China AI Symposium for Climate Science",
     "city": "Seoul",
+    "date": "October 2025",
     "lat": 37.5665,
     "lon": 126.9780
   },
   {
     "title": "Revolutionizing Weather Forecast and Climate Prediction Through Artificial Intelligence",
     "city": "Hong Kong",
+    "date": "September 2024",
     "lat": 22.3193,
     "lon": 114.1694
   },
   {
     "title": "International Summer School on Development and Application of Earth System Model",
     "city": "Beijing",
+    "date": "August 2024",
     "lat": 39.9042,
     "lon": 116.4074
   }
 ]
 </script>
 </section>
+
+<script src="https://cdn.jsdelivr.net/npm/d3-array@3/dist/d3-array.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3-geo@3/dist/d3-geo.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
+<script src="{{ '/assets/js/activity-globe.js' | relative_url }}"></script>
 
 <div class="section-card activity-card">
 <h3>AGU Annual Meeting 2025</h3>
