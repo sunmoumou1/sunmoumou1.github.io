@@ -5,7 +5,7 @@
       <p>
         {{ site.name }}<br>
         {{ site.title }}<br>
-        {{ site.institution }}
+        {{ site.institution | replace: ', Tsinghua University', '<br>Tsinghua University' }}
       </p>
     </div>
     <div>
