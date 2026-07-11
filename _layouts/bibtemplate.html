@@ -6,6 +6,12 @@
     | replace: 'Sun, S.', '<strong>Sun, S.</strong>'
     | replace: 'Sun, Sencan', '<strong>Sun, Sencan</strong>'
   %}
+  {% capture bold_title %}<strong>{{ entry.title }}</strong>{% endcapture %}
+  {% assign highlighted_reference = highlighted_reference | replace: entry.title, bold_title %}
+  {% if entry.journal %}
+    {% capture bold_journal %}<strong>{{ entry.journal }}</strong>{% endcapture %}
+    {% assign highlighted_reference = highlighted_reference | replace: entry.journal, bold_journal %}
+  {% endif %}
 
   <div class="pub-entry-inner{% unless entry.image %} pub-entry-inner-single{% endunless %}">
     <div class="pub-main">
