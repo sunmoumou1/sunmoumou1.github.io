@@ -19,6 +19,13 @@ permalink: /activities/
 <script type="application/json" id="activityGlobeData">
 [
   {
+    "title": "International Conference on Machine Learning (ICML 2026)",
+    "city": "Seoul",
+    "date": "July 2026",
+    "lat": 37.5665,
+    "lon": 126.9780
+  },
+  {
     "title": "AGU Annual Meeting 2025",
     "city": "New Orleans",
     "date": "December 2025",
@@ -54,6 +61,15 @@ permalink: /activities/
 <script src="https://cdn.jsdelivr.net/npm/d3-geo@3/dist/d3-geo.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
 <script src="{{ '/assets/js/activity-globe.js' | relative_url }}"></script>
+
+<div class="section-card activity-card">
+<h3>International Conference on Machine Learning (ICML 2026)</h3>
+<p class="activity-meta">July 6–9, 2026 · Seoul, South Korea</p>
+<p>I attended the 43rd International Conference on Machine Learning (ICML 2026) in Seoul.</p>
+<figure class="activity-figure">
+<img src="{{ '/images/ICML.jpg' | relative_url }}" alt="Attending ICML 2026 at COEX in Seoul" loading="lazy">
+</figure>
+</div>
 
 <div class="section-card activity-card">
 <h3>AGU Annual Meeting 2025</h3>
