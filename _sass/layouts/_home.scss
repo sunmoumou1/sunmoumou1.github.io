@@ -132,7 +132,7 @@
   border: 1px solid var(--border-color);
   border-radius: var(--radius-xl);
   overflow: hidden;
-  background-color: #fff;
+  background-color: var(--bg-card);
   box-shadow: var(--shadow-md);
 
   img {
@@ -158,7 +158,7 @@
 }
 
 [data-bs-theme="dark"] .research-interest-figure {
-  background-color: #fff;
+  background-color: var(--bg-card);
 }
 
 // News timeline

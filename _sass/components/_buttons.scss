@@ -29,9 +29,9 @@
   }
 
   &.btn-arxiv {
-    background-color: #b31b1b;
+    background-color: var(--accent);
     color: #fff;
-    &:hover { background-color: #8c1515; color: #fff; }
+    &:hover { background-color: var(--accent-hover); color: #fff; }
   }
 
   &.btn-bib,
@@ -58,9 +58,9 @@
   }
 
   &.btn-paper {
-    background-color: #b31b1b;
+    background-color: var(--accent);
     color: #fff;
-    &:hover { background-color: #8c1515; color: #fff; }
+    &:hover { background-color: var(--accent-hover); color: #fff; }
   }
 }
 

@@ -3,23 +3,23 @@
 // =============================================================
 
 :root {
-  // Accent
+  // Accent — deep wine red
   --accent: #8a1538;
   --accent-hover: #6f102d;
   --accent-light: rgba(138, 21, 56, 0.1);
 
-  // Light mode
-  --bg-primary: #f7f9fb;
-  --bg-secondary: #eef3f6;
-  --bg-card: #ffffff;
-  --text-primary: #23272b;
-  --text-secondary: #4d5963;
-  --text-muted: #76838e;
-  --border-color: #dce5ea;
-  --shadow-sm: 0 1px 3px rgba(35, 39, 43, 0.06);
-  --shadow-md: 0 4px 12px rgba(35, 39, 43, 0.08);
-  --shadow-lg: 0 8px 24px rgba(35, 39, 43, 0.1);
-  --shadow-navbar: 0 1px 4px rgba(35, 39, 43, 0.1);
+  // Light mode — soft, elegant wine-red tinted neutrals
+  --bg-primary: #faf5f6;
+  --bg-secondary: #f3eaec;
+  --bg-card: #fffcfc;
+  --text-primary: #2a1d20;
+  --text-secondary: #5e4b4f;
+  --text-muted: #7d646a;
+  --border-color: #eadde0;
+  --shadow-sm: 0 1px 3px rgba(42, 29, 32, 0.06);
+  --shadow-md: 0 4px 12px rgba(42, 29, 32, 0.08);
+  --shadow-lg: 0 8px 24px rgba(42, 29, 32, 0.1);
+  --shadow-navbar: 0 1px 4px rgba(42, 29, 32, 0.1);
 
   // Layout
   --container-max: 1100px;
@@ -55,13 +55,14 @@
   --accent-hover: #ee9cab;
   --accent-light: rgba(212, 106, 124, 0.16);
 
-  --bg-primary: #17191c;
-  --bg-secondary: #20252a;
-  --bg-card: #24292f;
-  --text-primary: #edf2f4;
-  --text-secondary: #c4ccd3;
-  --text-muted: #8f9ba6;
-  --border-color: #38444d;
+  // Dark mode — warm, muted wine-red shadows
+  --bg-primary: #1a1516;
+  --bg-secondary: #221c1d;
+  --bg-card: #2b2425;
+  --text-primary: #f3ecee;
+  --text-secondary: #c8b6ba;
+  --text-muted: #9a898d;
+  --border-color: #443b3d;
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.35);
   --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.4);

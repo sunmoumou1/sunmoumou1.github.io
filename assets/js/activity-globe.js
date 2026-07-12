@@ -167,7 +167,7 @@
       marker.setAttribute('orient', 'auto-start-reverse');
       var head = document.createElementNS(ns, 'path');
       head.setAttribute('d', 'M 0 0 L 10 5 L 0 10 z');
-      head.setAttribute('fill', '#e33131');
+      head.setAttribute('fill', '#8a1538');
       marker.appendChild(head);
       defs.appendChild(marker);
       arrowsSvg.appendChild(defs);
@@ -175,7 +175,7 @@
       locations.forEach(function () {
         var p = document.createElementNS(ns, 'path');
         p.setAttribute('fill', 'none');
-        p.setAttribute('stroke', '#e33131');
+        p.setAttribute('stroke', '#8a1538');
         p.setAttribute('stroke-width', '1.5');
         p.setAttribute('stroke-linecap', 'round');
         p.setAttribute('marker-end', 'url(#activityArrowHead)');
@@ -309,8 +309,8 @@
         centerX, centerY, radius * 0.92,
         centerX, centerY, radius * 1.16
       );
-      halo.addColorStop(0, 'rgba(120, 186, 222, 0.32)');
-      halo.addColorStop(1, 'rgba(120, 186, 222, 0)');
+      halo.addColorStop(0, 'rgba(138, 21, 56, 0.32)');
+      halo.addColorStop(1, 'rgba(138, 21, 56, 0)');
       ctx.fillStyle = halo;
       ctx.beginPath();
       ctx.arc(centerX, centerY, radius * 1.16, 0, Math.PI * 2);
@@ -328,7 +328,7 @@
         oceanCache.addColorStop(1, '#0a2547');
       }
       ctx.save();
-      ctx.shadowColor = 'rgba(12, 38, 64, 0.4)';
+      ctx.shadowColor = 'rgba(42, 29, 32, 0.4)';
       ctx.shadowBlur = radius * 0.18;
       ctx.shadowOffsetY = radius * 0.05;
       ctx.beginPath();
@@ -381,7 +381,7 @@
       );
       shade.addColorStop(0, 'rgba(255, 255, 255, 0.26)');
       shade.addColorStop(0.45, 'rgba(255, 255, 255, 0.02)');
-      shade.addColorStop(1, 'rgba(2, 14, 30, 0.34)');
+      shade.addColorStop(1, 'rgba(42, 29, 32, 0.34)');
       ctx.fillStyle = shade;
       ctx.fillRect(centerX - radius, centerY - radius, radius * 2, radius * 2);
 
@@ -418,13 +418,13 @@
         var pulse = reducedMotion ? 0.4 : (Math.sin(now / 460 + index * 1.7) + 1) * 0.5;
         ctx.save();
         ctx.globalAlpha = Math.min(1, 0.55 + point.depth * 0.45);
-        ctx.fillStyle = 'rgba(227, 49, 49, 0.18)';
+        ctx.fillStyle = 'rgba(138, 21, 56, 0.18)';
         ctx.beginPath();
         ctx.arc(point.x, point.y, 9 + pulse * 5, 0, Math.PI * 2);
         ctx.fill();
 
-        ctx.fillStyle = '#e33131';
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.95)';
+        ctx.fillStyle = '#8a1538';
+        ctx.strokeStyle = 'rgba(255, 250, 250, 0.95)';
         ctx.lineWidth = 2;
         ctx.beginPath();
         ctx.arc(point.x, point.y, 5, 0, Math.PI * 2);

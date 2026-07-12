@@ -4,6 +4,13 @@
 $baseurl: "{{ site.baseurl }}";
 
 // Bootstrap 5.3.3 — selective imports
+// Unify Bootstrap's default primary/link colors with the wine accent.
+$primary: #8a1538;
+$link-color: #8a1538;
+$link-hover-color: #6f102d;
+$component-active-bg: #8a1538;
+$component-active-color: #fff;
+
 @import "bootstrap/functions";
 @import "bootstrap/variables";
 @import "bootstrap/variables-dark";
