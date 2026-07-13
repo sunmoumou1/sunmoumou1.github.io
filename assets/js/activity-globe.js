@@ -402,12 +402,12 @@
       ctx.beginPath();
       ctx.arc(centerX, centerY, radius + 0.5, 0, Math.PI * 2);
       ctx.lineWidth = 1.1;
-      ctx.strokeStyle = 'rgba(214, 240, 255, 0.6)';
+      ctx.strokeStyle = 'rgba(243, 220, 225, 0.55)';
       ctx.stroke();
       ctx.beginPath();
       ctx.arc(centerX, centerY, radius + 3.5, 0, Math.PI * 2);
       ctx.lineWidth = 5;
-      ctx.strokeStyle = 'rgba(127, 196, 232, 0.12)';
+      ctx.strokeStyle = 'rgba(138, 21, 56, 0.12)';
       ctx.stroke();
       ctx.restore();
     }
