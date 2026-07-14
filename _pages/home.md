@@ -40,47 +40,66 @@ permalink: /
 
 I welcome conversations and collaboration around AI for weather and climate. You can reach me at [ssc23@mails.tsinghua.edu.cn](mailto:ssc23@mails.tsinghua.edu.cn).
 
-<section class="guestbook" aria-labelledby="guestbook-title" markdown="0">
+<section class="guestbook" id="guestbook" aria-labelledby="guestbook-title" markdown="0">
 <div class="guestbook-intro">
 <p class="section-kicker">Guestbook</p>
 <h3 id="guestbook-title">Leave a message</h3>
-<p>Questions, ideas, or just a hello — I would be delighted to hear from you. Your email address will only be used to reply and will never be displayed publicly.</p>
+<p>Questions, ideas, or just a hello — I would be delighted to hear from you. Messages are displayed publicly after posting; your email address is required for replies but is never shown with your message.</p>
 </div>
 
-<form class="guestbook-form" id="guestbookForm" action="https://formsubmit.co/ssc23@mails.tsinghua.edu.cn" method="POST">
-<input type="hidden" name="_subject" value="New message from the website guestbook">
-<input type="hidden" name="_template" value="table">
-<input type="hidden" name="_url" value="{{ site.url }}{{ site.baseurl }}/#guestbook-title">
-<div class="guestbook-honeypot" aria-hidden="true">
-<label for="guestbookWebsite">Website</label>
-<input id="guestbookWebsite" type="text" name="_honey" tabindex="-1" autocomplete="off">
+<div id="HCB_comment_box" class="guestbook-comments">
+<p class="guestbook-loading"><i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i> Loading the guestbook…</p>
 </div>
-
-<div class="guestbook-fields">
-<div class="guestbook-field">
-<label for="guestbookName">Name</label>
-<input id="guestbookName" type="text" name="name" autocomplete="name" minlength="2" maxlength="80" placeholder="Your name" required>
-</div>
-<div class="guestbook-field">
-<label for="guestbookEmail">Email</label>
-<input id="guestbookEmail" type="email" name="email" autocomplete="email" maxlength="160" placeholder="you@example.com" required>
-</div>
-</div>
-
-<div class="guestbook-field">
-<div class="guestbook-label-row">
-<label for="guestbookMessage">Message</label>
-<span id="guestbookCount" aria-live="polite">0 / 1200</span>
-</div>
-<textarea id="guestbookMessage" name="message" rows="6" minlength="2" maxlength="1200" placeholder="Write your message here…" required></textarea>
-</div>
-
-<div class="guestbook-actions">
-<button class="guestbook-submit" type="submit">
-<span>Send message</span>
-<i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
-</button>
-<p class="guestbook-status" id="guestbookStatus" role="status" aria-live="polite"></p>
-</div>
-</form>
+<script>
+window.hcb_user = {
+  PAGE: '{{ site.url }}{{ site.baseurl }}/guestbook',
+  comments_header: 'Messages',
+  name_label: 'Name',
+  email_label: 'Email (required, never displayed publicly)',
+  content_label: 'Write your public message here…',
+  submit: 'Post message',
+  no_comments_msg: 'No messages yet. Be the first to leave one!',
+  add: 'Leave a message',
+  again: 'Post another message',
+  said: '',
+  subscribe: 'Email me when someone replies',
+  reply: 'Reply',
+  flag: 'Flag',
+  like: 'Like',
+  msg_thankyou: 'Thank you — your message is now public.',
+  msg_approval: 'This message will appear after moderation.',
+  msg_approval_required: 'Thank you. Your message will appear after moderation.',
+  err_bad_email: 'Please enter a valid email address.',
+  err_comment_empty: 'Please write a message before posting.',
+  MAX_CHARS: 1200,
+  RELATIVE_DATES: true,
+  onload: function () {
+    window.setTimeout(function () {
+      var name = document.getElementById('hcb_form_name');
+      var email = document.getElementById('hcb_form_email');
+      var message = document.getElementById('hcb_form_content');
+      if (name) {
+        name.required = true;
+        name.autocomplete = 'name';
+      }
+      if (email) {
+        email.required = true;
+        email.autocomplete = 'email';
+      }
+      if (message) message.required = true;
+    }, 0);
+  }
+};
+(function () {
+  var script = document.createElement('script');
+  var host = 'https://www.htmlcommentbox.com';
+  var page = encodeURIComponent(window.hcb_user.PAGE).replace('+', '%2B');
+  script.id = 'hcb';
+  script.type = 'text/javascript';
+  script.async = true;
+  script.src = host + '/jread?page=' + page + '&opts=21270&num=10&ts=' + Date.now();
+  document.head.appendChild(script);
+})();
+</script>
+<noscript><p class="guestbook-noscript">JavaScript is required to view and post public messages.</p></noscript>
 </section>

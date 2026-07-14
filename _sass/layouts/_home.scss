@@ -161,7 +161,7 @@
   background-color: var(--bg-card);
 }
 
-// Guestbook — private messages delivered to the site owner's inbox
+// Guestbook — public messages powered by HTML Comment Box
 .guestbook {
   position: relative;
   margin-top: var(--space-12);
@@ -210,34 +210,34 @@
   }
 }
 
-.guestbook-form {
-  position: relative;
+.guestbook-loading,
+.guestbook-noscript {
+  margin: var(--space-4) 0 0;
+  color: var(--text-muted);
+  font-size: 0.875rem;
 }
 
-.guestbook-fields {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--space-4);
-  margin-bottom: var(--space-4);
+.guestbook #HCB_comment_box {
+  color: var(--text-secondary);
+  font-family: 'DM Sans', sans-serif;
 
-  @media (max-width: 640px) {
-    grid-template-columns: 1fr;
-  }
-}
-
-.guestbook-field {
-  label {
-    display: block;
-    margin-bottom: var(--space-2);
-    color: var(--text-primary);
-    font-size: 0.8125rem;
-    font-weight: 700;
+  h3 {
+    display: none;
   }
 
-  input,
-  textarea {
-    display: block;
+  #hcb_form {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-4);
+    margin: 0;
+    padding: 0;
+  }
+
+  #hcb_form #hcb_form_name,
+  #hcb_form #hcb_form_email,
+  #hcb_form #hcb_form_content {
     width: 100%;
+    margin: 0;
     border: 1px solid var(--border-color);
     border-radius: var(--radius-md);
     outline: none;
@@ -246,15 +246,12 @@
     font: inherit;
     font-size: 0.9375rem;
     line-height: 1.55;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+    box-shadow: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 
     &::placeholder {
       color: var(--text-muted);
-      opacity: 0.7;
-    }
-
-    &:hover {
-      border-color: color-mix(in srgb, var(--accent) 45%, var(--border-color));
+      opacity: 0.72;
     }
 
     &:focus {
@@ -263,105 +260,99 @@
     }
   }
 
-  input {
+  #hcb_form #hcb_form_name,
+  #hcb_form #hcb_form_email {
+    min-width: 0;
     height: 46px;
     padding: 0 var(--space-3);
   }
 
-  textarea {
+  #hcb_form #hcb_form_content {
     min-height: 142px;
     padding: var(--space-3);
     resize: vertical;
   }
-}
 
-.guestbook-label-row {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: var(--space-3);
+  #hcb_form .hcb-wrapper {
+    grid-column: 1 / -1;
+  }
 
-  span {
+  #hcb_form .home-desc {
+    grid-column: 1 / -1;
+    order: 10;
+    margin-top: var(--space-2);
+    color: var(--text-muted);
+    font-size: 0.6875rem;
+
+    a {
+      color: var(--text-muted);
+    }
+  }
+
+  #hcb_form #hcb_submit,
+  #hcb_form .submit {
+    min-height: 44px;
+    padding: 0 var(--space-5);
+    border: 1px solid var(--accent);
+    border-radius: var(--radius-md);
+    background: var(--accent);
+    color: #fff;
+    font: inherit;
+    font-size: 0.875rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 7px 18px color-mix(in srgb, var(--accent) 25%, transparent);
+    }
+  }
+
+  #comments_list {
+    margin-top: var(--space-8);
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--border-color);
+  }
+
+  #comments_list .hcb-comment-tb,
+  #comments_list .hcb-comment-tb a,
+  #comments_list .date,
+  #comments_list .likes {
     color: var(--text-muted);
     font-size: 0.75rem;
   }
-}
 
-.guestbook-actions {
-  display: flex;
-  align-items: center;
-  gap: var(--space-4);
-  margin-top: var(--space-5);
+  #comments_list .hcb-comment-body {
+    color: var(--text-secondary);
+    font-size: 0.9375rem;
+    line-height: 1.7;
+  }
+
+  #comments_list .author-name {
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+
+  #comments_list .hcb-comment-tb a:hover,
+  #comments_list .author-name:hover {
+    color: var(--accent);
+  }
+
+  .hcb-icon {
+    box-shadow: none;
+  }
 
   @media (max-width: 640px) {
-    align-items: stretch;
-    flex-direction: column;
-    gap: var(--space-3);
+    #hcb_form {
+      grid-template-columns: 1fr;
+    }
+
+    #hcb_form .hcb-wrapper {
+      grid-column: auto;
+    }
   }
-}
-
-.guestbook-submit {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-2);
-  min-height: 44px;
-  padding: 0 var(--space-5);
-  border: 1px solid var(--accent);
-  border-radius: var(--radius-md);
-  background: var(--accent);
-  color: #fff;
-  font: inherit;
-  font-size: 0.875rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
-
-  &:hover:not(:disabled) {
-    transform: translateY(-1px);
-    box-shadow: 0 7px 18px color-mix(in srgb, var(--accent) 25%, transparent);
-  }
-
-  &:focus-visible {
-    outline: 3px solid color-mix(in srgb, var(--accent) 25%, transparent);
-    outline-offset: 2px;
-  }
-
-  &:disabled {
-    cursor: wait;
-    opacity: 0.65;
-  }
-}
-
-.guestbook-status {
-  min-height: 1.5em;
-  margin: 0;
-  color: var(--text-muted);
-  font-size: 0.8125rem;
-
-  &.is-success {
-    color: #27864b;
-  }
-
-  &.is-error {
-    color: #c03c4f;
-  }
-}
-
-.guestbook-honeypot {
-  position: absolute;
-  left: -10000px;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-}
-
-[data-bs-theme="dark"] .guestbook-status.is-success {
-  color: #77d59a;
-}
-
-[data-bs-theme="dark"] .guestbook-status.is-error {
-  color: #ff91a0;
 }
 
 // News timeline
