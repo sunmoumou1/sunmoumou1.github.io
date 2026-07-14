@@ -26,7 +26,9 @@ url: "https://sunmoumou1.github.io"                          # 站点根 URL（G
 
 # ===== 网站分析统计 =====
 analytics:
-  google_id: ""                                              # Google Analytics 跟踪 ID（空 = 不启用）
+  # 线上部署优先读取 GitHub 仓库变量 GOOGLE_ANALYTICS_ID。
+  # 也可在这里填写 GA4 衡量 ID（格式 G-XXXXXXXXXX）用于本地测试；空 = 不启用。
+  google_id: ""
 
 # ===== 导航栏页面列表（决定顶部菜单项及顺序）=====
 nav_pages:

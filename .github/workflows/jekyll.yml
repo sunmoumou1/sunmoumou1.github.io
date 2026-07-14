@@ -99,6 +99,10 @@ jobs:
           # 一些插件、模板逻辑或配置可能会根据该环境变量切换到生产模式。
           JEKYLL_ENV: production
 
+          # 在仓库 Settings → Secrets and variables → Actions → Variables 中
+          # 添加 GOOGLE_ANALYTICS_ID 后，构建会自动启用 GA4 访问统计。
+          GOOGLE_ANALYTICS_ID: ${{ vars.GOOGLE_ANALYTICS_ID }}
+
       # 第五步：上传构建产物。
       - name: Upload artifact
         # 使用 GitHub Pages 官方 artifact 上传 action。

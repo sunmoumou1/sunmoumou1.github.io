@@ -35,6 +35,7 @@
 | 改某个页面的文字内容（About / 主页 / Research 等） | [`_pages/`](_pages/) 里对应的 `.md` 文件 |
 | 改配色 / 字体 / 间距等样式 | 主题色在 `_config.yml`；细节在 [`_sass/`](_sass/) |
 | 改页面交互（暗色切换、搜索、论文筛选） | [`assets/js/site.js`](assets/js/site.js)（改完要重新打包，见 §4.7） |
+| 查看访问人数、热门页面、来源和国家/地区 | 按第 4 节启用 Google Analytics 4 |
 
 具体操作步骤见下面的 **第 4 节**。
 
@@ -101,6 +102,39 @@
 | `assets/js/site.min.js` | 上面的**压缩版**，是网页实际加载的那个。改了 `site.js` 后要重新打包生成它（见 §4.7）。 |
 | `assets/javascript/bootstrap/` | Bootstrap 的 JavaScript（导航栏折叠、下拉等）。 |
 | `assets/search.json` | 站内搜索的索引，构建时自动生成，**不用手动改**。 |
+
+---
+
+## 4. 网站访问统计（Google Analytics 4）
+
+网站已经接入 Google Analytics 4（GA4），启用后可以查看访问人数、浏览量、热门页面、访问来源，以及按国家/地区汇总的访客分布。GitHub Pages 是静态托管，不能直接提供完整的访问日志，因此需要先创建一个免费的 GA4 衡量 ID。
+
+### 4.1 首次启用（只需做一次）
+
+1. 打开 [Google Analytics](https://analytics.google.com/)，创建账号和一个 GA4 媒体资源。
+2. 新建“网站”数据流：
+   - 网站网址：`https://sunmoumou1.github.io`
+   - 数据流名称：可填写 `Sencan Sun Website`
+3. 复制页面给出的“衡量 ID”，格式类似 `G-ABC123DEF4`。
+4. 打开本仓库的 **Settings → Secrets and variables → Actions → Variables**，点击 **New repository variable**：
+   - Name：`GOOGLE_ANALYTICS_ID`
+   - Value：上一步复制的 `G-...`
+5. 打开仓库的 **Actions**，选择 **Build and deploy Jekyll site to GitHub Pages**，点击 **Run workflow** 重新部署网站。
+
+衡量 ID 会在构建时自动加入页面。它本身是公开标识符，不是密码；使用仓库变量是为了以后更换时不必改代码。
+
+### 4.2 在哪里查看数据
+
+- **当前访问情况**：GA4 左侧 **Reports → Realtime**。启用并重新部署后，自己打开网站，通常几分钟内就能看到实时访问。
+- **总访问人数与浏览量**：**Reports → Acquisition → User acquisition**，以及 **Reports → Engagement → Pages and screens**。
+- **访客国家/地区**：**Reports → User attributes → Demographic details**，将主要维度选择为 **Country**。
+- **历史趋势**：在报告右上角修改日期范围。普通报告首次产生数据可能需要约 24 小时，且只统计启用之后的访问。
+
+统计是近似值：广告拦截器以及浏览器的“请勿跟踪”设置可能阻止统计。网站已关闭 Google Signals 和广告个性化信号，并尊重“请勿跟踪”；GA4 报告展示的是汇总后的国家/地区，不会在本网站保存或展示访客的原始 IP 地址。
+
+### 4.3 本地测试（可选）
+
+如果需要在本地验证，可以临时在 `_config.yml` 的 `analytics.google_id` 中填写衡量 ID，并使用生产环境构建。正常情况下保持为空即可，线上部署会优先读取 GitHub 仓库变量。
 
 ---
 
