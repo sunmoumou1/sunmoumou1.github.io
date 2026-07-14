@@ -161,6 +161,209 @@
   background-color: var(--bg-card);
 }
 
+// Guestbook — private messages delivered to the site owner's inbox
+.guestbook {
+  position: relative;
+  margin-top: var(--space-12);
+  padding: var(--space-8);
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  background:
+    radial-gradient(circle at 100% 0, color-mix(in srgb, var(--accent) 11%, transparent) 0, transparent 42%),
+    var(--bg-card);
+  box-shadow: var(--shadow-md);
+
+  &::before {
+    position: absolute;
+    top: 0;
+    left: var(--space-8);
+    width: 64px;
+    height: 3px;
+    border-radius: 0 0 3px 3px;
+    background: var(--accent);
+    content: '';
+  }
+
+  @media (max-width: 640px) {
+    margin-top: var(--space-8);
+    padding: var(--space-6);
+
+    &::before {
+      left: var(--space-6);
+    }
+  }
+}
+
+.guestbook-intro {
+  max-width: 660px;
+  margin-bottom: var(--space-6);
+
+  h3 {
+    margin: 0 0 var(--space-2);
+    font-size: 1.65rem;
+  }
+
+  p:last-child {
+    margin-bottom: 0;
+    color: var(--text-muted);
+  }
+}
+
+.guestbook-form {
+  position: relative;
+}
+
+.guestbook-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.guestbook-field {
+  label {
+    display: block;
+    margin-bottom: var(--space-2);
+    color: var(--text-primary);
+    font-size: 0.8125rem;
+    font-weight: 700;
+  }
+
+  input,
+  textarea {
+    display: block;
+    width: 100%;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    outline: none;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font: inherit;
+    font-size: 0.9375rem;
+    line-height: 1.55;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+
+    &::placeholder {
+      color: var(--text-muted);
+      opacity: 0.7;
+    }
+
+    &:hover {
+      border-color: color-mix(in srgb, var(--accent) 45%, var(--border-color));
+    }
+
+    &:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 14%, transparent);
+    }
+  }
+
+  input {
+    height: 46px;
+    padding: 0 var(--space-3);
+  }
+
+  textarea {
+    min-height: 142px;
+    padding: var(--space-3);
+    resize: vertical;
+  }
+}
+
+.guestbook-label-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+
+  span {
+    color: var(--text-muted);
+    font-size: 0.75rem;
+  }
+}
+
+.guestbook-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-top: var(--space-5);
+
+  @media (max-width: 640px) {
+    align-items: stretch;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+}
+
+.guestbook-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  padding: 0 var(--space-5);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-md);
+  background: var(--accent);
+  color: #fff;
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+
+  &:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 7px 18px color-mix(in srgb, var(--accent) 25%, transparent);
+  }
+
+  &:focus-visible {
+    outline: 3px solid color-mix(in srgb, var(--accent) 25%, transparent);
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    cursor: wait;
+    opacity: 0.65;
+  }
+}
+
+.guestbook-status {
+  min-height: 1.5em;
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.8125rem;
+
+  &.is-success {
+    color: #27864b;
+  }
+
+  &.is-error {
+    color: #c03c4f;
+  }
+}
+
+.guestbook-honeypot {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+[data-bs-theme="dark"] .guestbook-status.is-success {
+  color: #77d59a;
+}
+
+[data-bs-theme="dark"] .guestbook-status.is-error {
+  color: #ff91a0;
+}
+
 // News timeline
 .news-timeline {
   margin-top: 0;

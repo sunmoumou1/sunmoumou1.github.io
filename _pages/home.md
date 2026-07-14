@@ -39,3 +39,48 @@ permalink: /
 </section>
 
 I welcome conversations and collaboration around AI for weather and climate. You can reach me at [ssc23@mails.tsinghua.edu.cn](mailto:ssc23@mails.tsinghua.edu.cn).
+
+<section class="guestbook" aria-labelledby="guestbook-title" markdown="0">
+<div class="guestbook-intro">
+<p class="section-kicker">Guestbook</p>
+<h3 id="guestbook-title">Leave a message</h3>
+<p>Questions, ideas, or just a hello — I would be delighted to hear from you. Your email address will only be used to reply and will never be displayed publicly.</p>
+</div>
+
+<form class="guestbook-form" id="guestbookForm" action="https://formsubmit.co/ssc23@mails.tsinghua.edu.cn" method="POST">
+<input type="hidden" name="_subject" value="New message from the website guestbook">
+<input type="hidden" name="_template" value="table">
+<input type="hidden" name="_url" value="{{ site.url }}{{ site.baseurl }}/#guestbook-title">
+<div class="guestbook-honeypot" aria-hidden="true">
+<label for="guestbookWebsite">Website</label>
+<input id="guestbookWebsite" type="text" name="_honey" tabindex="-1" autocomplete="off">
+</div>
+
+<div class="guestbook-fields">
+<div class="guestbook-field">
+<label for="guestbookName">Name</label>
+<input id="guestbookName" type="text" name="name" autocomplete="name" minlength="2" maxlength="80" placeholder="Your name" required>
+</div>
+<div class="guestbook-field">
+<label for="guestbookEmail">Email</label>
+<input id="guestbookEmail" type="email" name="email" autocomplete="email" maxlength="160" placeholder="you@example.com" required>
+</div>
+</div>
+
+<div class="guestbook-field">
+<div class="guestbook-label-row">
+<label for="guestbookMessage">Message</label>
+<span id="guestbookCount" aria-live="polite">0 / 1200</span>
+</div>
+<textarea id="guestbookMessage" name="message" rows="6" minlength="2" maxlength="1200" placeholder="Write your message here…" required></textarea>
+</div>
+
+<div class="guestbook-actions">
+<button class="guestbook-submit" type="submit">
+<span>Send message</span>
+<i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+</button>
+<p class="guestbook-status" id="guestbookStatus" role="status" aria-live="polite"></p>
+</div>
+</form>
+</section>
