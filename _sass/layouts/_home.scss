@@ -366,14 +366,19 @@
   transform: skewX(7deg);
 }
 
-.about-research-focus {
-  p {
-    max-width: none;
-  }
-
-  .chip-container {
-    margin-bottom: var(--space-6);
-  }
+.home-figure-credit {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: 0;
+  color: var(--text-muted);
+  font-family: 'DM Sans', sans-serif;
+  font-size: clamp(0.68rem, 0.76vw, 0.82rem);
+  font-style: italic;
+  letter-spacing: 0.015em;
+  line-height: 1.5;
+  text-align: center;
 }
 
 @media (max-width: 860px) {

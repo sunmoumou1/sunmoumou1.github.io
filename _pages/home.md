@@ -34,6 +34,7 @@ permalink: /
         <span class="home-board-support home-board-support-left" aria-hidden="true"></span>
         <span class="home-board-support home-board-support-right" aria-hidden="true"></span>
       </div>
+      <figcaption class="home-figure-credit">Figure drawn by Sencan Sun. Please do not reproduce or use without permission.</figcaption>
     </figure>
   </div>
 </section>
