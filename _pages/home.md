@@ -29,74 +29,7 @@ permalink: /
 <span class="chip"><i class="fa-solid fa-earth-asia"></i>Climate Projection</span>
 </div>
 <figure class="research-interest-figure">
-<div class="forecast-pipeline" role="img" aria-label="Operational forecasting pipeline: observations enter data assimilation to create an analysis and initial condition, a forecast model produces a rollout and weather products, the rollout returns as background information, and indicators or forcing support subseasonal-to-seasonal and climate simulation.">
-<div class="forecast-pipeline__head" aria-hidden="true">
-<span>Operational forecasting system</span>
-<span class="forecast-pipeline__key"><i></i> AI-ready module</span>
-</div>
-<div class="forecast-pipeline__canvas" aria-hidden="true">
-<div class="forecast-pipeline__cycle-frame"></div>
-<div class="forecast-pipeline__context">
-<span class="forecast-pipeline__context-item forecast-pipeline__context-item--climate"><i class="fa-solid fa-arrows-rotate"></i>S2S / climate simulation</span>
-<span class="forecast-pipeline__context-item forecast-pipeline__context-item--forcing"><i class="fa-solid fa-bolt"></i>Indicator / forcing</span>
-</div>
-<ol class="forecast-pipeline__stages">
-<li class="forecast-pipeline__stage forecast-pipeline__stage--observations">
-<span class="forecast-pipeline__ai-marker"></span>
-<span class="forecast-pipeline__step">01 · Observe</span>
-<span class="forecast-pipeline__observation-visual">
-<i class="fa-solid fa-earth-americas forecast-pipeline__earth"></i>
-<i class="fa-solid fa-satellite forecast-pipeline__platform forecast-pipeline__platform--satellite"></i>
-<i class="fa-solid fa-location-dot forecast-pipeline__platform forecast-pipeline__platform--balloon"></i>
-<i class="fa-solid fa-satellite-dish forecast-pipeline__platform forecast-pipeline__platform--radar"></i>
-</span>
-<strong>Observations</strong>
-<small>Satellite · balloon · radar</small>
-<span class="forecast-pipeline__flow"></span>
-</li>
-<li class="forecast-pipeline__stage forecast-pipeline__stage--assimilation">
-<span class="forecast-pipeline__ai-marker"></span>
-<span class="forecast-pipeline__step">02 · Integrate</span>
-<span class="forecast-pipeline__icon"><i class="fa-solid fa-code-merge"></i></span>
-<strong>Assimilation</strong>
-<small>Observations + prior state</small>
-<span class="forecast-pipeline__flow"></span>
-</li>
-<li class="forecast-pipeline__stage forecast-pipeline__stage--analysis">
-<span class="forecast-pipeline__ai-marker"></span>
-<span class="forecast-pipeline__step">03 · Initialize</span>
-<span class="forecast-pipeline__icon"><i class="fa-solid fa-chart-line"></i></span>
-<strong>Analysis</strong>
-<small>Initial condition <em>x</em><sub>0</sub></small>
-<span class="forecast-pipeline__flow"></span>
-</li>
-<li class="forecast-pipeline__stage forecast-pipeline__stage--model">
-<span class="forecast-pipeline__ai-marker"></span>
-<span class="forecast-pipeline__step">04 · Predict</span>
-<span class="forecast-pipeline__icon"><i class="fa-solid fa-microchip"></i></span>
-<strong>Forecast model</strong>
-<small>Advance the state in time</small>
-<span class="forecast-pipeline__flow"></span>
-</li>
-<li class="forecast-pipeline__stage forecast-pipeline__stage--rollout">
-<span class="forecast-pipeline__ai-marker"></span>
-<span class="forecast-pipeline__step">05 · Roll out</span>
-<span class="forecast-pipeline__icon"><i class="fa-solid fa-forward-fast"></i></span>
-<strong>Rollout</strong>
-<small>Trajectory <em>x</em><sub>1:T</sub></small>
-<span class="forecast-pipeline__flow"></span>
-</li>
-<li class="forecast-pipeline__stage forecast-pipeline__stage--products">
-<span class="forecast-pipeline__ai-marker"></span>
-<span class="forecast-pipeline__step">06 · Deliver</span>
-<span class="forecast-pipeline__icon"><i class="fa-solid fa-cloud-sun-rain"></i></span>
-<strong>Weather products</strong>
-<small>Decision-ready forecasts</small>
-</li>
-</ol>
-<div class="forecast-pipeline__feedback"><span><i class="fa-solid fa-arrow-rotate-left"></i>Background feedback</span></div>
-</div>
-</div>
+<img src="{{ '/images/my_research_interest.png' | relative_url }}" alt="Operational forecasting pipeline from assimilation to forecast model, weather products, S2S, and climate simulation" loading="lazy">
 <figcaption>Figure drawn by Sencan Sun. AI methods can be inserted into each stage of the <strong>operational</strong> pipeline, replacing or augmenting modules where they improve forecast skill and reliability.</figcaption>
 </figure>
 <div class="research-interest-copy">
