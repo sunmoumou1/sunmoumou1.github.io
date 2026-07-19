@@ -118,7 +118,7 @@
   .rp-arch::after {
     content: '';
     position: absolute;
-    right: -12px; bottom: -30px;
+    right: -25px; bottom: -30px;
     border-top: 30px solid #fbbf24;
     border-left: 18px solid transparent;
     border-right: 18px solid transparent;
@@ -335,6 +335,10 @@
   /* keep host figure hover zoom from distorting the diagram */
   .research-interest-figure:hover .rp-stage img {
     transform: none;
+  }
+  .rp-dsh img,
+  .research-interest-figure:hover .rp-stage .rp-dsh img {
+    transform: scaleX(-1);
   }
 
   /* ---------- animations ---------- */
