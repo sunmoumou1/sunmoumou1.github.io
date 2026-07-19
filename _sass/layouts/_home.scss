@@ -230,7 +230,7 @@
   z-index: 2;
   width: 100%;
   margin: 0;
-  padding-bottom: clamp(5.5rem, 9vw, 10rem);
+  padding-bottom: calc(clamp(6rem, 9vw, 10rem) + 3rem);
 }
 
 .home-board-mount {
@@ -368,12 +368,13 @@
 
 .home-figure-credit {
   position: absolute;
-  right: 1.2%;
-  bottom: clamp(0.35rem, 0.8vw, 0.9rem);
-  left: auto;
+  right: 0;
+  bottom: 0.55rem;
+  left: 0;
   z-index: 5;
-  width: unquote('min(35%, 32rem)');
+  width: 100%;
   margin: 0;
+  padding: 0 1.2%;
   color: var(--text-muted);
   font-family: 'DM Sans', sans-serif;
   font-size: clamp(0.68rem, 0.76vw, 0.82rem);
@@ -442,10 +443,7 @@
   }
 
   .home-figure-credit {
-    right: 0;
-    bottom: -0.35rem;
-    left: 0;
-    width: 100%;
+    bottom: 0.35rem;
     padding: 0 0.5rem;
     font-size: 0.64rem;
     text-align: center;
