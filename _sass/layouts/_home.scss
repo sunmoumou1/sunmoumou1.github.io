@@ -371,6 +371,7 @@
   right: 1.2%;
   bottom: clamp(0.35rem, 0.8vw, 0.9rem);
   left: auto;
+  z-index: 5;
   width: unquote('min(35%, 32rem)');
   margin: 0;
   color: var(--text-muted);
