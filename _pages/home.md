@@ -29,7 +29,7 @@ permalink: /
 <span class="chip"><i class="fa-solid fa-earth-asia"></i>Climate Projection</span>
 </div>
 <figure class="research-interest-figure">
-<img src="{{ '/images/my_research_interest.png' | relative_url }}" alt="Operational forecasting pipeline from assimilation to forecast model, weather products, S2S, and climate simulation" loading="lazy">
+{% include research-pipeline.html %}
 <figcaption>Figure drawn by Sencan Sun. AI methods can be inserted into each stage of the <strong>operational</strong> pipeline, replacing or augmenting modules where they improve forecast skill and reliability.</figcaption>
 </figure>
 <div class="research-interest-copy">

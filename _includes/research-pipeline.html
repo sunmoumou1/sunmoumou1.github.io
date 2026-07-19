@@ -1,0 +1,361 @@
+<!-- Research pipeline figure — web-native version of my_research_interest.png.
+     Rendered on a fixed 2048x939 stage, scaled to fit its container via container queries. -->
+<div class="rp-wrap">
+  <div class="rp-vp">
+    <div class="rp-stage" role="img" aria-label="Operational forecasting pipeline: observations flow into assimilation, producing the analysis (initial condition), which feeds the forecast model; the rollout yields weather products and the background for the next cycle, while S2S and climate indicators provide forcing.">
+
+      <!-- gold frame + loop arrow + forcing arrow -->
+      <div class="rp-frame"></div>
+      <div class="rp-arch"></div>
+      <div class="rp-varrow"></div>
+
+      <!-- titles -->
+      <div class="rp-ttl rp-t1">S2S / climate simulation</div>
+      <div class="rp-ttl rp-t2">indicator / forcing</div>
+
+      <!-- purple arrows -->
+      <div class="rp-arr rp-arr-p rp-a1"></div>
+      <div class="rp-arr rp-arr-p rp-a2"></div>
+      <div class="rp-arr rp-arr-p rp-a6"></div>
+      <!-- blue arrows -->
+      <div class="rp-arr rp-arr-b rp-a3"></div>
+      <div class="rp-arr rp-arr-b rp-a5"></div>
+      <div class="rp-arr-v rp-a4"></div>
+
+      <!-- boxes -->
+      <div class="rp-box rp-box-asm">Assimilation</div>
+      <div class="rp-box rp-box-blue rp-box-fc">Forecast model</div>
+      <div class="rp-box rp-box-blue rp-box-wp">Weather product</div>
+
+      <!-- labels -->
+      <div class="rp-lbl rp-blue rp-l-ic">initial condition <em>x</em><sub>0</sub></div>
+      <div class="rp-lbl rp-purple rp-l-an">analysis</div>
+      <div class="rp-lbl rp-blue rp-l-ro">rollout <em>x</em><sub>1:T</sub></div>
+      <div class="rp-lbl rp-purple rp-l-bg">background</div>
+
+      <!-- observation globe -->
+      <div class="rp-gwrap rp-g-obs">
+        <img src="{{ '/images/pipeline/earth.png' | relative_url }}" alt="" loading="lazy">
+        <div class="rp-pin" style="left:88px;  top:93px"></div>
+        <div class="rp-pin" style="left:122px; top:107px"></div>
+        <div class="rp-pin" style="left:160px; top:83px"></div>
+        <div class="rp-pin" style="left:182px; top:127px"></div>
+        <div class="rp-pin" style="left:68px;  top:153px"></div>
+        <div class="rp-pin" style="left:208px; top:175px"></div>
+        <div class="rp-pin" style="left:166px; top:227px"></div>
+      </div>
+
+      <!-- analysis globe -->
+      <div class="rp-gwrap rp-g-ana">
+        <img src="{{ '/images/pipeline/earth.png' | relative_url }}" alt="" loading="lazy">
+      </div>
+
+      <!-- rollout globe -->
+      <div class="rp-gwrap rp-g-roll">
+        <img src="{{ '/images/pipeline/earth.png' | relative_url }}" alt="" loading="lazy">
+      </div>
+
+      <!-- observation platforms -->
+      <div class="rp-plat rp-sat"><img src="{{ '/images/pipeline/satellite.png' | relative_url }}" alt="" loading="lazy"></div>
+      <div class="rp-plat rp-bln"><img src="{{ '/images/pipeline/ballon.png' | relative_url }}" alt="" loading="lazy"></div>
+      <div class="rp-plat rp-dsh"><img src="{{ '/images/pipeline/radar.png' | relative_url }}" alt="" loading="lazy"></div>
+
+      <div class="rp-edge"></div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* ---------- responsive scaling wrapper ---------- */
+  .rp-wrap {
+    width: 100%;
+    margin: 0 auto;
+    container-type: inline-size;
+    font-family: 'DM Sans', Arial, "Helvetica Neue", Helvetica, sans-serif;
+  }
+  .rp-vp {
+    width: 100%;
+    aspect-ratio: 2048 / 939;
+    overflow: hidden;
+  }
+  .rp-stage {
+    position: relative;
+    width: 2048px;
+    height: 939px;
+    transform: scale(calc(100cqw / 2048px));
+    transform-origin: 0 0;
+    background: linear-gradient(180deg, rgba(255,255,255,.9), rgba(247,250,255,.84));
+  }
+  /* hairline inner border */
+  .rp-edge {
+    position: absolute;
+    inset: 8px;
+    border: 1.5px solid rgba(15, 23, 42, .09);
+    border-radius: 17px;
+    pointer-events: none;
+    z-index: 50;
+  }
+
+  /* ---------- gold frame & ornaments ---------- */
+  .rp-frame {
+    position: absolute;
+    left: 728px; top: 118px;
+    width: 854px; height: 790px;
+    border: 13px solid #fbbf24;
+    border-radius: 90px;
+    box-shadow: 0 0 0 3px rgba(251, 191, 36, .10);
+    z-index: 1;
+  }
+  .rp-arch {
+    position: absolute;
+    left: 881px; top: 54px;
+    width: 232px; height: 81px;
+    border: 13px solid #fbbf24;
+    border-bottom: none;
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+    z-index: 2;
+  }
+  .rp-arch::after {
+    content: '';
+    position: absolute;
+    right: -12px; bottom: -30px;
+    border-top: 30px solid #fbbf24;
+    border-left: 18px solid transparent;
+    border-right: 18px solid transparent;
+    transform: rotate(-14deg);
+  }
+  .rp-varrow {
+    position: absolute;
+    left: 1334px; top: 74px;
+    width: 14px; height: 164px;
+    border-radius: 7px;
+    background: linear-gradient(180deg, #fcd34d, #f59e0b);
+    z-index: 2;
+    overflow: visible;
+  }
+  .rp-varrow::after {
+    content: '';
+    position: absolute;
+    top: 100%; left: 50%;
+    transform: translateX(-50%);
+    border-top: 30px solid #f59e0b;
+    border-left: 18px solid transparent;
+    border-right: 18px solid transparent;
+  }
+
+  /* ---------- titles ---------- */
+  .rp-ttl {
+    position: absolute;
+    top: 4px;
+    font-size: 42px;
+    font-weight: 800;
+    letter-spacing: .5px;
+    white-space: nowrap;
+    background: linear-gradient(92deg, #d97706 0%, #f59e0b 45%, #fbbf24 70%, #f59e0b 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    z-index: 10;
+  }
+  .rp-t1 { left: 693px; }
+  .rp-t2 { left: 1230px; }
+
+  /* ---------- glass boxes ---------- */
+  .rp-box {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 42px;
+    font-weight: 800;
+    letter-spacing: .2px;
+    white-space: nowrap;
+    border: 3px solid transparent;
+    border-radius: 14px;
+    z-index: 20;
+  }
+  .rp-box-asm {
+    left: 420px; top: 638px;
+    width: 265px; height: 77px;
+    font-size: 40px;
+    background:
+      linear-gradient(180deg, rgba(255,255,255,.96), rgba(250,245,255,.9)) padding-box,
+      linear-gradient(135deg, #c084fc, #7e22ce) border-box;
+    color: #5b21b6;
+    box-shadow: 0 10px 24px rgba(91, 33, 182, .12), 0 2px 8px rgba(15, 23, 42, .05);
+  }
+  .rp-box-blue {
+    background:
+      linear-gradient(180deg, rgba(255,255,255,.96), rgba(240,249,255,.9)) padding-box,
+      linear-gradient(135deg, #7dd3fc, #0284c7) border-box;
+    color: #0c4a6e;
+    box-shadow: 0 10px 24px rgba(2, 132, 199, .12), 0 2px 8px rgba(15, 23, 42, .05);
+  }
+  .rp-box-fc { left: 1174px; top: 268px; width: 335px; height: 74px; }
+  .rp-box-wp { left: 1640px; top: 626px; width: 370px; height: 80px; }
+
+  /* ---------- arrows ---------- */
+  .rp-arr {
+    position: absolute;
+    height: 12px;
+    border-radius: 8px;
+    z-index: 15;
+  }
+  .rp-arr::after {
+    content: '';
+    position: absolute;
+    left: 100%; top: 50%;
+    transform: translateY(-50%);
+    border-top: 17px solid transparent;
+    border-bottom: 17px solid transparent;
+  }
+  .rp-arr-p {
+    background: linear-gradient(90deg, #a855f7, #7e22ce);
+  }
+  .rp-arr-p::after { border-left: 28px solid #7e22ce; }
+  .rp-arr-b {
+    background: linear-gradient(90deg, #38bdf8, #0284c7);
+  }
+  .rp-arr-b::after { border-left: 28px solid #0284c7; }
+
+  .rp-a1 { left: 312px; top: 671px; width: 82px; }
+  .rp-a2 {
+    left: 568px; top: 628px; width: 336px;
+    transform-origin: left center;
+    transform: rotate(-43.8deg);
+  }
+  .rp-a3 { left: 1022px; top: 299px; width: 132px; }
+  .rp-a5 { left: 1453px; top: 660px; width: 167px; }
+  .rp-a6 { left: 713px; top: 670px; width: 510px; }
+  .rp-a6::after {
+    left: auto; right: 100%;
+    border-left: none;
+    border-right: 28px solid #7e22ce;
+  }
+  .rp-arr-v {
+    position: absolute;
+    width: 12px;
+    border-radius: 8px;
+    background: linear-gradient(180deg, #38bdf8, #0284c7);
+    z-index: 15;
+  }
+  .rp-arr-v::after {
+    content: '';
+    position: absolute;
+    top: 100%; left: 50%;
+    transform: translateX(-50%);
+    border-top: 28px solid #0284c7;
+    border-left: 17px solid transparent;
+    border-right: 17px solid transparent;
+  }
+  .rp-a4 { left: 1335px; top: 344px; height: 180px; }
+
+  /* ---------- labels ---------- */
+  .rp-lbl {
+    position: absolute;
+    font-size: 42px;
+    font-weight: 800;
+    letter-spacing: .2px;
+    white-space: nowrap;
+    transform: translateX(-50%);
+    z-index: 25;
+  }
+  .rp-lbl em { font-style: italic; }
+  .rp-lbl sub { font-size: .55em; font-style: italic; }
+  .rp-blue {
+    background: linear-gradient(92deg, #0ea5e9, #2563eb);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    filter: drop-shadow(0 1px 2px rgba(2, 132, 199, .18));
+  }
+  .rp-purple {
+    background: linear-gradient(92deg, #a855f7, #7c3aed);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    filter: drop-shadow(0 1px 2px rgba(124, 58, 237, .18));
+  }
+  .rp-l-ic { left: 1020px; top: 436px; }
+  .rp-l-an { left: 1020px; top: 500px; }
+  .rp-l-ro { left: 1341px; top: 786px; }
+  .rp-l-bg { left: 1341px; top: 846px; }
+
+  /* ---------- globes ---------- */
+  .rp-gwrap {
+    position: absolute;
+    z-index: 12;
+    animation: rp-floaty 10s ease-in-out infinite;
+  }
+  .rp-gwrap::before {
+    content: '';
+    position: absolute;
+    inset: -13%;
+    border-radius: 50%;
+    background: radial-gradient(circle,
+      rgba(96, 165, 250, .30) 0%, rgba(96, 165, 250, .12) 45%, transparent 68%);
+    animation: rp-breathe 6s ease-in-out infinite;
+    z-index: -1;
+  }
+  .rp-gwrap img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    filter: drop-shadow(0 20px 30px rgba(30, 58, 138, .26));
+  }
+  .rp-g-obs  { left: 30px;   top: 515px; width: 280px; height: 280px; }
+  .rp-g-ana  { left: 800px;  top: 190px; width: 220px; height: 220px; animation-delay: -3s; }
+  .rp-g-roll { left: 1231px; top: 555px; width: 220px; height: 220px; animation-delay: -6s; }
+
+  /* pulsing observation pins */
+  .rp-pin {
+    position: absolute;
+    width: 13px; height: 13px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 32% 30%, #fca5a5, #dc2626 70%);
+    box-shadow: 0 0 12px rgba(220, 38, 38, .8);
+    z-index: 13;
+  }
+  .rp-pin::after {
+    content: '';
+    position: absolute;
+    inset: -7px;
+    border-radius: 50%;
+    border: 2.5px solid rgba(220, 38, 38, .65);
+    animation: rp-ping 2.2s ease-out infinite;
+  }
+
+  /* ---------- observation platforms ---------- */
+  .rp-plat { position: absolute; z-index: 14; }
+  .rp-plat img {
+    width: 100%;
+    display: block;
+  }
+  .rp-sat { left: 0;    top: 432px; width: 124px; animation: rp-floaty 8s ease-in-out infinite; }
+  .rp-bln { left: 152px; top: 402px; width: 66px;  animation: rp-floaty 7s ease-in-out -2s infinite; }
+  .rp-dsh { left: 258px; top: 506px; width: 98px;  transform-origin: 50% 92%;
+            animation: rp-sway 9s ease-in-out infinite; }
+
+  /* keep host figure hover zoom from distorting the diagram */
+  .research-interest-figure:hover .rp-stage img {
+    transform: none;
+  }
+
+  /* ---------- animations ---------- */
+  @keyframes rp-floaty {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-12px); }
+  }
+  @keyframes rp-sway {
+    0%, 100% { transform: rotate(-2.5deg); }
+    50%      { transform: rotate(2.5deg); }
+  }
+  @keyframes rp-breathe {
+    0%, 100% { opacity: .55; transform: scale(.96); }
+    50%      { opacity: .95; transform: scale(1.05); }
+  }
+  @keyframes rp-ping {
+    0%        { transform: scale(.4); opacity: .95; }
+    80%, 100% { transform: scale(2.1); opacity: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rp-stage * { animation: none !important; }
+  }
+</style>
