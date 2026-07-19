@@ -154,6 +154,20 @@ ai ai-google-scholar:
 </div>
 </div>
 
+<div class="section-card about-research-focus" markdown="0">
+<p class="section-kicker">Research focus</p>
+<h3>AI for operational forecasts</h3>
+<p>I am interested in using AI to strengthen individual modules across the <strong>operational</strong> forecasting pipeline: from data assimilation and medium-range weather prediction to subseasonal-to-seasonal forecasting and climate projection.</p>
+<div class="chip-container">
+<span class="chip"><i class="fa-solid fa-satellite-dish"></i>AI for Operational Forecasting</span>
+<span class="chip"><i class="fa-solid fa-database"></i>Data Assimilation</span>
+<span class="chip"><i class="fa-solid fa-cloud-sun-rain"></i>Weather Prediction</span>
+<span class="chip"><i class="fa-solid fa-calendar-days"></i>S2S Forecasting</span>
+<span class="chip"><i class="fa-solid fa-earth-asia"></i>Climate Projection</span>
+</div>
+<p>The goal is to build forecasting systems that are more skillful, reliable, and useful for understanding the future.</p>
+</div>
+
 {% comment %}
 Experience 区域。
 
@@ -293,3 +307,5 @@ photo-gallery / photo-card:
 </figure>
 </div>
 </div>
+
+{% include guestbook.html %}

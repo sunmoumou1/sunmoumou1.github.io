@@ -1,5 +1,11 @@
----
-layout: default
----
-
-{{ content }}
+<!DOCTYPE html>
+<html lang="en">
+  {% include head.html %}
+  <body class="home-page-body">
+    {% include header.html %}
+    <main class="home-site-main">
+      {{ content }}
+    </main>
+    {% include footer.html %}
+  </body>
+</html>
