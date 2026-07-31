@@ -267,7 +267,7 @@ Beyond Research 区域。
 
 这是一段更个人化的介绍：
   - 出生信息（2000 年 7 月 14 日，河南周口鹿邑）
-  - 一组生活照（童年、福州、洛杉矶），让读者更了解作者本人。
+  - 一组按年龄排列的生活照（童年、高中、福州、洛杉矶），让读者更了解作者本人。
 
 photo-gallery / photo-card:
   自定义 CSS，等高图片条带，统一不同长宽比的照片，照片下方带说明文字。
@@ -280,16 +280,24 @@ photo-gallery / photo-card:
 <p>Here are a few snapshots along the way — from childhood to more recent travels.</p>
 <div class="photo-gallery">
 <figure class="photo-card">
-<img src="{{ '/images/child.JPG' | relative_url }}" alt="Sencan Sun as a young child" loading="lazy">
-<figcaption>Childhood, taken by my mother.</figcaption>
+<img src="{{ '/images/child.JPG' | relative_url }}" alt="Sencan Sun at around one or two years old in a park" loading="lazy">
+<figcaption><strong>Age 1–2</strong> · A candid moment in the park, photographed by my mother.</figcaption>
+</figure>
+<figure class="photo-card">
+<img src="{{ '/images/year_10.png' | relative_url }}" alt="Sencan Sun at around ten years old with his grandmother" loading="lazy">
+<figcaption><strong>Around age 10</strong> · With my grandmother; the exact age is a little uncertain.</figcaption>
+</figure>
+<figure class="photo-card">
+<img src="{{ '/images/yaer17.JPG' | relative_url }}" alt="Sencan Sun at age seventeen playing in an inter-class football tournament" loading="lazy">
+<figcaption><strong>Age 17</strong> · Playing in an inter-class football tournament during my second year of high school.</figcaption>
 </figure>
 <figure class="photo-card">
 <img src="{{ '/images/fuzhou.JPG' | relative_url }}" alt="Sencan Sun in Fuzhou" loading="lazy">
-<figcaption>Fuzhou</figcaption>
+<figcaption><strong>Age 23</strong> · In Fuzhou.</figcaption>
 </figure>
 <figure class="photo-card">
 <img src="{{ '/images/losangles.jpg' | relative_url }}" alt="Sencan Sun in Los Angeles, with the Hollywood sign in the background" loading="lazy">
-<figcaption>Los Angeles</figcaption>
+<figcaption><strong>Age 25</strong> · In front of the Hollywood sign in Los Angeles.</figcaption>
 </figure>
 </div>
 </div>
