@@ -1,0 +1,997 @@
+---
+title: "Research Pipeline Preview"
+layout: default
+sitemap: false
+permalink: /research-pipeline-preview/
+---
+
+<style>
+  .pipeline-preview-page {
+    --pipeline-wine: var(--accent);
+    --pipeline-wine-soft: color-mix(in srgb, var(--accent) 11%, var(--bg-card));
+    --pipeline-blue: #397a90;
+    --pipeline-blue-soft: #eaf5f7;
+    --pipeline-amber: #bd7b16;
+    --pipeline-amber-soft: #fff6df;
+    --pipeline-ink: #26343b;
+    max-width: 1060px;
+    margin: 0 auto;
+    padding: var(--space-4) 0 var(--space-12);
+  }
+
+  [data-bs-theme="dark"] .pipeline-preview-page {
+    --pipeline-blue: #75b7ca;
+    --pipeline-blue-soft: #20343a;
+    --pipeline-amber: #efb85f;
+    --pipeline-amber-soft: #382d1e;
+    --pipeline-ink: #edf4f5;
+  }
+
+  .pipeline-preview-intro {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: var(--space-6);
+    align-items: end;
+    margin-bottom: var(--space-8);
+  }
+
+  .pipeline-preview-intro h1 {
+    max-width: 760px;
+    margin: var(--space-2) 0 var(--space-3);
+    font-size: clamp(2rem, 4vw, 3.35rem);
+    line-height: 1.06;
+  }
+
+  .pipeline-preview-intro p {
+    max-width: 720px;
+    margin: 0;
+    color: var(--text-muted);
+  }
+
+  .pipeline-preview-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--pipeline-wine);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .pipeline-preview-kicker::before {
+    width: 24px;
+    height: 2px;
+    border-radius: 2px;
+    background: currentColor;
+    content: "";
+  }
+
+  .pipeline-preview-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.55rem 0.8rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-full);
+    background: var(--bg-card);
+    color: var(--text-secondary);
+    font-size: 0.75rem;
+    font-weight: 600;
+    white-space: nowrap;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .pipeline-preview-status::before {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #3b9b73;
+    box-shadow: 0 0 0 4px color-mix(in srgb, #3b9b73 14%, transparent);
+    content: "";
+  }
+
+  .pipeline-prototype {
+    margin: 0;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    border-radius: 18px;
+    background: var(--bg-card);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .pipeline-figure-head {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-6);
+    align-items: center;
+    padding: 1.35rem 1.5rem 1.2rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .pipeline-figure-title span {
+    display: block;
+    margin-bottom: 0.12rem;
+    color: var(--text-muted);
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .pipeline-figure-title h2 {
+    margin: 0;
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: clamp(1.08rem, 2vw, 1.36rem);
+    font-weight: 700;
+    line-height: 1.25;
+  }
+
+  .pipeline-figure-title h2::after {
+    display: none;
+  }
+
+  .pipeline-legend {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.45rem 0.9rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .pipeline-legend li {
+    display: flex;
+    align-items: center;
+    gap: 0.38rem;
+    color: var(--text-muted);
+    font-size: 0.66rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .pipeline-legend-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--legend-color);
+  }
+
+  .pipeline-canvas {
+    position: relative;
+    min-height: 610px;
+    overflow: hidden;
+    background:
+      linear-gradient(90deg, color-mix(in srgb, var(--border-color) 26%, transparent) 1px, transparent 1px),
+      linear-gradient(color-mix(in srgb, var(--border-color) 26%, transparent) 1px, transparent 1px),
+      radial-gradient(circle at 50% 45%, color-mix(in srgb, var(--pipeline-blue) 8%, transparent), transparent 36%),
+      var(--bg-card);
+    background-size: 32px 32px, 32px 32px, auto, auto;
+  }
+
+  .pipeline-cycle-shell {
+    position: absolute;
+    inset: 9% 22% 11% 22%;
+    border: 1px solid color-mix(in srgb, var(--pipeline-amber) 58%, transparent);
+    border-radius: 30px;
+    pointer-events: none;
+  }
+
+  .pipeline-cycle-shell::before {
+    position: absolute;
+    top: -1px;
+    left: 9%;
+    width: 28%;
+    height: 3px;
+    border-radius: 0 0 3px 3px;
+    background: var(--pipeline-amber);
+    content: "";
+  }
+
+  .pipeline-climate-rail {
+    position: absolute;
+    top: 3.3%;
+    left: 27%;
+    z-index: 4;
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.45rem 0.68rem;
+    border: 1px solid color-mix(in srgb, var(--pipeline-amber) 34%, var(--border-color));
+    border-radius: var(--radius-full);
+    background: var(--pipeline-amber-soft);
+    color: var(--pipeline-amber);
+    font-size: 0.69rem;
+    font-weight: 700;
+    letter-spacing: 0.035em;
+    text-transform: uppercase;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .pipeline-climate-rail::before {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: currentColor;
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--pipeline-amber) 13%, transparent);
+    content: "";
+  }
+
+  .pipeline-node {
+    position: absolute;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    min-width: 0;
+    padding: 0.95rem;
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    background: color-mix(in srgb, var(--bg-card) 94%, transparent);
+    box-shadow: 0 9px 24px color-mix(in srgb, var(--text-primary) 8%, transparent);
+    backdrop-filter: blur(8px);
+    transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+  }
+
+  .pipeline-node:hover {
+    z-index: 5;
+    transform: translateY(-3px);
+    border-color: color-mix(in srgb, var(--node-color) 46%, var(--border-color));
+    box-shadow: 0 13px 30px color-mix(in srgb, var(--node-color) 15%, transparent);
+  }
+
+  .pipeline-node::before {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 3px;
+    border-radius: 14px 0 0 14px;
+    background: var(--node-color);
+    content: "";
+  }
+
+  .pipeline-node-observations {
+    --node-color: var(--pipeline-wine);
+    top: 34%;
+    left: 2.2%;
+    width: 17.5%;
+    min-height: 194px;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .pipeline-node-assimilation {
+    --node-color: var(--pipeline-wine);
+    top: 57%;
+    left: 26.4%;
+    width: 18.5%;
+    min-height: 112px;
+  }
+
+  .pipeline-node-analysis {
+    --node-color: var(--pipeline-blue);
+    top: 21.5%;
+    left: 26.4%;
+    width: 18.5%;
+    min-height: 126px;
+  }
+
+  .pipeline-node-model {
+    --node-color: var(--pipeline-ink);
+    top: 21.5%;
+    left: 55.1%;
+    width: 18.5%;
+    min-height: 126px;
+  }
+
+  .pipeline-node-rollout {
+    --node-color: var(--pipeline-blue);
+    top: 57%;
+    left: 55.1%;
+    width: 18.5%;
+    min-height: 112px;
+  }
+
+  .pipeline-node-output {
+    --node-color: var(--pipeline-blue);
+    top: 35.5%;
+    right: 2.2%;
+    width: 17.5%;
+    min-height: 186px;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .pipeline-node-copy {
+    min-width: 0;
+  }
+
+  .pipeline-node-step {
+    display: block;
+    margin-bottom: 0.3rem;
+    color: var(--node-color);
+    font-size: 0.57rem;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    line-height: 1.3;
+    text-transform: uppercase;
+  }
+
+  .pipeline-node h3 {
+    margin: 0 0 0.18rem;
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: clamp(0.92rem, 1.5vw, 1.08rem);
+    font-weight: 700;
+    line-height: 1.16;
+  }
+
+  .pipeline-node p {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.64rem;
+    line-height: 1.42;
+  }
+
+  .pipeline-equation {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.18rem;
+    margin-top: 0.5rem;
+    padding: 0.22rem 0.42rem;
+    border-radius: 5px;
+    background: color-mix(in srgb, var(--node-color) 9%, var(--bg-secondary));
+    color: var(--node-color);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.63rem;
+    line-height: 1.25;
+  }
+
+  .pipeline-node-ai {
+    position: absolute;
+    top: 0.58rem;
+    right: 0.58rem;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--node-color);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--node-color) 12%, transparent);
+  }
+
+  .pipeline-observation-orbit {
+    position: relative;
+    height: 76px;
+    margin: -0.15rem 0 0.35rem;
+  }
+
+  .pipeline-globe {
+    position: relative;
+    width: 56px;
+    height: 56px;
+    flex: 0 0 56px;
+    overflow: hidden;
+    border: 1px solid color-mix(in srgb, var(--pipeline-blue) 55%, var(--border-color));
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at 31% 28%, rgba(255,255,255,0.66), transparent 22%),
+      radial-gradient(ellipse at 45% 44%, #d8e9d7 0 11%, transparent 12%),
+      radial-gradient(ellipse at 64% 61%, #c7dfcd 0 12%, transparent 13%),
+      radial-gradient(circle at 62% 64%, #5e9caf, #397a90 62%, #245064 100%);
+    box-shadow: inset -10px -8px 16px rgba(7, 34, 44, 0.22);
+  }
+
+  .pipeline-observation-orbit .pipeline-globe {
+    position: absolute;
+    right: 50%;
+    bottom: 0;
+    width: 68px;
+    height: 68px;
+    transform: translateX(50%);
+  }
+
+  .pipeline-globe::before,
+  .pipeline-globe::after {
+    position: absolute;
+    inset: 7% 21%;
+    border: 1px solid rgba(255,255,255,0.34);
+    border-radius: 50%;
+    content: "";
+  }
+
+  .pipeline-globe::after {
+    inset: 21% 4%;
+  }
+
+  .pipeline-orbit-ring {
+    position: absolute;
+    right: 50%;
+    bottom: 2px;
+    width: 96px;
+    height: 45px;
+    transform: translateX(50%) rotate(-12deg);
+    border: 1px solid color-mix(in srgb, var(--pipeline-wine) 45%, transparent);
+    border-radius: 50%;
+  }
+
+  .pipeline-satellite {
+    position: absolute;
+    top: 4px;
+    right: 19%;
+    width: 15px;
+    height: 9px;
+    transform: rotate(16deg);
+    border: 2px solid var(--pipeline-wine);
+    border-radius: 3px;
+    background: var(--bg-card);
+    box-shadow: -11px 0 0 -3px var(--pipeline-wine), 11px 0 0 -3px var(--pipeline-wine);
+  }
+
+  .pipeline-source-list,
+  .pipeline-product-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    margin-top: 0.7rem;
+  }
+
+  .pipeline-source-list span,
+  .pipeline-product-list span {
+    padding: 0.18rem 0.36rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-full);
+    background: var(--bg-secondary);
+    color: var(--text-muted);
+    font-size: 0.54rem;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0.025em;
+    text-transform: uppercase;
+  }
+
+  .pipeline-model-glyph {
+    position: relative;
+    display: grid;
+    width: 48px;
+    height: 48px;
+    flex: 0 0 48px;
+    place-items: center;
+    border: 1px solid color-mix(in srgb, var(--pipeline-ink) 24%, var(--border-color));
+    border-radius: 11px;
+    background: color-mix(in srgb, var(--pipeline-ink) 7%, var(--bg-secondary));
+    color: var(--pipeline-ink);
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 1.18rem;
+    font-style: italic;
+    font-weight: 700;
+  }
+
+  .pipeline-model-glyph::before,
+  .pipeline-model-glyph::after {
+    position: absolute;
+    inset: 7px -4px -4px 7px;
+    z-index: -1;
+    border: 1px solid color-mix(in srgb, var(--pipeline-ink) 13%, var(--border-color));
+    border-radius: 10px;
+    content: "";
+  }
+
+  .pipeline-model-glyph::after {
+    inset: 11px -7px -7px 11px;
+  }
+
+  .pipeline-output-stack {
+    display: grid;
+    gap: 0.3rem;
+    margin: 0.6rem 0 0.2rem;
+  }
+
+  .pipeline-output-bar {
+    position: relative;
+    height: 7px;
+    overflow: hidden;
+    border-radius: 5px;
+    background: var(--bg-secondary);
+  }
+
+  .pipeline-output-bar::after {
+    position: absolute;
+    inset: 0;
+    width: var(--bar-width);
+    border-radius: inherit;
+    background: var(--bar-color);
+    content: "";
+  }
+
+  .pipeline-line {
+    --line-color: var(--pipeline-blue);
+    position: absolute;
+    z-index: 2;
+    border-radius: 10px;
+    background: var(--line-color);
+  }
+
+  .pipeline-line::after {
+    position: absolute;
+    width: 0;
+    height: 0;
+    content: "";
+  }
+
+  .pipeline-line-observations {
+    --line-color: var(--pipeline-wine);
+    top: 64.5%;
+    left: 19.2%;
+    width: 7.5%;
+    height: 3px;
+  }
+
+  .pipeline-line-observations::after,
+  .pipeline-line-analysis::after,
+  .pipeline-line-output::after {
+    top: 50%;
+    right: -1px;
+    transform: translate(70%, -50%);
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    border-left: 8px solid var(--line-color);
+  }
+
+  .pipeline-line-assimilation {
+    --line-color: var(--pipeline-wine);
+    top: 42%;
+    left: 35.55%;
+    width: 3px;
+    height: 15.2%;
+  }
+
+  .pipeline-line-assimilation::after {
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -70%);
+    border-right: 6px solid transparent;
+    border-bottom: 8px solid var(--line-color);
+    border-left: 6px solid transparent;
+  }
+
+  .pipeline-line-analysis {
+    top: 31.8%;
+    left: 44.7%;
+    width: 10.7%;
+    height: 3px;
+  }
+
+  .pipeline-line-model {
+    top: 42%;
+    left: 64.2%;
+    width: 3px;
+    height: 15.2%;
+  }
+
+  .pipeline-line-model::after,
+  .pipeline-line-climate::after {
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 70%);
+    border-top: 8px solid var(--line-color);
+    border-right: 6px solid transparent;
+    border-left: 6px solid transparent;
+  }
+
+  .pipeline-line-feedback {
+    --line-color: var(--pipeline-wine);
+    top: 66%;
+    left: 44.6%;
+    width: 10.8%;
+    height: 3px;
+  }
+
+  .pipeline-line-feedback::after {
+    top: 50%;
+    left: -1px;
+    transform: translate(-70%, -50%);
+    border-top: 6px solid transparent;
+    border-right: 8px solid var(--line-color);
+    border-bottom: 6px solid transparent;
+  }
+
+  .pipeline-line-output {
+    top: 64.5%;
+    left: 73.4%;
+    width: 7.4%;
+    height: 3px;
+  }
+
+  .pipeline-line-climate {
+    --line-color: var(--pipeline-amber);
+    top: 9%;
+    left: 64.2%;
+    width: 3px;
+    height: 12.3%;
+  }
+
+  .pipeline-flow-label {
+    position: absolute;
+    z-index: 2;
+    padding: 0.14rem 0.34rem;
+    border-radius: 4px;
+    background: var(--bg-card);
+    color: var(--text-muted);
+    font-size: 0.52rem;
+    font-weight: 700;
+    letter-spacing: 0.055em;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .pipeline-flow-label-observe { top: 59.6%; left: 20.1%; }
+  .pipeline-flow-label-feedback { top: 61.1%; left: 46.6%; }
+  .pipeline-flow-label-products { top: 59.6%; left: 74.2%; }
+  .pipeline-flow-label-forcing { top: 12.6%; left: 65.1%; }
+
+  .pipeline-ai-strip {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-6);
+    align-items: center;
+    padding: 1rem 1.5rem;
+    border-top: 1px solid var(--border-color);
+    background: color-mix(in srgb, var(--pipeline-wine) 4%, var(--bg-secondary));
+  }
+
+  .pipeline-ai-strip p {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 0.78rem;
+    line-height: 1.5;
+  }
+
+  .pipeline-ai-strip strong {
+    color: var(--pipeline-wine);
+  }
+
+  .pipeline-ai-key {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 0.45rem;
+    color: var(--text-muted);
+    font-size: 0.63rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .pipeline-ai-key span {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--pipeline-wine);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--pipeline-wine) 12%, transparent);
+  }
+
+  .pipeline-prototype figcaption {
+    padding: 0.9rem 1.5rem 1rem;
+    border-top: 1px solid var(--border-color);
+    background: var(--bg-card);
+    color: var(--text-muted);
+    font-size: 0.72rem;
+    font-style: italic;
+    line-height: 1.55;
+  }
+
+  .pipeline-preview-note {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-4);
+    margin-top: var(--space-6);
+  }
+
+  .pipeline-preview-note div {
+    padding: 0.95rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    background: color-mix(in srgb, var(--bg-card) 76%, transparent);
+  }
+
+  .pipeline-preview-note strong {
+    display: block;
+    margin-bottom: 0.14rem;
+    font-size: 0.73rem;
+  }
+
+  .pipeline-preview-note span {
+    display: block;
+    color: var(--text-muted);
+    font-size: 0.67rem;
+    line-height: 1.45;
+  }
+
+  @media (max-width: 900px) {
+    .pipeline-canvas {
+      min-height: 560px;
+    }
+
+    .pipeline-node {
+      padding: 0.72rem;
+    }
+
+    .pipeline-node-observations,
+    .pipeline-node-output {
+      min-height: 176px;
+    }
+
+    .pipeline-source-list span,
+    .pipeline-product-list span {
+      font-size: 0.48rem;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .pipeline-preview-intro {
+      grid-template-columns: 1fr;
+      gap: var(--space-4);
+      align-items: start;
+    }
+
+    .pipeline-preview-status {
+      justify-self: start;
+    }
+
+    .pipeline-figure-head {
+      align-items: flex-start;
+      flex-direction: column;
+      padding: 1.1rem;
+    }
+
+    .pipeline-legend {
+      justify-content: flex-start;
+    }
+
+    .pipeline-canvas {
+      display: grid;
+      min-height: 0;
+      gap: 1.35rem;
+      padding: 1.25rem;
+      background-size: 28px 28px, 28px 28px, auto, auto;
+    }
+
+    .pipeline-cycle-shell,
+    .pipeline-line,
+    .pipeline-flow-label {
+      display: none;
+    }
+
+    .pipeline-climate-rail,
+    .pipeline-node {
+      position: relative;
+      inset: auto;
+      width: 100%;
+    }
+
+    .pipeline-climate-rail {
+      justify-self: start;
+    }
+
+    .pipeline-node {
+      min-height: 0;
+      padding: 1rem;
+    }
+
+    .pipeline-node-observations,
+    .pipeline-node-output {
+      min-height: 0;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .pipeline-node:not(.pipeline-node-output)::after {
+      position: absolute;
+      bottom: -1.36rem;
+      left: 50%;
+      width: 2px;
+      height: 1.36rem;
+      transform: translateX(-50%);
+      background: color-mix(in srgb, var(--node-color) 66%, var(--border-color));
+      content: "";
+    }
+
+    .pipeline-observation-orbit {
+      width: 112px;
+      flex: 0 0 112px;
+      margin: 0;
+    }
+
+    .pipeline-node h3 {
+      font-size: 1rem;
+    }
+
+    .pipeline-node p {
+      font-size: 0.7rem;
+    }
+
+    .pipeline-node-step {
+      font-size: 0.61rem;
+    }
+
+    .pipeline-source-list span,
+    .pipeline-product-list span {
+      font-size: 0.54rem;
+    }
+
+    .pipeline-ai-strip {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: var(--space-3);
+      padding: 1rem 1.1rem;
+    }
+
+    .pipeline-prototype figcaption {
+      padding: 0.85rem 1.1rem;
+    }
+
+    .pipeline-preview-note {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .pipeline-line::before {
+      position: absolute;
+      width: 18px;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.75), transparent);
+      content: "";
+      animation: pipeline-pulse 2.8s ease-in-out infinite;
+    }
+
+    .pipeline-line-assimilation::before,
+    .pipeline-line-model::before,
+    .pipeline-line-climate::before {
+      width: 100%;
+      height: 18px;
+      background: linear-gradient(transparent, rgba(255,255,255,0.75), transparent);
+      animation-name: pipeline-pulse-vertical;
+    }
+  }
+
+  @keyframes pipeline-pulse {
+    from { left: -18px; opacity: 0; }
+    18% { opacity: 1; }
+    to { left: 100%; opacity: 0; }
+  }
+
+  @keyframes pipeline-pulse-vertical {
+    from { top: -18px; opacity: 0; }
+    18% { opacity: 1; }
+    to { top: 100%; opacity: 0; }
+  }
+</style>
+
+<section class="pipeline-preview-page" aria-labelledby="pipeline-preview-title">
+  <header class="pipeline-preview-intro">
+    <div>
+      <span class="pipeline-preview-kicker">Independent prototype</span>
+      <h1 id="pipeline-preview-title">Operational forecasting,<br>drawn as a living system.</h1>
+      <p>A web-native interpretation of the research pipeline: the same scientific story, rebuilt with responsive layout, typography, gradients, and CSS-drawn elements.</p>
+    </div>
+    <span class="pipeline-preview-status">Pure HTML + CSS</span>
+  </header>
+
+  <figure class="pipeline-prototype" aria-labelledby="pipeline-figure-title" aria-describedby="pipeline-figure-caption">
+    <header class="pipeline-figure-head">
+      <div class="pipeline-figure-title">
+        <span>System view · operational cycle</span>
+        <h2 id="pipeline-figure-title">From observations to actionable weather and climate products</h2>
+      </div>
+      <ul class="pipeline-legend" aria-label="Diagram legend">
+        <li><span class="pipeline-legend-dot" style="--legend-color: var(--pipeline-wine)"></span>Observations &amp; assimilation</li>
+        <li><span class="pipeline-legend-dot" style="--legend-color: var(--pipeline-blue)"></span>State &amp; forecast</li>
+        <li><span class="pipeline-legend-dot" style="--legend-color: var(--pipeline-amber)"></span>Slow feedback</li>
+      </ul>
+    </header>
+
+    <div class="pipeline-canvas" role="img" aria-label="Observations flow into data assimilation and analysis, then into a forecast model and rollout. The rollout supplies weather products and feeds back into assimilation. S2S, climate indicators, and forcing influence the forecast system.">
+      <div class="pipeline-cycle-shell" aria-hidden="true"></div>
+      <div class="pipeline-climate-rail">S2S · climate indicators · forcing</div>
+
+      <article class="pipeline-node pipeline-node-observations">
+        <span class="pipeline-node-ai" aria-hidden="true"></span>
+        <div class="pipeline-observation-orbit" aria-hidden="true">
+          <span class="pipeline-orbit-ring"></span>
+          <span class="pipeline-globe"></span>
+          <span class="pipeline-satellite"></span>
+        </div>
+        <div class="pipeline-node-copy">
+          <span class="pipeline-node-step">01 · Observing system</span>
+          <h3>Earth observations</h3>
+          <p>Continuous measurements of the atmosphere, ocean, and land.</p>
+          <div class="pipeline-source-list" aria-label="Observation sources">
+            <span>Satellite</span><span>Radar</span><span>Station</span><span>Buoy</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="pipeline-node pipeline-node-assimilation">
+        <span class="pipeline-node-ai" aria-hidden="true"></span>
+        <div class="pipeline-node-copy">
+          <span class="pipeline-node-step">02 · State estimation</span>
+          <h3>Data assimilation</h3>
+          <p>Blend observations with the evolving background state.</p>
+          <span class="pipeline-equation">A(xᵇ, y)</span>
+        </div>
+      </article>
+
+      <article class="pipeline-node pipeline-node-analysis">
+        <span class="pipeline-node-ai" aria-hidden="true"></span>
+        <span class="pipeline-globe" aria-hidden="true"></span>
+        <div class="pipeline-node-copy">
+          <span class="pipeline-node-step">03 · Initial condition</span>
+          <h3>Analysis x₀</h3>
+          <p>The best estimate of the current Earth system.</p>
+        </div>
+      </article>
+
+      <article class="pipeline-node pipeline-node-model">
+        <span class="pipeline-node-ai" aria-hidden="true"></span>
+        <span class="pipeline-model-glyph" aria-hidden="true">f<sub>θ</sub></span>
+        <div class="pipeline-node-copy">
+          <span class="pipeline-node-step">04 · Prediction engine</span>
+          <h3>Forecast model</h3>
+          <p>Physics-based, AI-based, or hybrid dynamics.</p>
+        </div>
+      </article>
+
+      <article class="pipeline-node pipeline-node-rollout">
+        <span class="pipeline-node-ai" aria-hidden="true"></span>
+        <span class="pipeline-globe" aria-hidden="true"></span>
+        <div class="pipeline-node-copy">
+          <span class="pipeline-node-step">05 · Evolving state</span>
+          <h3>Rollout x₁:T</h3>
+          <p>Future trajectories and the next-cycle background.</p>
+        </div>
+      </article>
+
+      <article class="pipeline-node pipeline-node-output">
+        <span class="pipeline-node-ai" aria-hidden="true"></span>
+        <div class="pipeline-node-copy">
+          <span class="pipeline-node-step">06 · Decision layer</span>
+          <h3>Weather products</h3>
+          <p>Reliable guidance translated into actionable information.</p>
+          <div class="pipeline-output-stack" aria-hidden="true">
+            <span class="pipeline-output-bar" style="--bar-width: 82%; --bar-color: var(--pipeline-blue)"></span>
+            <span class="pipeline-output-bar" style="--bar-width: 64%; --bar-color: var(--pipeline-wine)"></span>
+            <span class="pipeline-output-bar" style="--bar-width: 73%; --bar-color: var(--pipeline-amber)"></span>
+          </div>
+          <div class="pipeline-product-list" aria-label="Weather product types">
+            <span>Maps</span><span>Warnings</span><span>Outlooks</span>
+          </div>
+        </div>
+      </article>
+
+      <span class="pipeline-line pipeline-line-observations" aria-hidden="true"></span>
+      <span class="pipeline-line pipeline-line-assimilation" aria-hidden="true"></span>
+      <span class="pipeline-line pipeline-line-analysis" aria-hidden="true"></span>
+      <span class="pipeline-line pipeline-line-model" aria-hidden="true"></span>
+      <span class="pipeline-line pipeline-line-feedback" aria-hidden="true"></span>
+      <span class="pipeline-line pipeline-line-output" aria-hidden="true"></span>
+      <span class="pipeline-line pipeline-line-climate" aria-hidden="true"></span>
+
+      <span class="pipeline-flow-label pipeline-flow-label-observe">observations</span>
+      <span class="pipeline-flow-label pipeline-flow-label-feedback">background</span>
+      <span class="pipeline-flow-label pipeline-flow-label-products">products</span>
+      <span class="pipeline-flow-label pipeline-flow-label-forcing">influence</span>
+    </div>
+
+    <div class="pipeline-ai-strip">
+      <p><strong>AI insertion points.</strong> Every marked module can be augmented or replaced where learning-based methods improve forecast skill, efficiency, and reliability.</p>
+      <span class="pipeline-ai-key"><span aria-hidden="true"></span>AI-ready module</span>
+    </div>
+
+    <figcaption id="pipeline-figure-caption">Figure drawn by Sencan Sun. AI methods can be inserted into each stage of the <strong>operational</strong> pipeline, replacing or augmenting modules where they improve forecast skill and reliability.</figcaption>
+  </figure>
+
+  <aside class="pipeline-preview-note" aria-label="Prototype implementation notes">
+    <div><strong>No image asset</strong><span>The entire figure is rendered from semantic HTML and CSS.</span></div>
+    <div><strong>Responsive layout</strong><span>The system reorganizes into a readable vertical flow on small screens.</span></div>
+    <div><strong>Theme-aware</strong><span>Colors adapt automatically to the website’s light and dark modes.</span></div>
+  </aside>
+</section>

@@ -8,12 +8,6 @@ excerpt: "I received a reviewer certificate from Earth and Space Science for rev
 
 I am honored to receive my first **reviewer certificate**, awarded by **Earth and Space Science** for serving as a peer reviewer.
 
-My review record:
-
-- reviewed **2 manuscripts** submitted to *Earth and Space Science* in 2025.
-
-The certificate was signed by the Editor-in-Chief, **Graziella Caprarelli**, on August 7, 2026.
-
 <figure class="activity-figure">
   <img src="{{ '/images/ess-reviewer-certificate.png' | relative_url }}" alt="Reviewer certificate from Earth and Space Science" loading="lazy">
 </figure>
