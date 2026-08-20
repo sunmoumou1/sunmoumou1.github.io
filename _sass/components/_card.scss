@@ -343,3 +343,77 @@
 .activity-figure--portrait {
   max-width: 360px;
 }
+
+// =============================================================
+// Blog list — editorial preview with optional cover image
+// =============================================================
+
+.blog-list-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  padding: var(--space-6) 0;
+  border-bottom: 1px solid var(--border-color);
+
+  &:first-child {
+    padding-top: 0;
+  }
+
+  &:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+}
+
+.blog-list-content {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.blog-list-title {
+  display: block;
+  margin-top: var(--space-2);
+  color: var(--accent);
+  font-size: 1.2rem;
+  font-weight: 650;
+  line-height: 1.35;
+
+  &:hover {
+    color: var(--accent-hover);
+  }
+}
+
+.blog-list-excerpt {
+  margin-top: var(--space-6);
+  color: var(--text-secondary);
+}
+
+.blog-list-image {
+  flex: 0 0 180px;
+  width: 180px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  background: var(--bg-secondary);
+  box-shadow: var(--shadow-sm);
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .blog-list-item {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .blog-list-image {
+    flex-basis: auto;
+    width: 100%;
+    max-width: 300px;
+  }
+}

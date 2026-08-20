@@ -10,11 +10,14 @@ permalink: /blogs/
 {% if site.posts.size > 0 %}
 <div class="section-card" markdown="0">
 {% for post in site.posts %}
-<div class="news-item" style="padding: 1rem 0; border-bottom: 1px solid var(--border-color);">
-<span class="news-date">{{ post.date | date: "%b %-d, %Y" }}</span><br>
-<a href="{{ post.url | relative_url }}" style="font-weight: 600;">{{ post.title }}</a>
-{% if post.excerpt %}<div style="color: var(--text-secondary); margin-top: 0.35rem;">{{ post.excerpt | strip_html | truncatewords: 32 }}</div>{% endif %}
+<article class="blog-list-item">
+<div class="blog-list-content">
+<span class="news-date">{{ post.date | date: "%b %-d, %Y" }}</span>
+<a class="blog-list-title" href="{{ post.url | relative_url }}">{{ post.title }}</a>
+{% if post.excerpt %}<div class="blog-list-excerpt">{{ post.excerpt | strip_html | truncatewords: 32 }}</div>{% endif %}
 </div>
+{% if post.image %}<a class="blog-list-image" href="{{ post.url | relative_url }}" aria-label="Read {{ post.title | escape }}"><img src="{{ post.image | relative_url }}" alt="{{ post.title | escape }}" loading="lazy"></a>{% endif %}
+</article>
 {% endfor %}
 </div>
 {% else %}

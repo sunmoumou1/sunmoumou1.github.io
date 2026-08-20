@@ -1,7 +1,8 @@
 ---
 layout: post
-title: "Interview with 气有此理: From a First Paper to AI for Weather and Climate"
+title: "Interview with 气有此理：我第一次接受采访"
 date: 2026-08-20 09:00:00 +0800
+image: "/images/qiyou-cili-interview.png"
 excerpt: "I was interviewed by 气有此理 about the journey behind my first paper and my path into AI for weather and climate."
 ---
 
