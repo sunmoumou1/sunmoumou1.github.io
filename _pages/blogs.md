@@ -1,11 +1,11 @@
 ---
-title: "Blog"
+title: "Posts"
 layout: gridlay
 sitemap: false
 permalink: /blogs/
 ---
 
-## Blog
+## Posts
 
 {% if site.posts.size > 0 %}
 <div class="section-card" markdown="0">
