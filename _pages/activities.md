@@ -19,6 +19,13 @@ permalink: /activities/
 <script type="application/json" id="activityGlobeData">
 [
   {
+    "title": "12th International Symposium on Data Assimilation (ISDA 2026)",
+    "city": "Nanjing",
+    "date": "August–September 2026",
+    "lat": 32.0603,
+    "lon": 118.7969
+  },
+  {
     "title": "International Conference on Machine Learning (ICML 2026)",
     "city": "Seoul",
     "date": "July 2026",
@@ -61,6 +68,15 @@ permalink: /activities/
 <script src="https://cdn.jsdelivr.net/npm/d3-geo@3/dist/d3-geo.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
 <script src="{{ '/assets/js/activity-globe.js' | relative_url }}"></script>
+
+<div class="section-card activity-card">
+<h3>12th International Symposium on Data Assimilation (ISDA 2026)</h3>
+<p class="activity-meta">August 30–September 4, 2026 · Nanjing, China</p>
+<p>I attended the 12th International Symposium on Data Assimilation (ISDA 2026) in Nanjing. Held at Nanjing University from August 31 to September 4, the symposium explored frontier theories, methods, and applications in data assimilation, including data assimilation and machine learning, observational data assimilation, methods and infrastructure, and Earth system data assimilation.</p>
+<figure class="activity-figure">
+<img src="{{ '/images/ISDA.png' | relative_url }}" alt="12th International Symposium on Data Assimilation in Nanjing" loading="lazy">
+</figure>
+</div>
 
 <div class="section-card activity-card">
 <h3>International Conference on Machine Learning (ICML 2026)</h3>
