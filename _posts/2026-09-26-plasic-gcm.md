@@ -3,7 +3,7 @@ layout: post
 title: "Introducing PlaSiC: a GCM made to be understood"
 date: 2026-09-26 09:00:00 +0800
 target_url: "/PlaSiC/index.html"
-image: "/PlaSiC/earth_grid.png"
+image: "/PlaSiC/pdf1.png"
 excerpt: "I developed PlaSiC, a teaching-oriented general circulation model in C that makes the equations, physics, and source code of a complete numerical simulation easier to explore."
 ---
 
