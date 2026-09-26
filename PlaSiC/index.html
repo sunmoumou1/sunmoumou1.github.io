@@ -2580,9 +2580,10 @@ function drawHistoricalChart(){
     historicalSvg("text",{x:co2Plot.left-8,y:co2Y(tick)+4,"text-anchor":"end",fill:"#688397","font-size":"11","font-family":"-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif"},co2Inset,String(tick));
   });
   [1850,1900,1950,2000,2014].forEach(function(tick){
-    var anchor = tick === 2014 ? "end" : "middle";
+    var anchor = tick === 2000 || tick === 2014 ? "end" : "middle";
+    var labelX = tick === 2000 ? co2X(tick) - 5 : co2X(tick);
     historicalSvg("line",{x1:co2X(tick),y1:co2Plot.top,x2:co2X(tick),y2:co2Plot.bottom,stroke:"#6a8da2","stroke-opacity":".12","stroke-dasharray":"2 5"},co2Inset);
-    historicalSvg("text",{x:co2X(tick),y:co2Plot.bottom+20,"text-anchor":anchor,fill:"#688397","font-size":"11","font-family":"-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif"},co2Inset,String(tick));
+    historicalSvg("text",{x:labelX,y:co2Plot.bottom+20,"text-anchor":anchor,fill:"#688397","font-size":"11","font-family":"-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif"},co2Inset,String(tick));
   });
   historicalSvg("line",{x1:co2Plot.left,y1:co2Plot.bottom,x2:co2Plot.right,y2:co2Plot.bottom,stroke:"#517389","stroke-opacity":".6","stroke-width":"1"},co2Inset);
   var co2Fill = historicalSvg("linearGradient",{id:"historicalCo2Fill",x1:"0",x2:"0",y1:"0",y2:"1"},defs);

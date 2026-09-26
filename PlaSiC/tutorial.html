@@ -199,6 +199,49 @@ button{font-family:inherit;cursor:pointer;background:none;border:none;color:inhe
   color:var(--faint);white-space:normal;line-height:1.5;
 }
 
+/* ---- the one action on the page: download the book ---- */
+.download-cta{
+  display:inline-flex;align-items:center;gap:.9rem;
+  width:fit-content;
+  margin-top:clamp(1.7rem,3.6vh,2.7rem);
+  padding:.8rem 1.15rem .8rem 1rem;
+  border:1px solid rgba(255,255,255,.18);border-radius:999px;
+  background:rgba(19,58,94,.92);color:#f5f7f9;
+  box-shadow:
+    0 1px 2px rgba(20,50,90,.18),
+    0 18px 38px -14px rgba(28,73,112,.5),
+    inset 0 1px 0 rgba(255,255,255,.16);
+  transition:transform .3s ease,background .3s ease,box-shadow .3s ease;
+}
+.download-cta:hover{
+  transform:translateY(-2px);
+  background:rgba(21,63,102,.98);
+  box-shadow:
+    0 2px 3px rgba(20,50,90,.2),
+    0 26px 52px -16px rgba(28,73,112,.58),
+    inset 0 1px 0 rgba(255,255,255,.2);
+}
+.download-cta:active{transform:translateY(0)}
+.download-cta__icon{
+  display:grid;place-items:center;flex:none;
+  width:2.15rem;height:2.15rem;border-radius:50%;
+  background:linear-gradient(130deg,#8fc2ea,#eaf4fb 56%,#6ea6d4);
+  color:#12507f;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 5px 12px rgba(10,40,70,.28);
+  transition:transform .3s ease;
+}
+.download-cta__icon svg{display:block;width:1.05rem;height:1.05rem}
+.download-cta:hover .download-cta__icon{transform:translateY(1px)}
+.download-cta__label{
+  font-family:var(--font-mono);font-size:.76rem;font-weight:500;
+  letter-spacing:.16em;text-transform:uppercase;white-space:nowrap;
+}
+.download-cta__meta{
+  padding-left:.9rem;border-left:1px solid rgba(255,255,255,.22);
+  font-family:var(--font-mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(222,236,248,.66);white-space:nowrap;
+}
+
 /* ---- the desk: the prints, laid at an angle ---- */
 .desk{
   position:relative;z-index:2;
@@ -343,9 +386,13 @@ body.in .reveal{opacity:1;transform:none}
   .stat,.stat + .stat{border-left:0;padding:1rem 0 .6rem}
   .stat + .stat{border-top:1px solid var(--line)}
   .stat strong{font-size:clamp(2rem,7.5vw,2.6rem)}
+  .download-cta__meta{display:none}
 }
 @media (max-width:430px){
   .hero h1{font-size:clamp(2.9rem,12vw,3.6rem)}
+  .download-cta{gap:.72rem;padding:.74rem 1rem .74rem .88rem}
+  .download-cta__icon{width:1.95rem;height:1.95rem}
+  .download-cta__label{font-size:.68rem;letter-spacing:.12em}
 }
 
 /* ============================================================
@@ -475,6 +522,21 @@ body.zoom-open{overflow:hidden}
         <div class="stat"><strong>400+pages</strong><span>pages of<br>derivation</span></div>
         <div class="stat"><strong>8</strong><span>chapters,<br>cover to code</span></div>
       </div>
+
+      <a class="download-cta reveal" style="--d:.42s"
+         href="https://drive.usercontent.google.com/download?id=1PaMNy_Bc8rSRLUIjQizExJ17wFgWT9Ag&amp;export=download&amp;confirm=t"
+         target="_blank" rel="noopener"
+         aria-label="Download the PlaSiC tutorial PDF, about 63 MB, from Google Drive">
+        <span class="download-cta__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3.4v10.2"/>
+            <path d="M7.7 9.9 12 14.2l4.3-4.3"/>
+            <path d="M4.4 16.4v2.2a1.8 1.8 0 0 0 1.8 1.8h11.6a1.8 1.8 0 0 0 1.8-1.8v-2.2"/>
+          </svg>
+        </span>
+        <span class="download-cta__label">Download tutorial PDF</span>
+        <span class="download-cta__meta">63 MB</span>
+      </a>
     </div>
 
     <div class="desk" id="desk" aria-label="Spreads from the PlaSiC tutorial book">

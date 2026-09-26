@@ -381,6 +381,31 @@ body.in .reveal{opacity:1;transform:none}
   .hero h1{font-size:clamp(2.8rem,12vw,3.5rem)}
   .f{grid-template-columns:1.35rem minmax(0,1fr);padding-left:0;padding-right:0}
 }
+
+/* Reading-size adjustments: keep the existing visual hierarchy while making
+   the source tree's supporting text easier to read at normal zoom. */
+.brand{font-size:1.12rem}
+.brand .crumb{font-size:.7rem}
+.edition{font-size:.92rem}
+.kicker{font-size:.82rem}
+.lede{font-size:clamp(1.22rem,1.55vw,1.68rem)}
+.term-path{font-size:.9rem}
+.term-meta{font-size:.78rem}
+.prompt{font-size:.94rem}
+.chip{font-size:.8rem}
+.mod-num{font-size:.76rem}
+.mod-dir{font-size:clamp(1.15rem,1.45vw,1.45rem)}
+.mod-meta{font-size:.78rem}
+.mod-note{font-size:clamp(1.05rem,1.1vw,1.18rem)}
+.br{font-size:.9rem}
+.fn{font-size:.92rem}
+.fn.h{font-size:.88rem}
+.fl{font-size:.84rem}
+.site-foot{font-size:.78rem}
+
+@media (max-width:700px){
+  .edition{font-size:.68rem}
+}
 </style>
 </head>
 <body>
@@ -931,7 +956,7 @@ body.in .reveal{opacity:1;transform:none}
         <li class="f">
           <span class="br" aria-hidden="true">├──</span>
           <span class="fhead">
-            <code class="fn c">oceandyn_kernels.c</code>
+            <code class="fn c">3docean.c</code>
             <span class="lead" aria-hidden="true"></span>
             <span class="fl">985</span>
           </span>
@@ -939,7 +964,7 @@ body.in .reveal{opacity:1;transform:none}
         <li class="f">
           <span class="br" aria-hidden="true">├──</span>
           <span class="fhead">
-            <code class="fn h">slabocean_kernels.h</code>
+            <code class="fn h">3docean.h</code>
             <span class="lead" aria-hidden="true"></span>
             <span class="fl">105</span>
           </span>
@@ -947,7 +972,7 @@ body.in .reveal{opacity:1;transform:none}
         <li class="f">
           <span class="br" aria-hidden="true">├──</span>
           <span class="fhead">
-            <code class="fn c">slabocean_kernels.c</code>
+            <code class="fn c">slab_ocean.c</code>
             <span class="lead" aria-hidden="true"></span>
             <span class="fl">679</span>
           </span>
@@ -955,7 +980,7 @@ body.in .reveal{opacity:1;transform:none}
         <li class="f">
           <span class="br" aria-hidden="true">├──</span>
           <span class="fhead">
-            <code class="fn h">oceanmod_kernels.h</code>
+            <code class="fn h">slab_ocean.h</code>
             <span class="lead" aria-hidden="true"></span>
             <span class="fl">61</span>
           </span>
