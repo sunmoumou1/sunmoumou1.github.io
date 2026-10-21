@@ -16,25 +16,14 @@ permalink: /
   </div>
 
   <div class="home-gallery">
-    <div class="home-lamp-rig" aria-hidden="true">
-      <span class="home-lamp-cable"></span>
-      <span class="home-lamp-neck"></span>
-      <span class="home-lamp-shade">
-        <i class="home-lamp-bulb"></i>
-      </span>
-    </div>
-
-    <figure class="home-board-stage" aria-label="Operational forecasting research pipeline displayed on a blackboard">
-      <div class="home-board-mount" aria-hidden="true"></div>
-      <div class="home-blackboard">
-        <div class="home-board-surface">
-          {% include research-pipeline.html %}
-        </div>
-        <span class="home-board-ledge" aria-hidden="true"></span>
-        <span class="home-board-support home-board-support-left" aria-hidden="true"></span>
-        <span class="home-board-support home-board-support-right" aria-hidden="true"></span>
-      </div>
-      <figcaption class="home-figure-credit">Figure drawn by Sencan Sun. Please do not reproduce or use without permission.</figcaption>
+    <figure class="home-photo" aria-labelledby="home-photo-title">
+      <a class="home-photo-image" href="{{ '/images/weather-climate-system-architecture.png' | relative_url }}" target="_blank" rel="noopener" aria-label="View the weather and climate system diagram at full resolution (opens in a new tab)">
+        <img src="{{ '/images/weather-climate-system-architecture.png' | relative_url }}" width="3440" height="2156" fetchpriority="high" alt="Weather and climate system architecture: observations and background forecasts feed data assimilation to update initial conditions; the forecast model produces weather products and climate projections.">
+      </a>
+      <figcaption class="home-photo-caption">
+        <span class="home-photo-title" id="home-photo-title">My research overview</span>
+        <p class="home-photo-credit">Figure drawn by Sencan Sun.<br>Please do not reproduce or use without permission.</p>
+      </figcaption>
     </figure>
   </div>
 </section>

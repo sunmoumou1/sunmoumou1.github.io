@@ -1,5 +1,5 @@
 // =============================================================
-// Home page — editorial gallery with a self-lit pendant and board
+// Home page — editorial introduction and a postcard-style research print
 // =============================================================
 
 .home-page-body {
@@ -124,264 +124,104 @@
 
 .home-gallery {
   position: relative;
-  width: unquote('min(100%, 1840px)');
-  margin: clamp(2rem, 4.5vw, 5rem) auto 0;
-  padding-top: clamp(8rem, 10vw, 12rem);
+  width: unquote('min(100%, 1480px)');
+  margin: clamp(2.5rem, 5vw, 5.5rem) auto 0;
+  padding: clamp(0.5rem, 1.4vw, 1.5rem);
 }
 
-.home-lamp-rig {
-  position: absolute;
-  top: -2rem;
-  left: 50%;
-  z-index: 6;
-  width: clamp(17rem, 22vw, 25rem);
-  height: clamp(10rem, 13vw, 14rem);
-  transform-origin: 50% 0;
-  transform-style: preserve-3d;
-  pointer-events: none;
-  animation: home-lamp-sway 8.4s cubic-bezier(0.45, 0.04, 0.55, 0.96) infinite;
-}
-
-.home-lamp-cable {
-  position: absolute;
-  top: 0;
-  left: calc(50% - 2px);
-  width: 4px;
-  height: clamp(5rem, 7vw, 7rem);
-  border-radius: 3px;
-  background: linear-gradient(90deg, #18191b, #55585c 48%, #141517);
-  box-shadow: 2px 0 4px rgba(0, 0, 0, 0.24);
-}
-
-.home-lamp-neck {
-  position: absolute;
-  top: clamp(4.7rem, 6.6vw, 6.7rem);
-  left: calc(50% - 18px);
-  width: 36px;
-  height: 24px;
-  border-radius: 5px 5px 2px 2px;
-  background: linear-gradient(90deg, #151619, #4a4c50 48%, #111214);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-}
-
-.home-lamp-shade {
-  position: absolute;
-  top: clamp(5.8rem, 7.8vw, 8rem);
-  left: 50%;
+// A lightly turned photographic print, with a second sheet underneath.
+.home-photo {
+  position: relative;
+  isolation: isolate;
   width: 100%;
-  height: clamp(4.4rem, 5.5vw, 6rem);
-  transform: translateX(-50%);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 52% 52% 16% 16% / 84% 84% 22% 22%;
-  background:
-    radial-gradient(ellipse at 50% 86%, rgba(255, 195, 111, 0.24), transparent 45%),
-    linear-gradient(100deg, #08090a 4%, #35373b 45%, #1b1c20 72%, #070809 97%);
+  margin: 0;
+  padding: clamp(0.8rem, 2.2vw, 2.5rem);
+  transform: rotate(-0.65deg);
+  border: 1px solid #e5ddd2;
+  border-radius: 2px;
+  background: #fffdf9;
   box-shadow:
-    inset 0 -12px 16px rgba(0, 0, 0, 0.62),
-    inset 0 7px 16px rgba(255, 255, 255, 0.07),
-    0 13px 26px rgba(0, 0, 0, 0.34);
+    0 2px 4px rgba(42, 29, 32, 0.04),
+    0 18px 40px -16px rgba(42, 29, 32, 0.2),
+    0 48px 80px -40px rgba(42, 29, 32, 0.22);
 
+  &::before {
+    position: absolute;
+    inset: 0.45rem -0.4rem -0.45rem 0.4rem;
+    z-index: -2;
+    transform: rotate(1.2deg);
+    border: 1px solid #e5ddd2;
+    border-radius: inherit;
+    background: #f4eee5;
+    box-shadow: 0 8px 18px -12px rgba(42, 29, 32, 0.2);
+    content: '';
+  }
+
+  // Keep the paper face above the backing sheet without affecting the image.
   &::after {
     position: absolute;
-    right: 6%;
-    bottom: -7px;
-    left: 6%;
-    height: 15px;
-    border-radius: 50%;
-    background: radial-gradient(ellipse, #ffddb1 0 5%, #d9893e 18%, #4b2515 46%, #080808 72%);
-    box-shadow: 0 1px 0 rgba(255, 211, 157, 0.35);
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: #fffdf9;
     content: '';
   }
 }
 
-.home-lamp-bulb {
-  position: absolute;
-  bottom: -13px;
-  left: 50%;
-  z-index: 2;
-  width: 22px;
-  height: 22px;
-  transform: translateX(-50%);
-  border-radius: 50%;
-  background: #fff1d8;
-  box-shadow:
-    0 0 8px 3px rgba(255, 215, 164, 0.88),
-    0 0 22px 9px rgba(238, 146, 62, 0.46),
-    0 0 52px 14px rgba(216, 114, 38, 0.18);
-}
-
-@keyframes home-lamp-sway {
-  0%, 100% {
-    transform: translateX(-50%) perspective(900px) rotateZ(-6.5deg) rotateX(2deg);
-  }
-  25% {
-    transform: translateX(-50%) perspective(900px) rotateZ(1.8deg) rotateX(-4.5deg);
-  }
-  50% {
-    transform: translateX(-50%) perspective(900px) rotateZ(6.5deg) rotateX(1.4deg);
-  }
-  75% {
-    transform: translateX(-50%) perspective(900px) rotateZ(-1.4deg) rotateX(4.2deg);
-  }
-}
-
-.home-board-stage {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  margin: 0;
-  padding-bottom: calc(clamp(6rem, 9vw, 10rem) + 3rem);
-}
-
-.home-board-mount {
-  position: absolute;
-  top: clamp(-2rem, -1.7vw, -1.2rem);
-  left: 50%;
-  z-index: 1;
-  width: clamp(4.3rem, 6vw, 7rem);
-  height: clamp(2.8rem, 4vw, 4.7rem);
-  transform: translateX(-50%);
-  border: 2px solid #5c351c;
-  border-radius: 1.2rem 1.2rem 0.35rem 0.35rem;
-  background:
-    linear-gradient(90deg, rgba(73, 38, 17, 0.38), transparent 34%, rgba(255, 220, 154, 0.22) 52%, transparent 72%),
-    #a66b34;
-  box-shadow: 0 8px 20px rgba(35, 18, 8, 0.28);
-}
-
-.home-blackboard {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  aspect-ratio: 2.14 / 1;
-  padding: clamp(0.8rem, 1.25vw, 1.5rem);
-  border: clamp(0.35rem, 0.55vw, 0.7rem) solid #5a3219;
-  border-radius: clamp(0.65rem, 1vw, 1.1rem);
-  background:
-    repeating-linear-gradient(92deg, rgba(62, 30, 12, 0.36) 0 4px, transparent 4px 15px),
-    linear-gradient(100deg, #7d4a24, #c1874b 18%, #8d552b 35%, #d2a064 52%, #815025 70%, #bd8145 88%, #6d3e1e);
-  box-shadow:
-    inset 0 0 0 2px rgba(255, 221, 165, 0.38),
-    inset 0 0 0 5px rgba(55, 26, 10, 0.22),
-    0 2.1rem 4.8rem rgba(42, 29, 32, 0.25),
-    0 0.7rem 1.5rem rgba(42, 29, 32, 0.16);
-}
-
-.home-board-surface {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  width: 100%;
-  height: 100%;
-  align-items: center;
-  justify-content: center;
+.home-photo-image {
+  display: block;
   overflow: hidden;
-  container-type: size;
-  border: 2px solid #090f0d;
-  border-radius: clamp(0.4rem, 0.65vw, 0.75rem);
-  background:
-    radial-gradient(ellipse at 48% 40%, rgba(121, 144, 132, 0.09), transparent 62%),
-    repeating-linear-gradient(7deg, rgba(255, 255, 255, 0.018) 0 1px, transparent 1px 7px),
-    repeating-linear-gradient(102deg, rgba(0, 0, 0, 0.055) 0 2px, transparent 2px 13px),
-    #091310;
-  box-shadow:
-    inset 0 0 3rem rgba(0, 0, 0, 0.76),
-    inset 0 0 0 2px rgba(255, 255, 255, 0.025);
-}
+  border: 1px solid #e9e5df;
+  background: #fff;
+  color: inherit;
+  cursor: zoom-in;
 
-.home-board-surface .rp-wrap {
-  width: unquote('min(99cqw, 213cqh)') !important;
-  margin: auto !important;
-}
-
-.home-board-surface .rp-stage {
-  background: transparent !important;
-}
-
-.home-board-surface .rp-edge {
-  display: none !important;
-}
-
-.home-board-surface .rp-gwrap img,
-.home-board-surface .rp-plat img {
-  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.24));
-}
-
-.home-board-ledge {
-  position: absolute;
-  right: 7%;
-  bottom: clamp(-1.45rem, -1.3vw, -0.8rem);
-  left: 7%;
-  z-index: 4;
-  height: clamp(1rem, 1.4vw, 1.7rem);
-  border: 2px solid #5a3219;
-  border-radius: 0.3rem 0.3rem 0.55rem 0.55rem;
-  background:
-    repeating-linear-gradient(92deg, rgba(69, 33, 13, 0.28) 0 5px, transparent 5px 18px),
-    linear-gradient(180deg, #d2a064, #8a5129 72%, #61351b);
-  box-shadow: 0 10px 14px rgba(25, 12, 5, 0.3);
-
-  &::before,
-  &::after {
-    position: absolute;
-    top: -0.18rem;
-    width: clamp(2.6rem, 5vw, 6rem);
-    height: clamp(0.35rem, 0.48vw, 0.58rem);
-    transform: rotate(-2deg);
-    border-radius: 999px;
-    background: #eee6d8;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
-    content: '';
+  &:focus-visible {
+    outline: 3px solid #8a1538;
+    outline-offset: 5px;
   }
 
-  &::before { left: 14%; }
-  &::after {
-    right: 14%;
-    transform: rotate(3deg);
-    background: #c99176;
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
   }
 }
 
-.home-board-support {
-  position: absolute;
-  top: calc(100% - 0.35rem);
-  z-index: 1;
-  width: clamp(2.5rem, 4.5vw, 5rem);
-  height: clamp(6rem, 9vw, 10rem);
-  border: 2px solid #593016;
-  border-radius: 0 0 0.85rem 0.85rem;
-  background:
-    repeating-linear-gradient(92deg, rgba(68, 31, 11, 0.28) 0 4px, transparent 4px 13px),
-    linear-gradient(90deg, #75421f, #c18a50 42%, #8a5229 70%, #643719);
-  box-shadow: 0 1.2rem 1.4rem rgba(42, 29, 32, 0.22);
+.home-photo-caption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: clamp(1.1rem, 2.2vw, 2rem) 0 0.15rem;
 }
 
-.home-board-support-left {
-  left: 19%;
-  transform: skewX(-7deg);
-}
-
-.home-board-support-right {
-  right: 19%;
-  transform: skewX(7deg);
-}
-
-.home-figure-credit {
-  position: absolute;
-  right: 0;
-  bottom: 0.55rem;
-  left: 0;
-  z-index: 5;
-  width: 100%;
-  margin: 0;
-  padding: 0 1.2%;
-  color: var(--text-muted);
-  font-family: 'DM Sans', sans-serif;
-  font-size: clamp(0.68rem, 0.76vw, 0.82rem);
+.home-photo-title {
+  color: #3d3430;
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: clamp(1.1rem, 1.7vw, 1.8rem);
   font-style: italic;
-  letter-spacing: 0.015em;
-  line-height: 1.5;
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+}
+
+.home-photo-credit {
+  flex: 0 1 22rem;
+  margin: 0;
+  color: #786b63;
+  font-family: 'DM Sans', sans-serif;
+  font-size: clamp(0.6rem, 0.76vw, 0.78rem);
+  line-height: 1.65;
   text-align: right;
+}
+
+[data-bs-theme="dark"] .home-photo {
+  border-color: #d6cbbd;
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.12),
+    0 18px 40px -16px rgba(0, 0, 0, 0.5),
+    0 48px 80px -40px rgba(0, 0, 0, 0.6);
 }
 
 @media (max-width: 860px) {
@@ -405,12 +245,6 @@
 
   .home-gallery {
     margin-top: var(--space-8);
-    padding-top: 7.5rem;
-  }
-
-  .home-lamp-rig {
-    top: -2.4rem;
-    width: clamp(14rem, 42vw, 19rem);
   }
 }
 
@@ -433,27 +267,19 @@
     font-size: 1.28rem;
   }
 
-  .home-blackboard {
-    padding: 0.45rem;
-    border-width: 0.3rem;
+  .home-photo {
+    transform: rotate(-0.35deg);
   }
 
-  .home-board-surface {
-    border-width: 1px;
+  .home-photo-caption {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.85rem;
   }
 
-  .home-figure-credit {
-    bottom: 0.35rem;
-    padding: 0 0.5rem;
-    font-size: 0.64rem;
-    text-align: center;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .home-lamp-rig {
-    animation: none;
-    transform: translateX(-50%);
+  .home-photo-credit {
+    flex-basis: auto;
+    text-align: left;
   }
 }
 
