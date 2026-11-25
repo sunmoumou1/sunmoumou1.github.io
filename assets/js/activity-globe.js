@@ -3,7 +3,7 @@
  *
  * Uses Natural Earth country geometry (vendored TopoJSON) projected through
  * d3-geo so coastlines and borders are smooth and clip cleanly at the limb.
- * Locations are annotated with on-globe English place names and italic, dated
+ * Locations are annotated with on-globe bilingual place names and italic, dated
  * callout cards that are tethered to each marker with curved arrows.
  *
  * Loaded only on the Activities page. Depends on d3-array, d3-geo and
@@ -73,6 +73,9 @@
     var centerX = 0;
     var centerY = 0;
     var radius = 0;
+    // Narrow panels (phones) show one card at a time, under the globe. The
+    // breakpoint lives in the stylesheet as --globe-layout.
+    var compact = false;
     var oceanCache = null;
 
     // ----- Rotation state ------------------------------------------------
@@ -89,6 +92,15 @@
     var hovering = false;
     var lastInteraction = performance.now() - 3000;
     var lastFocus = performance.now() + 1400;
+    // Compact layout: the card follows the tour until the reader drags.
+    var followTour = true;
+    var featuredIndex = -1;
+    // Wide layout: the column each card was last shown in, and the cards that
+    // were just put in place without sliding (see layoutAnnotations).
+    var cardSides = [];
+    var placing = [];
+    // The spot each place name used in the last frame (-1: none).
+    var labelSpots = [];
 
     // ----- Annotation DOM ------------------------------------------------
     var callouts = [];
@@ -102,10 +114,28 @@
       title.className = 'activity-globe-callout__title';
       title.textContent = location.title;
       callout.appendChild(title);
+      // Optional Chinese title / date / city (title_zh, date_zh, city_zh).
+      if (location.title_zh) {
+        var titleZh = document.createElement('span');
+        titleZh.className = 'activity-globe-callout__title-zh';
+        titleZh.lang = 'zh-CN';
+        titleZh.textContent = location.title_zh;
+        callout.appendChild(titleZh);
+      }
       if (location.date) {
         var date = document.createElement('span');
         date.className = 'activity-globe-callout__date';
-        date.textContent = location.date;
+        // Each language stays on one line; a narrow card breaks at the dot.
+        var dateEn = document.createElement('span');
+        dateEn.textContent = location.date;
+        date.appendChild(dateEn);
+        if (location.date_zh) {
+          date.appendChild(document.createTextNode(' · '));
+          var dateZh = document.createElement('span');
+          dateZh.lang = 'zh-CN';
+          dateZh.textContent = location.date_zh;
+          date.appendChild(dateZh);
+        }
         callout.appendChild(date);
       }
       labelsLayer.appendChild(callout);
@@ -114,6 +144,13 @@
       var place = document.createElement('span');
       place.className = 'activity-globe-place';
       place.textContent = location.city || location.title;
+      if (location.city_zh) {
+        var placeZh = document.createElement('span');
+        placeZh.className = 'activity-globe-place__zh';
+        placeZh.lang = 'zh-CN';
+        placeZh.textContent = location.city_zh;
+        place.appendChild(placeZh);
+      }
       labelsLayer.appendChild(place);
       places[index] = place;
     });
@@ -187,7 +224,7 @@
 
     function resize() {
       var rect = root.getBoundingClientRect();
-      width = Math.max(320, Math.round(rect.width));
+      width = Math.max(240, Math.round(rect.width));
       height = Math.max(380, Math.round(rect.height));
       dpr = window.devicePixelRatio || 1;
 
@@ -198,12 +235,19 @@
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
       arrowsSvg.setAttribute('viewBox', '0 0 ' + width + ' ' + height);
+      compact = window.getComputedStyle(root).getPropertyValue('--globe-layout').trim() === 'compact';
       centerX = width / 2;
-      centerY = height * (width < 640 ? 0.46 : 0.52);
-      radius = Math.min(
-        width * (width < 640 ? 0.34 : 0.33),
-        height * (width < 640 ? 0.3 : 0.4)
-      );
+      if (compact) {
+        // Globe at the top; the lower part of the panel holds the card.
+        radius = Math.min(width * 0.36, (height - 190) / 2.32);
+        centerY = radius * 1.16 + 16;
+      } else {
+        centerY = height * (width < 640 ? 0.46 : 0.52);
+        radius = Math.min(
+          width * (width < 640 ? 0.34 : 0.33),
+          height * (width < 640 ? 0.3 : 0.4)
+        );
+      }
 
       projection.scale(radius).translate([centerX, centerY]);
       oceanCache = null;
@@ -211,6 +255,7 @@
 
     // ----- Pointer / inertia --------------------------------------------
     function onPointerDown(event) {
+      followTour = false;
       drag = {
         id: event.pointerId,
         x: event.clientX,
@@ -287,6 +332,7 @@
         target.lon = locations[focusIndex].lon;
         target.lat = targetLat(focusIndex);
         lastFocus = now;
+        followTour = true;
       }
 
       if (!settled) {
@@ -436,6 +482,9 @@
 
     // ----- Annotation layout (place names + callouts + arrows) -----------
     function layoutAnnotations(points) {
+      placing.forEach(function (el) { el.classList.remove('is-placing'); });
+      placing = [];
+
       var visible = [];
       points.forEach(function (point) {
         point.visible = point.visible && point.depth > 0.05;
@@ -444,34 +493,206 @@
         point.path = arrowPaths[point.index];
         point.calloutWidth = point.callout.offsetWidth || 180;
         point.calloutHeight = point.callout.offsetHeight || 48;
-        point.side = point.visible && point.x < centerX ? -1 : 1;
+        point.side = point.x < centerX ? -1 : 1;
+        // A marker near the middle keeps its card where it was, so the card
+        // doesn't swap columns back and forth.
+        if (cardSides[point.index] && Math.abs(point.x - centerX) < radius * 0.12) {
+          point.side = cardSides[point.index];
+        }
         point.targetY = point.y;
         if (point.visible) visible.push(point);
       });
 
-      distribute(visible.filter(function (p) { return p.side < 0; }));
-      distribute(visible.filter(function (p) { return p.side >= 0; }));
+      var shown = visible;
+      if (compact) {
+        var featured = pickFeatured(visible);
+        shown = featured ? [featured] : [];
+        if (featured) placeBelow(featured);
+      } else {
+        balanceSides(visible);
+        distribute(visible.filter(function (p) { return p.side < 0; }));
+        distribute(visible.filter(function (p) { return p.side >= 0; }));
+      }
+
+      placeLabels(shown, visible, compact);
 
       points.forEach(function (point) {
-        if (!point.visible) {
+        if (shown.indexOf(point) < 0) {
           point.callout.classList.remove('is-visible');
           point.place.classList.remove('is-visible');
+          // The label's opacity is set inline while shown, so clear it too.
+          point.place.style.opacity = '0';
           point.path.style.opacity = '0';
           return;
         }
 
-        // On-globe English place name, hugging the marker.
-        point.place.style.left = point.x + 'px';
-        point.place.style.top = (point.y - 16) + 'px';
-        point.place.classList.add('is-visible');
-        point.place.style.opacity = Math.min(1, 0.25 + point.depth).toString();
+        // On-globe bilingual place name beside the marker.
+        if (point.labelSpot) {
+          point.place.style.left = r1(point.labelSpot.x) + 'px';
+          point.place.style.top = r1(point.labelSpot.y) + 'px';
+          point.place.classList.add('is-visible');
+          point.place.style.opacity = Math.min(1, 0.25 + point.depth).toString();
+        } else {
+          point.place.classList.remove('is-visible');
+          point.place.style.opacity = '0';
+        }
 
         // Tethered callout card.
         point.callout.style.left = point.labelX + 'px';
         point.callout.style.top = point.labelY + 'px';
+        // A card that appears or changes columns fades in at its new place
+        // instead of sliding across the globe.
+        var changedSide = !compact && cardSides[point.index] !== point.side;
+        if (!point.callout.classList.contains('is-visible') || changedSide) {
+          point.callout.classList.add('is-placing');
+          placing.push(point.callout);
+        }
+        cardSides[point.index] = point.side;
         point.callout.classList.add('is-visible');
         drawArrow(point);
       });
+    }
+
+    // Place names sit above their marker, or beside / below / diagonally off
+    // it when that spot would cover another name, a marker or a card. With no free spot a name
+    // is left out (its card still says where), unless it is the only one
+    // shown. A city shared by two events is named once. Earlier locations in
+    // the list choose first, and a name keeps its spot until that spot is
+    // clearly covered, so names don't hop or flicker as the globe turns.
+    function placeLabels(items, visible, alwaysShow) {
+      var taken = visible.map(function (p) {
+        return { left: p.x - 7, top: p.y - 7, right: p.x + 7, bottom: p.y + 7, owner: p };
+      });
+      items.forEach(function (p) {
+        taken.push({
+          left: p.labelX - p.calloutWidth / 2,
+          top: p.labelY - p.calloutHeight / 2,
+          right: p.labelX + p.calloutWidth / 2,
+          bottom: p.labelY + p.calloutHeight / 2
+        });
+      });
+      var named = {};
+      items.slice().sort(function (a, b) { return a.index - b.index; }).forEach(function (point) {
+        point.labelSpot = null;
+        var last = labelSpots[point.index];
+        labelSpots[point.index] = -1;
+        var key = point.location.lat + ',' + point.location.lon;
+        if (named[key]) return;
+        var w = point.place.offsetWidth;
+        var h = point.place.offsetHeight;
+        // Above, right, left, the four diagonals, then below.
+        var spots = [
+          { x: point.x - w / 2, y: point.y - 14 - h },
+          { x: point.x + 12, y: point.y - h / 2 },
+          { x: point.x - 12 - w, y: point.y - h / 2 },
+          { x: point.x + 6, y: point.y - 6 - h },
+          { x: point.x - 6 - w, y: point.y - 6 - h },
+          { x: point.x + 6, y: point.y + 6 },
+          { x: point.x - 6 - w, y: point.y + 6 },
+          { x: point.x - w / 2, y: point.y + 12 }
+        ];
+        // Above when it is free, else wherever the name already is, else the
+        // first free spot in the list.
+        var order = [0, 1, 2, 3, 4, 5, 6, 7];
+        if (last > 0) order = [0, last].concat(order.filter(function (k) { return k !== 0 && k !== last; }));
+        var fallback = null;
+        for (var i = 0; i < order.length; i += 1) {
+          var spot = spots[order[i]];
+          var box = {
+            left: spot.x - 2,
+            top: spot.y - 1,
+            right: spot.x + w + 2,
+            bottom: spot.y + h + 1
+          };
+          if (box.left < 0 || box.top < 0 || box.right > width || box.bottom > height) continue;
+          if (!fallback) fallback = spot;
+          // The current spot only counts as covered past a few pixels, and a
+          // name only moves back above once there is a little room to spare.
+          var slack = 0;
+          if (order[i] === last) slack = 4;
+          else if (order[i] === 0 && last > 0) slack = -4;
+          var probe = {
+            left: box.left + slack,
+            top: box.top + slack,
+            right: box.right - slack,
+            bottom: box.bottom - slack
+          };
+          if (taken.some(function (t) { return t.owner !== point && overlaps(t, probe); })) continue;
+          taken.push(box);
+          point.labelSpot = spot;
+          labelSpots[point.index] = order[i];
+          named[key] = true;
+          return;
+        }
+        if (alwaysShow) point.labelSpot = fallback;
+      });
+    }
+
+    function overlaps(a, b) {
+      return a.left < b.right && b.left < a.right && a.top < b.bottom && b.top < a.bottom;
+    }
+
+    // Compact layout: the tour's current stop while the tour runs, otherwise
+    // the marker nearest the middle of the globe.
+    function pickFeatured(visible) {
+      var focus = null;
+      var current = null;
+      var nearest = null;
+      visible.forEach(function (point) {
+        if (point.index === focusIndex) focus = point;
+        if (point.index === featuredIndex) current = point;
+        if (!nearest || point.depth > nearest.depth) nearest = point;
+      });
+      var pick = nearest;
+      if (followTour && focus) {
+        pick = focus;
+      } else if (current && nearest && nearest.depth - current.depth < 0.02) {
+        // Keep the current card until another marker is clearly nearer, so
+        // it doesn't flicker between neighbouring cities.
+        pick = current;
+      }
+      featuredIndex = pick ? pick.index : -1;
+      return pick;
+    }
+
+    // Compact layout: centre the card under the globe, clear of the hint.
+    function placeBelow(point) {
+      var hint = root.querySelector('.activity-globe-hint');
+      var floor = hint ? hint.offsetTop - 10 : height - 16;
+      var top = Math.min(centerY + radius * 1.16 + 12, floor - point.calloutHeight);
+      point.labelX = centerX;
+      point.labelY = Math.max(8, top) + point.calloutHeight / 2;
+    }
+
+    // Wide layout: when one column holds more cards than the panel can fit,
+    // move the cards whose markers sit nearest the other side across.
+    function balanceSides(items) {
+      var room = height - 2 * (width < 640 ? 12 : 22);
+      function columnHeight(side) {
+        var total = 0;
+        var count = 0;
+        items.forEach(function (p) {
+          if (p.side === side) {
+            total += p.calloutHeight;
+            count += 1;
+          }
+        });
+        return total + Math.max(0, count - 1) * 12;
+      }
+      for (var guard = 0; guard < items.length; guard += 1) {
+        var left = columnHeight(-1);
+        var right = columnHeight(1);
+        var from = 0;
+        if (left > room && left > right) from = -1;
+        else if (right > room && right > left) from = 1;
+        if (!from) return;
+        var mover = null;
+        items.forEach(function (p) {
+          if (p.side === from && (!mover || from * (p.x - mover.x) < 0)) mover = p;
+        });
+        if (!mover || columnHeight(-from) + mover.calloutHeight + 12 >= Math.max(left, right)) return;
+        mover.side = -from;
+      }
     }
 
     function distribute(items) {
@@ -516,14 +737,26 @@
 
     function drawArrow(point) {
       var half = point.calloutWidth / 2;
-      var edgeX = point.labelX - point.side * (half + 5);
-      var edgeY = point.labelY;
-      var c1x = edgeX - point.side * 38;
-      var c2x = point.x + point.side * 26;
-      var d = 'M ' + r1(edgeX) + ' ' + r1(edgeY) +
-        ' C ' + r1(c1x) + ' ' + r1(edgeY) + ' ' +
-        r1(c2x) + ' ' + r1(point.y) + ' ' +
-        r1(point.x) + ' ' + r1(point.y);
+      var d;
+      if (compact) {
+        // From the top edge of the card up to the marker.
+        var startX = clamp(point.x, point.labelX - half + 16, point.labelX + half - 16);
+        var startY = point.labelY - point.calloutHeight / 2 - 5;
+        var bend = clamp((startY - point.y) * 0.45, 12, 34);
+        d = 'M ' + r1(startX) + ' ' + r1(startY) +
+          ' C ' + r1(startX) + ' ' + r1(startY - bend) + ' ' +
+          r1(point.x) + ' ' + r1(point.y + bend) + ' ' +
+          r1(point.x) + ' ' + r1(point.y);
+      } else {
+        var edgeX = point.labelX - point.side * (half + 5);
+        var edgeY = point.labelY;
+        var c1x = edgeX - point.side * 38;
+        var c2x = point.x + point.side * 26;
+        d = 'M ' + r1(edgeX) + ' ' + r1(edgeY) +
+          ' C ' + r1(c1x) + ' ' + r1(edgeY) + ' ' +
+          r1(c2x) + ' ' + r1(point.y) + ' ' +
+          r1(point.x) + ' ' + r1(point.y);
+      }
       point.path.setAttribute('d', d);
       point.path.style.opacity = Math.min(0.95, 0.35 + point.depth * 0.6).toString();
     }

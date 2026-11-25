@@ -3,6 +3,10 @@
 // =============================================================
 
 html {
+  // 17px base (browser default 16px × 106.25%). Every rem-based size and
+  // spacing scales with it, so the whole site reads slightly larger while
+  // still honouring the reader's own browser font-size preference.
+  font-size: 106.25%;
   scroll-behavior: smooth;
 
   // Custom scrollbar — thin, accent-tinted

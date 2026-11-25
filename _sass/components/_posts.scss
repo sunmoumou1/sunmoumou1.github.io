@@ -1,0 +1,1093 @@
+// =============================================================
+// Posts page — Flip (a pile of paper cards) and Desk (cards laid out)
+// =============================================================
+//
+// Markup: _pages/blogs.md · Behaviour: assets/js/posts-deck.js
+// The paper stays light in both themes, like the Home print, so the ink
+// on it uses fixed colours instead of the theme variables.
+
+$paper: #fffdf9;
+$paper-edge: #e5ddd2;
+$paper-mat: #f4eee5;
+$ink: #2a1d20;
+$ink-soft: #5e4b4f;
+$ink-muted: #786b63;
+$ink-zh: #8a7c74;
+$ink-accent: #8a1538;
+
+$turn-duration: 0.85s; // keep in sync with TURN_MS in posts-deck.js
+$turn-ease: cubic-bezier(0.32, 0.08, 0.24, 1);
+$settle-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+// Fine felt grain for the desk surface (tiny SVG noise tile).
+$felt-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.36 0 0 0 0 0.27 0 0 0 0 0.2 0 0 0 0.12 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+$felt-grain-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 0.95 0 0 0 0 0.92 0 0 0 0.07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+
+// -------------------------------------------------------------
+// Toolbar — post count and the Flip / Desk switch
+// -------------------------------------------------------------
+
+.posts-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.posts-count {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  .zh {
+    margin-left: 0.6em;
+    letter-spacing: 0.06em;
+  }
+}
+
+.posts-count-num {
+  color: var(--text-primary);
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  vertical-align: -0.06em;
+}
+
+.posts-view-toggle {
+  display: inline-flex;
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-full);
+  background: var(--bg-card);
+  box-shadow: var(--shadow-sm);
+}
+
+.posts-view-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 1.05rem;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  line-height: 1.2;
+  cursor: pointer;
+  transition: background-color var(--transition-fast), color var(--transition-fast),
+    box-shadow var(--transition-fast);
+
+  i {
+    font-size: 0.85em;
+    opacity: 0.85;
+  }
+
+  .zh {
+    margin-left: 0;
+    color: inherit;
+    font-size: 0.92em;
+    opacity: 0.78;
+  }
+
+  &:hover {
+    color: var(--accent);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  &[aria-pressed="true"] {
+    background: var(--accent);
+    color: #fff;
+    box-shadow: 0 1px 2px rgba(42, 29, 32, 0.12), 0 6px 14px -6px rgba(138, 21, 56, 0.55);
+  }
+}
+
+[data-bs-theme="dark"] .posts-view-btn[aria-pressed="true"] {
+  color: #1a1516;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+// -------------------------------------------------------------
+// The desk — a felt surface shared by both views
+// -------------------------------------------------------------
+
+.posts-surface {
+  --surface-ink: #5b4d46;
+  --surface-ink-muted: #85766d;
+  --surface-line: rgba(91, 70, 58, 0.16);
+  position: relative;
+  isolation: isolate;
+  padding: clamp(1.75rem, 4.5vw, 3.75rem) clamp(1rem, 4.5vw, 3.75rem);
+  border-radius: 0.875rem;
+  background-color: #ebe4da;
+  background-image:
+    radial-gradient(120% 80% at 12% 0%, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0) 58%),
+    radial-gradient(90% 70% at 100% 100%, rgba(110, 80, 60, 0.09), rgba(110, 80, 60, 0) 62%),
+    $felt-grain;
+  box-shadow:
+    inset 0 0 0 1px rgba(90, 64, 50, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    inset 0 -30px 60px -50px rgba(80, 55, 40, 0.35);
+}
+
+[data-bs-theme="dark"] .posts-surface {
+  --surface-ink: #e0d3cd;
+  --surface-ink-muted: #a6958e;
+  --surface-line: rgba(255, 240, 230, 0.14);
+  background-color: #241d1e;
+  background-image:
+    radial-gradient(120% 80% at 12% 0%, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0) 58%),
+    radial-gradient(90% 70% at 100% 100%, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0) 62%),
+    $felt-grain-dark;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+// Cover used when a post has no image, or its image fails to load:
+// a calendar-style date stamp on the mat.
+.post-cover-fallback {
+  position: absolute;
+  inset: 0;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.15rem;
+  background:
+    radial-gradient(circle at 50% 48%, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0) 58%),
+    repeating-linear-gradient(135deg, #f4eee5 0 12px, #f0e8dd 12px 24px);
+  color: $ink-muted;
+  font-family: 'Source Serif 4', Georgia, serif;
+  line-height: 1;
+  text-align: center;
+
+  span {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  strong {
+    margin: 0.2rem 0 0.35rem;
+    color: $ink-accent;
+    font-size: clamp(3rem, 6vw, 4.5rem);
+    font-weight: 400;
+    font-style: italic;
+    letter-spacing: -0.02em;
+  }
+}
+
+.is-missing > .post-cover-fallback {
+  display: flex;
+}
+
+.is-missing > img {
+  display: none;
+}
+
+// -------------------------------------------------------------
+// Flip view — the pile and its page turn
+// -------------------------------------------------------------
+
+.posts-flip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.posts-deck {
+  // How far each card underneath peeks out from the one above it.
+  --pile-x: 7px;
+  --pile-y: 8px;
+  position: relative;
+  display: grid;
+  width: 100%;
+  max-width: 56rem;
+  padding: 0 calc(var(--pile-x) * 2.6) calc(var(--pile-y) * 2.6) 0;
+  border-radius: 6px;
+  outline: none;
+  // The page turns about its left edge, seen from slightly to the left.
+  perspective: 2600px;
+  perspective-origin: 0% 50%;
+  cursor: pointer;
+  touch-action: pan-y;
+
+  &:focus-visible {
+    outline: 2px dashed var(--accent);
+    outline-offset: 12px;
+  }
+}
+
+.post-card {
+  --dx: 0px;
+  --dy: 0px;
+  --rz: 0deg;
+  --ry: 0deg;
+  --delay: 0ms;
+  position: relative;
+  grid-area: 1 / 1;
+  display: grid;
+  grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+  min-height: 24rem;
+  border: 1px solid $paper-edge;
+  border-radius: 3px;
+  background-color: $paper;
+  color: $ink;
+  box-shadow:
+    0 1px 2px rgba(60, 40, 30, 0.06),
+    0 4px 10px -6px rgba(60, 40, 30, 0.2);
+  transform-origin: 0% 50%;
+  transform: translate3d(var(--dx), var(--dy), 0) rotateZ(var(--rz)) rotateY(var(--ry));
+  rotate: y 0deg;
+  backface-visibility: hidden;
+  transition:
+    transform 0.75s $settle-ease var(--delay),
+    rotate 0.45s $settle-ease,
+    opacity 0.35s ease var(--delay),
+    visibility 0s linear var(--delay),
+    background-color 0.5s ease var(--delay),
+    box-shadow 0.5s ease var(--delay);
+
+  // Shading that deepens as the page swings away from the light.
+  &::before {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    border-radius: inherit;
+    background: linear-gradient(90deg, rgba(50, 30, 20, 0) 0%, rgba(50, 30, 20, 0.05) 40%, rgba(50, 30, 20, 0.24) 100%);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.6s ease var(--delay);
+    content: '';
+  }
+
+  &.is-top {
+    box-shadow:
+      0 2px 4px rgba(60, 40, 30, 0.05),
+      0 18px 36px -18px rgba(60, 40, 30, 0.32),
+      0 40px 70px -40px rgba(60, 40, 30, 0.3);
+  }
+
+  // Sheets lower in the pile sit a little offset, askew and in shade.
+  &[data-depth="1"] {
+    --dx: var(--pile-x);
+    --dy: var(--pile-y);
+    --rz: 0.45deg;
+    background-color: #fbf8f2;
+  }
+
+  &[data-depth="2"] {
+    --dx: calc(var(--pile-x) * 1.85);
+    --dy: calc(var(--pile-y) * 1.85);
+    --rz: -0.35deg;
+    background-color: #f8f3ec;
+  }
+
+  &[data-depth="3"] {
+    --dx: calc(var(--pile-x) * 2.6);
+    --dy: calc(var(--pile-y) * 2.6);
+    --rz: 0.25deg;
+    background-color: #f4efe6;
+  }
+
+  // Deeper sheets wait, hidden, under the third one.
+  &.is-buried {
+    opacity: 0;
+    transition:
+      transform 0.75s $settle-ease var(--delay),
+      rotate 0.45s $settle-ease,
+      opacity 0.3s ease calc(var(--delay) + 0.45s),
+      visibility 0s linear var(--delay),
+      background-color 0.5s ease var(--delay),
+      box-shadow 0.5s ease var(--delay);
+  }
+
+  // Turned pages swing about the left edge and leave the pile.
+  &.is-turned {
+    --ry: -100deg;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+      transform $turn-duration $turn-ease var(--delay),
+      rotate 0.45s $settle-ease,
+      opacity 0.2s ease calc(var(--delay) + #{$turn-duration * 0.6}),
+      visibility 0s linear calc(var(--delay) + #{$turn-duration}),
+      background-color 0.5s ease var(--delay),
+      box-shadow $turn-duration ease var(--delay);
+
+    &::before {
+      opacity: 1;
+    }
+  }
+}
+
+// Hovering the forward part of the card lifts the page a little.
+.posts-deck[data-zone="next"] .post-card.is-top {
+  rotate: y -4deg;
+
+  &::before {
+    opacity: 0.35;
+  }
+
+  .post-card-curl {
+    --curl: 2.75rem;
+  }
+}
+
+.post-card-media {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.85rem 0 0.85rem 0.85rem;
+  padding: clamp(1rem, 2.4vw, 1.75rem);
+  overflow: hidden;
+  border: 1px solid #ebe3d7;
+  border-radius: 2px;
+  background: $paper-mat;
+
+  // The cover sits on the mat like a small photographic print.
+  img {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 19rem;
+    border: 5px solid #fff;
+    box-shadow: 0 1px 2px rgba(60, 40, 30, 0.12), 0 10px 22px -12px rgba(60, 40, 30, 0.35);
+  }
+}
+
+.post-card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+  padding: clamp(1.5rem, 3vw, 2.4rem) clamp(1.4rem, 3vw, 2.5rem);
+}
+
+.post-card-date {
+  color: $ink-muted;
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+
+  .zh {
+    margin-left: 0.75em;
+    padding-left: 0.75em;
+    border-left: 1px solid $paper-edge;
+    color: $ink-zh;
+    font-size: 1em;
+    letter-spacing: 0.05em;
+  }
+}
+
+.post-card-title {
+  margin: 0.85rem 0 0;
+  color: $ink;
+  font-size: clamp(1.35rem, 2.1vw, 1.75rem);
+  letter-spacing: -0.01em;
+  line-height: 1.22;
+
+  a {
+    color: inherit;
+    background-image: linear-gradient($ink-accent, $ink-accent);
+
+    &:hover {
+      color: $ink-accent;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $ink-accent;
+      outline-offset: 3px;
+    }
+  }
+
+  .zh-line {
+    margin-top: 0.5em;
+    color: $ink-zh;
+    font-size: 0.64em;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    line-height: 1.55;
+  }
+
+  // A short accent rule under the title.
+  &::after {
+    display: block;
+    width: 2rem;
+    height: 2px;
+    margin-top: 1.1rem;
+    border-radius: 1px;
+    background: $ink-accent;
+    content: '';
+  }
+}
+
+.post-card .post-card-excerpt {
+  max-width: 34rem;
+  margin: 1.15rem 0 0;
+  color: $ink-soft;
+  font-size: 0.98rem;
+  line-height: 1.7;
+}
+
+.post-card .post-card-excerpt-zh {
+  margin-top: 0.5rem;
+  color: $ink-zh;
+  font-size: 0.92rem;
+  line-height: 1.8;
+}
+
+.post-card-body > p:last-of-type {
+  margin-bottom: 1.5rem;
+}
+
+.post-card-read {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-top: auto;
+  padding: 0.55rem 1.15rem;
+  border: 1px solid rgba(138, 21, 56, 0.32);
+  border-radius: var(--radius-full);
+  background-image: none;
+  color: $ink-accent;
+  font-size: 0.88rem;
+  font-weight: 600;
+  line-height: 1.3;
+  transition: background-color var(--transition-fast), border-color var(--transition-fast),
+    color var(--transition-fast);
+
+  .zh {
+    margin-left: 0;
+    color: inherit;
+    font-size: 0.92em;
+    opacity: 0.8;
+  }
+
+  i {
+    font-size: 0.85em;
+    transition: transform var(--transition-base);
+  }
+
+  &:hover {
+    border-color: $ink-accent;
+    background-color: $ink-accent;
+    color: #fff;
+
+    i {
+      transform: translateX(3px);
+    }
+  }
+
+  &:focus-visible {
+    outline: 2px solid $ink-accent;
+    outline-offset: 3px;
+  }
+}
+
+// Dog-eared corner: the folded flap (upper-left half) shows the back of
+// the sheet; the lower-right half shows the sheet underneath.
+.post-card-curl {
+  --curl: 1.6rem;
+  position: absolute;
+  right: -1px;
+  bottom: -1px;
+  z-index: 2;
+  width: var(--curl);
+  height: var(--curl);
+  background:
+    linear-gradient(to top left, #e7e0d5 0 50%, rgba(231, 224, 213, 0) 50%),
+    linear-gradient(to bottom right, #fbf7f0 0%, #f1eadf 40%, #e1d7c9 50%);
+  box-shadow: -2px -2px 4px -1px rgba(60, 40, 30, 0.14);
+  pointer-events: none;
+  transition: width 0.35s $settle-ease, height 0.35s $settle-ease;
+}
+
+// Chevrons on the card edge show which way a click will turn.
+.posts-edge {
+  position: absolute;
+  top: 50%;
+  z-index: 1100;
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  margin-top: calc(-1.375rem - var(--pile-y) * 1.3);
+  border-radius: 50%;
+  background: rgba(255, 253, 249, 0.96);
+  box-shadow: 0 2px 6px rgba(60, 40, 30, 0.12), 0 10px 24px -10px rgba(60, 40, 30, 0.35);
+  color: $ink-accent;
+  font-size: 0.9rem;
+  opacity: 0;
+  scale: 0.8;
+  pointer-events: none;
+  transition: opacity 0.2s ease, scale 0.25s $settle-ease;
+}
+
+.posts-edge--prev {
+  left: -1.375rem;
+}
+
+.posts-edge--next {
+  right: calc(var(--pile-x) * 2.6 - 1.375rem);
+}
+
+.posts-deck[data-zone="prev"] .posts-edge--prev,
+.posts-deck[data-zone="next"] .posts-edge--next {
+  opacity: 1;
+  scale: 1;
+}
+
+// Controls — previous / progress / next
+.posts-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.6rem, 2vw, 1.1rem);
+  width: 100%;
+  max-width: 34rem;
+  margin-top: clamp(1.75rem, 3.5vw, 2.5rem);
+}
+
+.posts-nav {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border: 1px solid rgba(91, 70, 58, 0.14);
+  border-radius: 50%;
+  background: $paper;
+  box-shadow: 0 1px 2px rgba(60, 40, 30, 0.08), 0 6px 14px -8px rgba(60, 40, 30, 0.3);
+  color: $ink;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color var(--transition-fast), border-color var(--transition-fast),
+    color var(--transition-fast), transform var(--transition-fast);
+
+  &:hover {
+    border-color: $ink-accent;
+    background: $ink-accent;
+    color: #fff;
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: scale(0.96);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+}
+
+.posts-counter {
+  flex: none;
+  min-width: 1.6em;
+  color: var(--surface-ink-muted);
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 0.95rem;
+  font-variant-numeric: tabular-nums lining-nums;
+  text-align: center;
+}
+
+.posts-counter-current {
+  color: var(--surface-ink);
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.posts-progress {
+  display: flex;
+  flex: 1 1 auto;
+  gap: 5px;
+  min-width: 5rem;
+  max-width: 16rem;
+}
+
+// Each segment is a "go to post n" button with a generous hit area.
+.posts-progress-seg {
+  position: relative;
+  flex: 1 1 0;
+  height: 1.5rem;
+  padding: 0;
+  border: 0;
+  border-radius: 3px;
+  background: none;
+  cursor: pointer;
+
+  &::before {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    left: 0;
+    height: 3px;
+    margin-top: -1.5px;
+    border-radius: 2px;
+    background: var(--surface-line);
+    transition: background-color 0.3s ease, opacity 0.3s ease, height 0.3s ease, margin 0.3s ease;
+    content: '';
+  }
+
+  &.is-past::before {
+    background: var(--accent);
+    opacity: 0.4;
+  }
+
+  &.is-current::before {
+    height: 5px;
+    margin-top: -2.5px;
+    background: var(--accent);
+    opacity: 1;
+  }
+
+  &:hover::before {
+    background: var(--accent);
+    opacity: 0.7;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+}
+
+.posts-hint {
+  max-width: none;
+  margin: 1rem 0 0;
+  color: var(--surface-ink-muted);
+  font-size: 0.8rem;
+  text-align: center;
+  text-wrap: balance;
+
+  .zh {
+    color: inherit;
+    opacity: 0.85;
+  }
+}
+
+.posts-hint-touch {
+  display: none;
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .posts-hint-pointer {
+    display: none;
+  }
+
+  .posts-hint-touch {
+    display: inline;
+  }
+
+  .posts-edge {
+    display: none;
+  }
+}
+
+.posts-live {
+  @include visually-hidden;
+}
+
+// Switching to Flip: the pile settles onto the desk.
+@keyframes posts-pile-in {
+  from {
+    opacity: 0;
+    translate: 0 14px;
+    scale: 0.985;
+  }
+}
+
+.posts-flip.is-entering .posts-deck {
+  animation: posts-pile-in 0.6s $settle-ease backwards;
+}
+
+// -------------------------------------------------------------
+// Desk view — every card laid out
+// -------------------------------------------------------------
+
+// Cards wrap in centred rows, so an unfinished last row stays balanced.
+.desk-grid {
+  --desk-cols: 3;
+  --desk-gap-x: clamp(1.5rem, 3.5vw, 2.75rem);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+  gap: clamp(2.25rem, 4vw, 3.25rem) var(--desk-gap-x);
+  margin: 0;
+  padding: 0.5rem 0 0;
+  list-style: none;
+}
+
+.desk-item {
+  position: relative;
+  width: calc((100% - (var(--desk-cols) - 1) * var(--desk-gap-x)) / var(--desk-cols));
+  max-width: none;
+  rotate: var(--tilt, 0deg);
+  translate: 0 var(--nudge, 0px);
+  transition: rotate 0.4s $settle-ease, translate 0.4s $settle-ease, scale 0.4s $settle-ease;
+
+  // Picking a card up: it straightens and lifts off the desk.
+  &:hover,
+  &:focus-within {
+    z-index: 2;
+    rotate: 0deg;
+    translate: 0 calc(var(--nudge, 0px) - 6px);
+    scale: 1.035;
+  }
+}
+
+.desk-item--wine {
+  --tape: rgba(176, 72, 102, 0.3);
+}
+
+.desk-item--kraft {
+  --tape: rgba(206, 176, 128, 0.55);
+}
+
+.desk-item--slate {
+  --tape: rgba(118, 140, 156, 0.36);
+}
+
+.desk-card {
+  position: relative;
+  display: block;
+  padding: 0.65rem 0.65rem 1.1rem;
+  border: 1px solid $paper-edge;
+  border-radius: 3px;
+  background: $paper;
+  background-image: none;
+  box-shadow:
+    0 1px 1px rgba(60, 40, 30, 0.05),
+    0 8px 16px -10px rgba(60, 40, 30, 0.28),
+    0 22px 36px -24px rgba(60, 40, 30, 0.35);
+  color: $ink;
+  transition: box-shadow 0.4s $settle-ease;
+
+  &:hover,
+  &:focus-visible {
+    box-shadow:
+      0 2px 3px rgba(60, 40, 30, 0.06),
+      0 18px 30px -14px rgba(60, 40, 30, 0.32),
+      0 40px 60px -30px rgba(60, 40, 30, 0.38);
+    color: $ink;
+  }
+
+  &:focus-visible {
+    outline: 3px solid $ink-accent;
+    outline-offset: 4px;
+  }
+}
+
+// Washi tape holding the card to the desk.
+.desk-tape {
+  position: absolute;
+  top: -0.75rem;
+  left: 50%;
+  z-index: 2;
+  width: 5.5rem;
+  height: 1.5rem;
+  translate: -50% 0;
+  rotate: calc(var(--tilt, 0deg) * -1.5 + 1deg);
+  background-color: var(--tape, rgba(206, 176, 128, 0.55));
+  background-image: linear-gradient(90deg, rgba(255, 255, 255, 0.16) 50%, rgba(255, 255, 255, 0) 50%);
+  background-size: 7px 100%;
+  clip-path: polygon(0 8%, 5% 0, 95% 0, 100% 10%, 97% 28%, 100% 48%, 96.5% 68%, 100% 88%, 95% 100%,
+    5% 100%, 0 92%, 3% 72%, 0 52%, 3.5% 32%);
+  opacity: 0.92;
+}
+
+.desk-photo {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  border: 1px solid #ece5da;
+  background: $paper-mat;
+
+  img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    // Slightly left of centre and above the middle: slide titles and
+    // faces usually sit there. A post can override it with image_position.
+    object-position: 20% 28%;
+    transition: scale 0.6s $settle-ease;
+  }
+}
+
+.desk-card:hover .desk-photo img {
+  scale: 1.04;
+}
+
+.desk-photo .post-cover-fallback {
+  span {
+    font-size: clamp(0.58rem, 2.1vw, 0.74rem);
+  }
+
+  strong {
+    margin: 0.1rem 0 0.25rem;
+    font-size: clamp(1.9rem, 8.5vw, 2.75rem);
+  }
+}
+
+.desk-caption {
+  display: block;
+  padding: 0.9rem 0.35rem 0;
+}
+
+.desk-date {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 0.6em;
+  color: $ink-muted;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+
+  .zh {
+    margin-left: 0;
+    color: $ink-zh;
+    font-size: 1em;
+    letter-spacing: 0.04em;
+  }
+}
+
+.desk-title {
+  display: block;
+  margin-top: 0.45rem;
+  color: $ink;
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 1.08rem;
+  font-weight: 700;
+  letter-spacing: -0.005em;
+  line-height: 1.3;
+  text-wrap: balance;
+  transition: color var(--transition-fast);
+}
+
+.desk-card:hover .desk-title {
+  color: $ink-accent;
+}
+
+.desk-caption .desk-title-zh {
+  display: block;
+  margin: 0.35rem 0 0;
+  color: $ink-zh;
+  font-size: 0.86rem;
+  letter-spacing: 0.03em;
+  line-height: 1.6;
+}
+
+// Switching to Desk: the cards are dealt out one by one.
+@keyframes posts-deal-in {
+  from {
+    opacity: 0;
+    translate: 0 -26px;
+    rotate: calc(var(--tilt, 0deg) * -2.5);
+    scale: 0.9;
+  }
+}
+
+.posts-desk.is-entering .desk-item {
+  animation: posts-deal-in 0.65s cubic-bezier(0.2, 0.9, 0.3, 1.15) backwards;
+  animation-delay: calc(var(--i, 0) * 60ms);
+}
+
+// -------------------------------------------------------------
+// Dark theme — the paper stays light; borders and shadows deepen
+// -------------------------------------------------------------
+
+[data-bs-theme="dark"] {
+  .post-card,
+  .desk-card {
+    border-color: #d6cbbd;
+  }
+
+  .post-card.is-top {
+    box-shadow:
+      0 2px 4px rgba(0, 0, 0, 0.2),
+      0 18px 36px -18px rgba(0, 0, 0, 0.6),
+      0 40px 70px -40px rgba(0, 0, 0, 0.6);
+  }
+
+  .desk-card {
+    box-shadow:
+      0 1px 1px rgba(0, 0, 0, 0.2),
+      0 8px 16px -10px rgba(0, 0, 0, 0.55),
+      0 22px 36px -24px rgba(0, 0, 0, 0.6);
+  }
+
+  .posts-nav {
+    border-color: transparent;
+  }
+}
+
+// -------------------------------------------------------------
+// Small screens
+// -------------------------------------------------------------
+
+@media (max-width: 860px) {
+  .desk-grid {
+    --desk-cols: 2;
+  }
+}
+
+@media (max-width: 767px) {
+  .post-card {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
+    min-height: 0;
+  }
+
+  .post-card-media {
+    height: 10rem;
+    margin: 0.55rem 0.55rem 0;
+    padding: 0.85rem;
+
+    img {
+      max-height: 100%;
+      border-width: 4px;
+    }
+  }
+
+  .post-card-body {
+    padding: 1.25rem 1.2rem 1.4rem;
+  }
+
+  .post-card-title {
+    margin-top: 0.7rem;
+    font-size: 1.22rem;
+
+    &::after {
+      margin-top: 0.9rem;
+    }
+  }
+
+  // Every card in the pile is as tall as the tallest one, so on a phone the
+  // excerpts are trimmed to a few lines; the full text is one tap away.
+  .post-card .post-card-excerpt {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+
+  .post-card .post-card-excerpt-zh {
+    -webkit-line-clamp: 2;
+    font-size: 0.9rem;
+    line-height: 1.75;
+  }
+
+  .post-card-body > p:last-of-type {
+    margin-bottom: 1.25rem;
+  }
+}
+
+@media (max-width: 560px) {
+  .posts-surface {
+    padding: 1.5rem 0.9rem 1.75rem;
+    border-radius: 0.625rem;
+  }
+
+  .posts-deck {
+    --pile-x: 4px;
+    --pile-y: 5px;
+  }
+
+  .posts-controls {
+    gap: 0.5rem;
+  }
+
+  .posts-nav {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .desk-grid {
+    --desk-gap-x: 1rem;
+    row-gap: 1.75rem;
+  }
+
+  .desk-card {
+    padding: 0.45rem 0.45rem 0.8rem;
+  }
+
+  .desk-caption {
+    padding: 0.7rem 0.15rem 0;
+  }
+
+  .desk-title {
+    font-size: 0.9rem;
+  }
+
+  .desk-caption .desk-title-zh {
+    font-size: 0.78rem;
+  }
+
+  .desk-date {
+    font-size: 0.62rem;
+  }
+
+  .desk-tape {
+    top: -0.55rem;
+    width: 3.8rem;
+    height: 1.15rem;
+  }
+}
+
+// -------------------------------------------------------------
+// Reduced motion — pages cross-fade instead of turning
+// -------------------------------------------------------------
+
+@media (prefers-reduced-motion: reduce) {
+  .post-card {
+    rotate: none !important;
+    transition: opacity 0.25s ease, visibility 0s linear 0s !important;
+
+    &::before {
+      display: none;
+    }
+  }
+
+  .post-card.is-turned {
+    --ry: 0deg;
+    transition: opacity 0.25s ease, visibility 0s linear 0.25s !important;
+  }
+
+  .desk-item,
+  .desk-card,
+  .desk-photo img,
+  .post-card-curl {
+    transition: none !important;
+  }
+
+  .posts-flip.is-entering .posts-deck,
+  .posts-desk.is-entering .desk-item {
+    animation: none !important;
+  }
+}

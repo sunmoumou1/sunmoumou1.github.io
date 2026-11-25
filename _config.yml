@@ -1,8 +1,12 @@
 # ===== 基本个人信息（用于网页展示）=====
-name: "Sencan Sun(孙森灿)"                                    
-title: "Doctoral Student in Atmospheric Science"             
-institution: "Department of Earth System Science, Tsinghua University"  
-email: ssc23@mails.tsinghua.edu.cn                   
+name: "Sencan Sun(孙森灿)"
+name_en: "Sencan Sun"                                        # 英文名（导航栏 / About / 页脚双语显示）
+name_zh: "孙森灿"                                            # 中文名
+title: "Doctoral Student in Atmospheric Science"
+title_zh: "大气科学博士研究生"                                # 头衔（中文）
+institution: "Department of Earth System Science, Tsinghua University"
+institution_zh: "清华大学地球系统科学系"                      # 单位（中文）
+email: ssc23@mails.tsinghua.edu.cn
 photo: sunsencan.png                                      
 
 # ===== 外部链接（留空则一般不显示对应图标）=====
@@ -31,12 +35,17 @@ analytics:
   google_id: ""
 
 # ===== 导航栏页面列表（决定顶部菜单项及顺序）=====
+# title_zh：导航栏英文下方显示的中文名
 nav_pages:
   - name: about          # 关于
+    title_zh: 关于
   - name: publications   # 论文/发表
+    title_zh: 论文
   - name: activities     # 学术活动
+    title_zh: 活动
   - name: blogs          # 博客
     title: Posts
+    title_zh: 文章
 
 # ===== Jekyll 构建相关全局设置 =====
 timezone: Asia/Shanghai                                      # 时区（上海，影响文章时间解析）

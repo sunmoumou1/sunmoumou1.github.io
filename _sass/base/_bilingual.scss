@@ -1,0 +1,139 @@
+// =============================================================
+// Bilingual typography — English first, Chinese translation after
+// =============================================================
+//
+// 中英双语写法（英文在前，中文译文紧随其后）：
+//
+//   1. 段落译文：在英文 <p> 之后另起一段
+//        <p>English paragraph.</p>
+//        <p class="zh" lang="zh-CN">中文段落。</p>
+//
+//   2. 同行短译：短句、标签直接接在英文后面
+//        Beijing<span class="zh" lang="zh-CN">北京</span>
+//
+//   3. 换行短译：标题、列表项、图注等，中文另起一行
+//        Title<span class="zh zh-line" lang="zh-CN">中文标题</span>
+//
+// The Chinese is set in the reader's native CJK system font (no web-font
+// download, so it also renders well where Google Fonts is unreachable), in
+// a quieter "translation ink" colour, never italic, and a touch smaller than
+// the English, so the two languages read as a pair rather than as duplicates.
+
+:root {
+  --font-zh: "PingFang SC", "Hiragino Sans GB", "Source Han Sans SC",
+    "Noto Sans CJK SC", "Noto Sans SC", "Microsoft YaHei", "WenQuanYi Micro Hei",
+    sans-serif;
+  --zh-text: #7b6a6e;
+  --zh-text-strong: #5e4b4f;
+}
+
+[data-bs-theme="dark"] {
+  --zh-text: #ab9b9f;
+  --zh-text-strong: #d6c7cb;
+}
+
+// Base — every Chinese run, inline or block.
+.zh {
+  color: var(--zh-text);
+  font-family: var(--font-zh);
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  text-transform: none;
+
+  // CJK has no true italic; a synthesised slant only looks broken.
+  &,
+  em,
+  i {
+    font-style: normal !important;
+  }
+
+  strong,
+  b {
+    color: var(--zh-text-strong);
+    font-weight: 600;
+  }
+
+  a {
+    color: var(--accent);
+  }
+}
+
+// Inline translation, sitting after the English on the same line.
+span.zh {
+  margin-left: 0.45em;
+  font-size: 0.9em;
+}
+
+// Short translation dropped onto its own line beneath the English.
+span.zh.zh-line {
+  display: block;
+  margin-top: 0.2em;
+  margin-left: 0;
+  font-size: 0.94em;
+  line-height: 1.7;
+}
+
+// Paragraph translation, directly beneath its English original. The negative
+// top margin collapses with the English paragraph's bottom margin so each
+// pair sits close together while consecutive pairs stay clearly separated.
+p.zh,
+div.zh {
+  margin-top: calc(-1 * var(--space-2));
+  margin-bottom: var(--space-6);
+  font-size: 0.95em;
+  line-height: 1.9;
+}
+
+// 65ch measures differently in the CJK font; 47em matches the width of the
+// English 65ch paragraph above it, so both blocks line up.
+p.zh {
+  max-width: 47em;
+}
+
+// Headings — the Chinese becomes a calm subtitle rather than a second shout.
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  .zh {
+    font-weight: 400;
+    letter-spacing: 0.08em;
+  }
+}
+
+h1 span.zh,
+h2 span.zh {
+  margin-left: 0.55em;
+  font-size: 0.56em;
+}
+
+h3 span.zh,
+h4 span.zh {
+  margin-left: 0.5em;
+  font-size: 0.68em;
+}
+
+h1 span.zh.zh-line,
+h2 span.zh.zh-line {
+  margin-top: 0.45em;
+  margin-left: 0;
+  font-size: 0.58em;
+  letter-spacing: 0.06em;
+  line-height: 1.5;
+}
+
+h3 span.zh.zh-line,
+h4 span.zh.zh-line {
+  margin-top: 0.35em;
+  margin-left: 0;
+  font-size: 0.72em;
+  line-height: 1.55;
+}
+
+// Translations on solid accent buttons keep the button's own ink.
+.btn .zh {
+  color: inherit;
+  opacity: 0.82;
+}

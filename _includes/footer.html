@@ -1,32 +1,32 @@
 <footer class="site-footer">
   <div class="footer-grid">
     <div>
-      <h5>About</h5>
+      <h5>About<span class="zh" lang="zh-CN">关于</span></h5>
       <p>
-        {{ site.name }}<br>
-        {{ site.title }}<br>
-        {{ site.institution | replace: ', Tsinghua University', '<br>Tsinghua University' }}
+        {{ site.name_en | default: site.name }}{% if site.name_zh %}<span class="zh" lang="zh-CN">{{ site.name_zh }}</span>{% endif %}<br>
+        {{ site.title }}{% if site.title_zh %}<span class="zh zh-line" lang="zh-CN">{{ site.title_zh }}</span>{% else %}<br>{% endif %}
+        {{ site.institution | replace: ', Tsinghua University', '<br>Tsinghua University' }}{% if site.institution_zh %}<span class="zh zh-line" lang="zh-CN">{{ site.institution_zh }}</span>{% endif %}
       </p>
     </div>
     <div>
-      <h5>Contact</h5>
+      <h5>Contact<span class="zh" lang="zh-CN">联系</span></h5>
       <p>
         <a href="mailto:{{ site.email }}"><i class="fa-solid fa-envelope"></i> {{ site.email }}</a><br>
         {% if site.links.github and site.links.github != "" %}<a href="{{ site.links.github }}"><i class="fa-brands fa-github"></i> GitHub</a><br>{% endif %}
       </p>
     </div>
     <div>
-      <h5>Links</h5>
+      <h5>Links<span class="zh" lang="zh-CN">链接</span></h5>
       <p>
-        {% if site.links.google_scholar and site.links.google_scholar != "" %}<a href="{{ site.links.google_scholar }}"><i class="ai ai-google-scholar"></i> Google Scholar</a><br>{% endif %}
+        {% if site.links.google_scholar and site.links.google_scholar != "" %}<a href="{{ site.links.google_scholar }}"><i class="ai ai-google-scholar"></i> Google Scholar<span class="zh" lang="zh-CN">谷歌学术</span></a><br>{% endif %}
         {% if site.links.researchgate and site.links.researchgate != "" %}<a href="{{ site.links.researchgate }}"><i class="ai ai-researchgate"></i> ResearchGate</a><br>{% endif %}
-        <a href="{{ '/blogs/' | relative_url }}"><i class="fa-solid fa-pen-nib"></i> Posts</a>
+        <a href="{{ '/blogs/' | relative_url }}"><i class="fa-solid fa-pen-nib"></i> Posts<span class="zh" lang="zh-CN">文章</span></a>
       </p>
     </div>
   </div>
   <div class="footer-grid">
     <div class="footer-copyright" style="grid-column: 1 / -1;">
-      &copy; {{ "now" | date: "%Y" }} {{ site.name | escape }}
+      &copy; {{ "now" | date: "%Y" }} {{ site.name_en | default: site.name | escape }}{% if site.name_zh %}<span class="zh" lang="zh-CN">{{ site.name_zh }}</span>{% endif %}
     </div>
   </div>
 </footer>

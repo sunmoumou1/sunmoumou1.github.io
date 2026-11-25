@@ -37,6 +37,7 @@ $component-active-color: #fff;
 @import "base/variables";
 @import "base/reset";
 @import "base/typography";
+@import "base/bilingual";
 
 // Components
 @import "components/card";
@@ -47,6 +48,7 @@ $component-active-color: #fff;
 @import "components/publication";
 @import "components/search";
 @import "components/chips";
+@import "components/posts";
 
 // Layouts
 @import "layouts/grid";

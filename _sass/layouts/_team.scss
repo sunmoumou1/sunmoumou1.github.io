@@ -94,8 +94,22 @@
   .pi-name {
     font-family: 'Source Serif 4', Georgia, serif;
     margin-top: 0;
-    font-size: 1.5rem;
+    margin-bottom: var(--space-1);
+    font-size: 1.65rem;
     &::after { display: none; }
+
+    .zh {
+      font-size: 0.66em;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+    }
+  }
+
+  .pi-role {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 1rem;
+    line-height: 1.6;
   }
 
   .pi-links {
@@ -144,25 +158,39 @@
 
 .credential-title {
   color: var(--text-primary);
+  font-size: 1.04rem;
   font-weight: 700;
-  line-height: 1.35;
+  line-height: 1.4;
 }
 
 .credential-meta {
+  margin-top: 0.1rem;
   color: var(--text-secondary);
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   line-height: 1.55;
+
+  .zh-line {
+    margin-top: 0.05rem;
+    line-height: 1.6;
+  }
 }
 
 .credential-advisors {
   margin-top: var(--space-2);
   color: var(--text-secondary);
-  font-size: 0.85rem;
-  line-height: 1.55;
+  font-size: 0.92rem;
+  line-height: 1.6;
 
   strong {
+    margin-right: 0.6em;
     color: var(--text-muted);
     font-weight: 700;
+  }
+
+  // Chinese names inside advisor links read as part of the link.
+  a .zh {
+    color: inherit;
+    opacity: 0.78;
   }
 
   & + & {
@@ -170,10 +198,16 @@
   }
 }
 
+.credential-sep {
+  margin: 0 0.55em;
+  color: var(--text-muted);
+}
+
 .credential-date,
 .experience-date {
+  margin-top: 0.15rem;
   color: var(--accent);
-  font-size: 0.82rem;
+  font-size: 0.88rem;
   font-weight: 700;
   line-height: 1.55;
 }
@@ -192,6 +226,15 @@
 
   li {
     max-width: none;
+    line-height: 1.7;
+
+    & + li {
+      margin-top: var(--space-2);
+    }
+
+    .zh-line {
+      margin-top: 0.15em;
+    }
   }
 }
 
@@ -203,32 +246,72 @@
   flex-wrap: wrap;
 }
 
+.experience-role {
+  display: block;
+  color: var(--text-primary);
+  font-size: 1.04rem;
+  line-height: 1.4;
+
+  .zh-line {
+    margin-top: 0.15rem;
+  }
+}
+
 .experience-org {
+  display: block;
+  margin-top: var(--space-1);
   color: var(--accent);
   font-weight: 700;
 }
 
 .experience-date {
   text-align: right;
+  white-space: nowrap;
+}
 
-  span {
-    color: var(--text-secondary);
-    font-style: italic;
-    font-weight: 500;
-  }
+.experience-place {
+  display: block;
+  color: var(--text-secondary);
+  font-style: italic;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+// Keep short Chinese names (organisations, advisors) from breaking mid-word.
+.experience-org .zh,
+.credential-advisors a {
+  white-space: nowrap;
 }
 
 @media (max-width: 640px) {
   .credential-item,
   .experience-item {
-    grid-template-columns: 48px minmax(0, 1fr);
+    grid-template-columns: 40px minmax(0, 1fr);
+    gap: var(--space-3);
     padding: var(--space-3);
+    text-align: left;
   }
 
   .credential-logo,
   .experience-logo {
-    width: 48px;
-    height: 48px;
+    width: 40px;
+    height: 40px;
+    padding: 0.25rem;
+  }
+
+  // Phones: logo floats beside the header, bullet points use the full width.
+  .experience-item {
+    display: block;
+  }
+
+  .experience-logo {
+    float: left;
+    margin: 0.1rem var(--space-3) var(--space-2) 0;
+  }
+
+  .experience-content ul {
+    clear: both;
+    padding-left: 1rem;
   }
 
   .experience-date {
@@ -272,11 +355,25 @@
   }
 
   figcaption {
-    margin-top: var(--space-2);
+    // width:0 + min-width:100% keeps the caption from widening the photo.
+    width: 0;
+    min-width: 100%;
+    margin-top: var(--space-3);
     text-align: center;
     color: var(--text-muted);
-    font-size: 0.8rem;
+    font-size: 0.88rem;
     font-style: italic;
+    line-height: 1.6;
+
+    strong {
+      color: var(--text-secondary);
+      font-style: normal;
+    }
+
+    .zh-line {
+      margin-top: 0.25rem;
+      line-height: 1.65;
+    }
   }
 }
 

@@ -81,7 +81,7 @@
     var btn = document.createElement('button');
     btn.className = 'copy-btn';
     btn.innerHTML = '<i class="fa-regular fa-copy"></i>';
-    btn.title = 'Copy to clipboard';
+    btn.title = 'Copy to clipboard · 复制到剪贴板';
 
     btn.addEventListener('click', function () {
       navigator.clipboard.writeText(pre.textContent.trim()).then(function () {
@@ -118,7 +118,8 @@
   var topBtn = document.createElement('button');
   topBtn.className = 'back-to-top';
   topBtn.innerHTML = '<i class="fa-solid fa-arrow-up"></i>';
-  topBtn.setAttribute('aria-label', 'Back to top');
+  topBtn.setAttribute('aria-label', 'Back to top · 返回顶部');
+  topBtn.title = 'Back to top · 返回顶部';
   document.body.appendChild(topBtn);
 
   topBtn.addEventListener('click', function () {
@@ -158,7 +159,10 @@
         }
       });
     }, {
-      threshold: 0.1,
+      // threshold 0: reveal as soon as any part enters the viewport.
+      // A ratio such as 0.1 can never be reached by sections taller than
+      // ten viewports (e.g. the About page on phones), leaving them hidden.
+      threshold: 0,
       rootMargin: '0px 0px -40px 0px'
     });
 
@@ -230,8 +234,14 @@
         callback(data);
       })
       .catch(function () {
-        searchResultsEl.innerHTML = '<div class="search-no-results">Could not load search index.</div>';
+        searchResultsEl.innerHTML = '<div class="search-no-results">Could not load search index.<span class="zh zh-line" lang="zh-CN">搜索索引加载失败。</span></div>';
       });
+  }
+
+  function escapeHtml(str) {
+    return String(str).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
   }
 
   function renderResults(query, data) {
@@ -246,7 +256,9 @@
     });
 
     if (matches.length === 0) {
-      searchResultsEl.innerHTML = '<div class="search-no-results">No results for "' + query + '"</div>';
+      var safeQuery = escapeHtml(query);
+      searchResultsEl.innerHTML = '<div class="search-no-results">No results for “' + safeQuery + '”' +
+        '<span class="zh zh-line" lang="zh-CN">没有找到与“' + safeQuery + '”相关的内容</span></div>';
       return;
     }
 

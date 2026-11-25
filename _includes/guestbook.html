@@ -1,34 +1,37 @@
 <section class="guestbook" id="guestbook" aria-labelledby="guestbook-title" markdown="0">
   <div class="guestbook-intro">
-    <p class="section-kicker">Guestbook</p>
-    <h3 id="guestbook-title">Leave a message</h3>
-    <p>Questions, ideas, or just a hello — I would be delighted to hear from you. Messages are displayed publicly after posting; your email address is required for replies but is never shown with your message.</p>
+    <p class="section-kicker">Guestbook<span class="zh" lang="zh-CN">留言板</span></p>
+    <h3 id="guestbook-title">Leave a message<span class="zh" lang="zh-CN">给我留言</span></h3>
+    <p class="guestbook-lede">Questions, ideas, or just a hello — I would be delighted to hear from you. Messages are displayed publicly after posting; your email address is required for replies but is never shown with your message.</p>
+    <p class="guestbook-lede zh" lang="zh-CN">无论是问题、想法，还是简单打个招呼，我都很乐意收到。留言发布后会公开显示；邮箱为必填项，用于接收回复，但不会随留言一同显示。</p>
   </div>
 
   <div id="HCB_comment_box" class="guestbook-comments">
-    <p class="guestbook-loading"><i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i> Loading the guestbook…</p>
+    <p class="guestbook-loading"><i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i> Loading the guestbook…<span class="zh" lang="zh-CN">留言板加载中…</span></p>
   </div>
   <script>
+  // 留言板组件（HTML Comment Box）的界面文字：统一写成「English · 中文」双语格式。
+  // Like / Reply / Flag 之间组件会自动插入「·」，所以这三项只用空格分隔中英文。
   window.hcb_user = {
     PAGE: '{{ site.url }}{{ site.baseurl }}/guestbook',
-    comments_header: 'Messages',
-    name_label: 'Name',
-    email_label: 'Email (required, never displayed publicly)',
-    content_label: 'Write your public message here…',
-    submit: 'Post message',
-    no_comments_msg: 'No messages yet. Be the first to leave one!',
-    add: 'Leave a message',
-    again: 'Post another message',
+    comments_header: 'Messages · 留言',
+    name_label: 'Name · 姓名',
+    email_label: 'Email (required, kept private) · 邮箱（必填，不公开）',
+    content_label: 'Write your public message here… · 在这里写下你的公开留言…',
+    submit: 'Post message · 发布留言',
+    no_comments_msg: 'No messages yet. Be the first to leave one! · 还没有留言，欢迎留下第一条！',
+    add: 'Leave a message · 给我留言',
+    again: 'Post another message · 再留一条',
     said: '',
-    subscribe: 'Email me when someone replies',
-    reply: 'Reply',
-    flag: 'Flag',
-    like: 'Like',
-    msg_thankyou: 'Thank you — your message is now public.',
-    msg_approval: 'This message will appear after moderation.',
-    msg_approval_required: 'Thank you. Your message will appear after moderation.',
-    err_bad_email: 'Please enter a valid email address.',
-    err_comment_empty: 'Please write a message before posting.',
+    subscribe: 'Email me when someone replies · 有人回复时邮件通知我',
+    reply: 'Reply 回复',
+    flag: 'Flag 举报',
+    like: 'Like 赞',
+    msg_thankyou: 'Thank you — your message is now public. · 谢谢！你的留言已公开显示。',
+    msg_approval: 'This message will appear after moderation. · 这条留言将在审核通过后显示。',
+    msg_approval_required: 'Thank you. Your message will appear after moderation. · 谢谢！你的留言将在审核通过后显示。',
+    err_bad_email: 'Please enter a valid email address. · 请输入有效的邮箱地址。',
+    err_comment_empty: 'Please write a message before posting. · 请先写下留言内容再发布。',
     MAX_CHARS: 1200,
     RELATIVE_DATES: true,
     onload: function () {
@@ -59,5 +62,5 @@
     document.head.appendChild(script);
   })();
   </script>
-  <noscript><p class="guestbook-noscript">JavaScript is required to view and post public messages.</p></noscript>
+  <noscript><p class="guestbook-noscript">JavaScript is required to view and post public messages.<span class="zh zh-line" lang="zh-CN">需要启用 JavaScript 才能查看和发布公开留言。</span></p></noscript>
 </section>

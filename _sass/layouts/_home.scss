@@ -58,10 +58,21 @@
   margin: 0 0 clamp(1rem, 2vw, 1.75rem);
   color: var(--accent);
   font-family: 'JetBrains Mono', monospace;
-  font-size: clamp(0.72rem, 0.85vw, 0.92rem);
+  font-size: clamp(0.76rem, 0.88vw, 0.95rem);
   font-weight: 700;
   letter-spacing: 0.28em;
   text-transform: uppercase;
+
+  .zh {
+    margin-left: 0.9em;
+    padding-left: 0.9em;
+    border-left: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+    color: inherit;
+    font-size: 1em;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    opacity: 0.85;
+  }
 }
 
 .home-kicker {
@@ -69,10 +80,14 @@
   align-items: center;
   gap: 1rem;
 
-  span {
+  .home-kicker-rule {
     width: clamp(2.8rem, 5vw, 5.5rem);
     height: 2px;
     background: var(--accent);
+  }
+
+  .zh {
+    margin-left: 0;
   }
 }
 
@@ -95,17 +110,27 @@
   }
 }
 
+// Chinese subtitle beneath the display headline.
+.home-title-block p.home-title-zh {
+  margin: clamp(1.1rem, 2vw, 1.8rem) 0 0;
+  padding-left: 0.12em;
+  color: var(--zh-text);
+  font-size: clamp(1.3rem, 2.1vw, 2.3rem);
+  font-weight: 300;
+  letter-spacing: 0.16em;
+  line-height: 1.4;
+
+  strong {
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+}
+
 .home-statement {
   position: relative;
-  max-width: 32ch;
+  max-width: 34rem;
   margin: 0 0 0.35rem;
   padding: clamp(0.4rem, 1vw, 0.8rem) 0 clamp(0.4rem, 1vw, 0.8rem) clamp(1.3rem, 2.6vw, 2.4rem);
-  color: var(--text-secondary);
-  font-family: 'Source Serif 4', Georgia, serif;
-  font-size: clamp(1.45rem, 2vw, 2.35rem);
-  font-style: italic;
-  font-weight: 430;
-  line-height: 1.38;
 
   &::before {
     position: absolute;
@@ -116,9 +141,35 @@
     content: '';
   }
 
+  p {
+    max-width: none;
+    margin: 0;
+    color: var(--text-secondary);
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: clamp(1.45rem, 2vw, 2.35rem);
+    font-style: italic;
+    font-weight: 430;
+    line-height: 1.38;
+  }
+
   strong {
     color: var(--text-primary);
     font-weight: 750;
+  }
+
+  p.zh {
+    margin-top: clamp(0.9rem, 1.4vw, 1.3rem);
+    color: var(--zh-text);
+    font-family: var(--font-zh);
+    font-size: clamp(1.02rem, 1.2vw, 1.32rem);
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    line-height: 1.85;
+
+    strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
   }
 }
 
@@ -199,21 +250,37 @@
 .home-photo-title {
   color: #3d3430;
   font-family: 'Source Serif 4', Georgia, serif;
-  font-size: clamp(1.1rem, 1.7vw, 1.8rem);
+  font-size: clamp(1.15rem, 1.7vw, 1.8rem);
   font-style: italic;
   font-weight: 400;
   letter-spacing: -0.025em;
   line-height: 1.2;
+
+  // The print stays light in both themes, so its Chinese ink is fixed too.
+  .zh {
+    margin-left: 0.7em;
+    color: #8a7c74;
+    font-size: 0.66em;
+    letter-spacing: 0.14em;
+    vertical-align: 0.12em;
+  }
 }
 
 .home-photo-credit {
-  flex: 0 1 22rem;
+  flex: 0 1 24rem;
   margin: 0;
   color: #786b63;
   font-family: 'DM Sans', sans-serif;
-  font-size: clamp(0.6rem, 0.76vw, 0.78rem);
+  font-size: clamp(0.7rem, 0.82vw, 0.86rem);
   line-height: 1.65;
   text-align: right;
+
+  .zh {
+    margin-top: 0.3em;
+    color: #8a7c74;
+    font-size: 0.98em;
+    letter-spacing: 0.04em;
+  }
 }
 
 [data-bs-theme="dark"] .home-photo {
@@ -239,7 +306,7 @@
   }
 
   .home-statement {
-    max-width: 38ch;
+    max-width: 36rem;
     margin-left: clamp(0.5rem, 4vw, 2rem);
   }
 
@@ -262,9 +329,25 @@
     font-size: clamp(2.9rem, 15vw, 4.6rem);
   }
 
+  .home-kicker .zh {
+    letter-spacing: 0.2em;
+  }
+
+  .home-title-block p.home-title-zh {
+    font-size: 1.3rem;
+    letter-spacing: 0.12em;
+  }
+
   .home-statement {
     margin-left: 0.5rem;
-    font-size: 1.28rem;
+
+    p {
+      font-size: 1.28rem;
+    }
+
+    p.zh {
+      font-size: 1.02rem;
+    }
   }
 
   .home-photo {
@@ -322,13 +405,20 @@
   margin-bottom: var(--space-6);
 
   h3 {
-    margin: 0 0 var(--space-2);
-    font-size: 1.65rem;
+    margin: 0 0 var(--space-3);
+    font-size: 1.75rem;
   }
 
-  p:last-child {
-    margin-bottom: 0;
+  .guestbook-lede {
+    margin-bottom: var(--space-3);
     color: var(--text-muted);
+  }
+
+  // Chinese line of the intro; keep the warm-grey bilingual colour.
+  .guestbook-lede.zh {
+    margin-top: 0;
+    margin-bottom: 0;
+    color: var(--zh-text);
   }
 }
 
@@ -336,7 +426,7 @@
 .guestbook-noscript {
   margin: var(--space-4) 0 0;
   color: var(--text-muted);
-  font-size: 0.875rem;
+  font-size: 0.94rem;
 }
 
 .guestbook #HCB_comment_box {
@@ -366,7 +456,7 @@
     background: var(--bg-primary);
     color: var(--text-primary);
     font: inherit;
-    font-size: 0.9375rem;
+    font-size: 1rem;
     line-height: 1.55;
     box-shadow: none;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
@@ -404,7 +494,7 @@
     order: 10;
     margin-top: var(--space-2);
     color: var(--text-muted);
-    font-size: 0.6875rem;
+    font-size: 0.75rem;
 
     a {
       color: var(--text-muted);
@@ -420,7 +510,7 @@
     background: var(--accent);
     color: #fff;
     font: inherit;
-    font-size: 0.875rem;
+    font-size: 0.94rem;
     font-weight: 700;
     cursor: pointer;
     box-shadow: none;
@@ -443,13 +533,13 @@
   #comments_list .date,
   #comments_list .likes {
     color: var(--text-muted);
-    font-size: 0.75rem;
+    font-size: 0.82rem;
   }
 
   #comments_list .hcb-comment-body {
     color: var(--text-secondary);
-    font-size: 0.9375rem;
-    line-height: 1.7;
+    font-size: 1rem;
+    line-height: 1.75;
   }
 
   #comments_list .author-name {
@@ -460,6 +550,21 @@
   #comments_list .hcb-comment-tb a:hover,
   #comments_list .author-name:hover {
     color: var(--accent);
+  }
+
+  // Like / Reply / Flag are <button>s in the current HCB markup.
+  #comments_list .hcb-comment-tb button {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--text-muted);
+    font: inherit;
+    font-size: 0.82rem;
+    cursor: pointer;
+
+    &:hover {
+      color: var(--accent);
+    }
   }
 
   .hcb-icon {
@@ -491,7 +596,7 @@
   }
 
   .news-date {
-    font-size: 0.6875rem;
+    font-size: 0.75rem;
     font-weight: 600;
     color: var(--text-muted);
     text-transform: uppercase;
@@ -502,7 +607,7 @@
   .news-headline {
     margin-top: var(--space-1);
     color: var(--text-secondary);
-    font-size: 0.875rem;
+    font-size: 0.94rem;
     line-height: 1.5;
   }
 }
