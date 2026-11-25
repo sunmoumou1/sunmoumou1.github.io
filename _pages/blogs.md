@@ -5,7 +5,7 @@ sitemap: false
 permalink: /blogs/
 ---
 
-## Posts<span class="zh" lang="zh-CN">文章</span>
+## Posts<span class="zh" lang="zh-CN">朋友圈</span>
 
 {% if site.posts.size > 0 %}
 {% assign post_total = site.posts.size %}
@@ -27,9 +27,9 @@ permalink: /blogs/
 {% assign desk_nudges = "0,12,-4,8,-8,4" | split: "," %}
 {% assign desk_tapes = "wine,kraft,slate" | split: "," %}
 
-<section class="posts-shelf" id="posts-shelf" data-view="desk" aria-label="Posts · 文章" markdown="0">
+<section class="posts-shelf" id="posts-shelf" data-view="desk" aria-label="Posts · 朋友圈" markdown="0">
   <div class="posts-toolbar">
-    <p class="posts-count"><span class="posts-count-num">{{ post_total }}</span> {% if post_total == 1 %}post{% else %}posts{% endif %}<span class="zh" lang="zh-CN">共 {{ post_total }} 篇</span></p>
+    <p class="posts-count"><span class="posts-count-num">{{ post_total }}</span> {% if post_total == 1 %}post{% else %}posts{% endif %}<span class="zh" lang="zh-CN">共 {{ post_total }} 条</span></p>
     <div class="posts-view-toggle" role="group" aria-label="View · 浏览方式" hidden>
       <button type="button" class="posts-view-btn" data-view-target="flip" aria-pressed="false" aria-controls="posts-flip"><i class="fa-solid fa-book-open" aria-hidden="true"></i>Flip<span class="zh" lang="zh-CN">翻阅</span></button>
       <button type="button" class="posts-view-btn" data-view-target="desk" aria-pressed="true" aria-controls="posts-desk"><i class="fa-solid fa-table-cells-large" aria-hidden="true"></i>Desk<span class="zh" lang="zh-CN">平铺</span></button>
@@ -38,7 +38,7 @@ permalink: /blogs/
 
   <div class="posts-surface">
     <div class="posts-flip" id="posts-flip" hidden>
-      <div class="posts-deck" tabindex="0" role="region" aria-roledescription="carousel" aria-label="Posts, one card at a time · 逐篇翻阅">
+      <div class="posts-deck" tabindex="0" role="region" aria-roledescription="carousel" aria-label="Posts, one card at a time · 逐条翻阅">
         {% for post in site.posts %}
         {% if post.target_url %}{% assign post_href = post.target_url | relative_url %}{% else %}{% assign post_href = post.url | relative_url %}{% endif %}
         <article class="post-card" role="group" aria-roledescription="slide" aria-label="{{ forloop.index }} / {{ forloop.length }}" data-title="{{ post.title | escape }}">
@@ -61,11 +61,11 @@ permalink: /blogs/
       </div>
 
       <div class="posts-controls">
-        <button type="button" class="posts-nav" data-step="-1" aria-label="Previous post · 上一篇"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i></button>
+        <button type="button" class="posts-nav" data-step="-1" aria-label="Previous post · 上一条"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i></button>
         <span class="posts-counter posts-counter-current" aria-hidden="true">01</span>
         <div class="posts-progress"></div>
         <span class="posts-counter" aria-hidden="true">{% if post_total < 10 %}0{% endif %}{{ post_total }}</span>
-        <button type="button" class="posts-nav" data-step="1" aria-label="Next post · 下一篇"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>
+        <button type="button" class="posts-nav" data-step="1" aria-label="Next post · 下一条"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>
       </div>
       <p class="posts-hint">
         <span class="posts-hint-pointer">Click the card or press ← → to turn the page<span class="zh" lang="zh-CN">点击卡片或按 ← → 键翻页</span></span>
@@ -102,5 +102,5 @@ permalink: /blogs/
 </section>
 <script src="{{ '/assets/js/posts-deck.js' | relative_url }}"></script>
 {% else %}
-<p class="text-muted">No blog posts yet.<span class="zh" lang="zh-CN">暂无文章。</span></p>
+<p class="text-muted">No blog posts yet.<span class="zh" lang="zh-CN">暂无动态。</span></p>
 {% endif %}

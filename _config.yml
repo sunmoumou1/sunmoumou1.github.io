@@ -45,7 +45,7 @@ nav_pages:
     title_zh: 活动
   - name: blogs          # 博客
     title: Posts
-    title_zh: 文章
+    title_zh: 朋友圈
 
 # ===== Jekyll 构建相关全局设置 =====
 timezone: Asia/Shanghai                                      # 时区（上海，影响文章时间解析）

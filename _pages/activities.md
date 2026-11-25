@@ -19,6 +19,16 @@ permalink: /activities/
 <script type="application/json" id="activityGlobeData">
 [
   {
+    "title": "2026 National Symposium on Numerical Weather Prediction Technology",
+    "title_zh": "2026年全国数值预报技术交流研讨会",
+    "city": "Wuhan",
+    "city_zh": "武汉",
+    "date": "November 2026",
+    "date_zh": "2026年11月",
+    "lat": 30.5928,
+    "lon": 114.3055
+  },
+  {
     "title": "12th International Symposium on Data Assimilation (ISDA 2026)",
     "title_zh": "第十二届国际资料同化研讨会",
     "city": "Nanjing",
@@ -88,6 +98,16 @@ permalink: /activities/
 <script src="{{ '/assets/js/activity-globe.js' | relative_url }}"></script>
 
 <div class="section-card activity-card">
+<h3>2026 National Symposium on Numerical Weather Prediction Technology<span class="zh zh-line" lang="zh-CN">2026年全国数值预报技术交流研讨会</span></h3>
+<p class="activity-meta">November 12–13, 2026 · Wuhan, China<span class="zh" lang="zh-CN">2026年11月12日–13日 · 中国武汉</span></p>
+<p>I attended the 2026 National Symposium on Numerical Weather Prediction Technology in Wuhan. The symposium was hosted by the Chinese Meteorological Society, the CMA Earth System Modeling and Prediction Centre, and the Hubei Meteorological Service.</p>
+<p class="zh" lang="zh-CN">我参加了在武汉召开的2026年全国数值预报技术交流研讨会。本次研讨会由中国气象学会、中国气象局地球系统数值预报中心和湖北省气象局共同主办。</p>
+<figure class="activity-figure">
+<img src="{{ '/images/nwp-symposium-2026.jpg' | relative_url }}" alt="Backdrop of the 2026 National Symposium on Numerical Weather Prediction Technology in Wuhan" loading="lazy">
+</figure>
+</div>
+
+<div class="section-card activity-card">
 <h3>12th International Symposium on Data Assimilation (ISDA 2026)<span class="zh zh-line" lang="zh-CN">第十二届国际资料同化研讨会（ISDA 2026）</span></h3>
 <p class="activity-meta">August 30–September 4, 2026 · Nanjing, China<span class="zh" lang="zh-CN">2026年8月30日–9月4日 · 中国南京</span></p>
 <p>I attended the 12th International Symposium on Data Assimilation (ISDA 2026) in Nanjing. Held at Nanjing University from August 31 to September 4, the symposium explored frontier theories, methods, and applications in data assimilation, including data assimilation and machine learning, observational data assimilation, methods and infrastructure, and Earth system data assimilation.</p>
@@ -109,9 +129,9 @@ permalink: /activities/
 
 <div class="section-card activity-card">
 <h3>AGU Annual Meeting 2025<span class="zh zh-line" lang="zh-CN">美国地球物理联合会（AGU）2025 年会</span></h3>
-<p class="activity-meta"><span class="activity-badge">Invited Talk<span class="zh" lang="zh-CN">特邀报告</span></span>December 15–19, 2025 · New Orleans, United States<span class="zh" lang="zh-CN">2025年12月15日–19日 · 美国新奥尔良</span></p>
+<p class="activity-meta"><span class="activity-badge">Invited Talk<span class="zh" lang="zh-CN">受邀报告</span></span>December 15–19, 2025 · New Orleans, United States<span class="zh" lang="zh-CN">2025年12月15日–19日 · 美国新奥尔良</span></p>
 <p>I attended the American Geophysical Union (AGU) Annual Meeting — the largest gathering in the Earth and space sciences — and was honored to give an invited talk.</p>
-<p class="zh" lang="zh-CN">我参加了美国地球物理联合会（AGU）年会——地球与空间科学领域规模最大的学术盛会，并有幸在会上作特邀报告。</p>
+<p class="zh" lang="zh-CN">我参加了美国地球物理联合会（AGU）年会——地球与空间科学领域规模最大的学术盛会，并有幸在会上作受邀报告。</p>
 <figure class="activity-figure">
 <img src="{{ '/images/AGU.JPG' | relative_url }}" alt="AGU Annual Meeting 2025 in New Orleans" loading="lazy">
 </figure>

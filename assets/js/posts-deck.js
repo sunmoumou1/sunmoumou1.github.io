@@ -99,7 +99,7 @@
     var n = current + 1;
     live.textContent = 'Post ' + n + ' of ' + total + ': ' +
       (cards[current].getAttribute('data-title') || '') +
-      ' · 第 ' + n + ' 篇，共 ' + total + ' 篇';
+      ' · 第 ' + n + ' 条，共 ' + total + ' 条';
   }
 
   function go(target) {
@@ -162,7 +162,7 @@
       seg.type = 'button';
       seg.className = 'posts-progress-seg';
       seg.setAttribute('data-index', String(i));
-      seg.setAttribute('aria-label', 'Go to post ' + (i + 1) + ' · 前往第 ' + (i + 1) + ' 篇');
+      seg.setAttribute('aria-label', 'Go to post ' + (i + 1) + ' · 前往第 ' + (i + 1) + ' 条');
       progress.appendChild(seg);
       segments.push(seg);
     });
